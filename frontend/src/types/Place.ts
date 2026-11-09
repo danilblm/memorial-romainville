@@ -16,6 +16,8 @@ export interface PlacePhoto {
   _id: string;
   url: string;
   caption?: LocalizedText;
+  era?: "ancienne" | "actuelle" | "inconnue";
+  dateLabel?: string;
   source?: Source;
 }
 

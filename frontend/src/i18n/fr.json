@@ -142,6 +142,8 @@
     "openPlace": "Voir le lieu en détail",
     "persons": "Femmes liées : {{count}}",
     "testimonies": "Témoignages : {{count}}",
+    "sources": "Sources : {{count}}",
+    "photos": "Photos : {{count}}",
     "notOnThisView": "pas encore placé sur cette vue",
     "notPlacedPlan": "Lieux à placer sur le plan : {{count}}",
     "notPlacedReal": "Lieux à placer sur la vue satellite : {{count}}"
@@ -151,7 +153,24 @@
     "photos": "Photographies",
     "persons": "Femmes liées à ce lieu",
     "backToMap": "Retour à la carte",
-    "kinds": { "casemate": "Casemate", "cour": "Cour", "batiment": "Bâtiment", "autre": "Lieu" }
+    "kinds": { "casemate": "Casemate", "cour": "Cour", "batiment": "Bâtiment", "autre": "Lieu" },
+    "beforeAfter": "Hier et aujourd'hui",
+    "then": "Archive",
+    "now": "Aujourd'hui",
+    "compare": "Faites glisser le curseur pour comparer l'archive et l'état actuel.",
+    "photosHint": "Sélectionnez une photo pour l'agrandir et zoomer sur les détails, comme les graffitis.",
+    "eras": { "ancienne": "Archive", "actuelle": "Aujourd'hui", "inconnue": "Époque inconnue" }
+  },
+  "viewer": {
+    "photo": "Photographie",
+    "open": "Agrandir la photo",
+    "counter": "{{n}} / {{total}}",
+    "zoomIn": "Zoomer",
+    "zoomOut": "Dézoomer",
+    "reset": "Taille d'origine",
+    "previous": "Photo précédente",
+    "next": "Photo suivante",
+    "hint": "Molette, boutons ou double-clic pour zoomer · glisser pour se déplacer · flèches pour changer de photo · Échap pour fermer"
   },
   "contribute": {
     "eyebrow": "Mémoire participative",

@@ -142,6 +142,8 @@
     "openPlace": "See the place in detail",
     "persons": "Linked women: {{count}}",
     "testimonies": "Testimonies: {{count}}",
+    "sources": "Sources: {{count}}",
+    "photos": "Photos: {{count}}",
     "notOnThisView": "not yet placed on this view",
     "notPlacedPlan": "Places to put on the plan: {{count}}",
     "notPlacedReal": "Places to put on the satellite view: {{count}}"
@@ -151,7 +153,24 @@
     "photos": "Photographs",
     "persons": "Women linked to this place",
     "backToMap": "Back to the map",
-    "kinds": { "casemate": "Casemate", "cour": "Courtyard", "batiment": "Building", "autre": "Place" }
+    "kinds": { "casemate": "Casemate", "cour": "Courtyard", "batiment": "Building", "autre": "Place" },
+    "beforeAfter": "Then and now",
+    "then": "Archive",
+    "now": "Today",
+    "compare": "Drag the slider to compare the archive with the present state.",
+    "photosHint": "Select a photo to enlarge it and zoom in on details, such as the graffiti.",
+    "eras": { "ancienne": "Archive", "actuelle": "Today", "inconnue": "Unknown period" }
+  },
+  "viewer": {
+    "photo": "Photograph",
+    "open": "Enlarge the photo",
+    "counter": "{{n}} / {{total}}",
+    "zoomIn": "Zoom in",
+    "zoomOut": "Zoom out",
+    "reset": "Original size",
+    "previous": "Previous photo",
+    "next": "Next photo",
+    "hint": "Wheel, buttons or double-click to zoom · drag to move · arrows to change photo · Esc to close"
   },
   "contribute": {
     "eyebrow": "Participatory memory",

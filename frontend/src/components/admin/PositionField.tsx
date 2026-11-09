@@ -1,6 +1,6 @@
 import { Box, Stack, TextField, Typography } from "@mui/material";
 import { MouseEvent } from "react";
-import { PLAN_HEIGHT, PLAN_URL, PLAN_WIDTH } from "../../constants/plan";
+import { usePlan } from "../../hooks/usePlan";
 
 interface Position {
   x?: number | null;
@@ -13,16 +13,17 @@ interface Props {
   onChange: (value: Position) => void;
 }
 
-// Placer un lieu sur le plan du fort en cliquant dessus
+// Placer un lieu sur le plan du fort en cliquant dessus (le plan choisi dans « Réglages du site »)
 const PositionField = ({ label, value, onChange }: Props) => {
+  const plan = usePlan();
   const current = value ?? {};
   const placed = current.x != null && current.y != null;
 
   const place = (event: MouseEvent<HTMLDivElement>) => {
     const rect = event.currentTarget.getBoundingClientRect();
     onChange({
-      x: Math.round(((event.clientX - rect.left) / rect.width) * PLAN_WIDTH),
-      y: Math.round(((event.clientY - rect.top) / rect.height) * PLAN_HEIGHT),
+      x: Math.round(((event.clientX - rect.left) / rect.width) * plan.width),
+      y: Math.round(((event.clientY - rect.top) / rect.height) * plan.height),
     });
   };
 
@@ -33,6 +34,7 @@ const PositionField = ({ label, value, onChange }: Props) => {
     <Stack spacing={1}>
       <Typography variant="subtitle2" component="p">
         {label} – cliquez sur le plan pour placer le lieu
+        {plan.provisional && " (plan provisoire)"}
       </Typography>
       <Box
         onClick={place}
@@ -40,8 +42,8 @@ const PositionField = ({ label, value, onChange }: Props) => {
           position: "relative",
           width: "100%",
           maxWidth: 600,
-          aspectRatio: `${PLAN_WIDTH} / ${PLAN_HEIGHT}`,
-          backgroundImage: `url(${PLAN_URL})`,
+          aspectRatio: `${plan.width} / ${plan.height}`,
+          backgroundImage: `url(${plan.url})`,
           backgroundSize: "100% 100%",
           border: 1,
           borderColor: "divider",
@@ -52,8 +54,8 @@ const PositionField = ({ label, value, onChange }: Props) => {
           <Box
             sx={{
               position: "absolute",
-              left: `${((current.x ?? 0) / PLAN_WIDTH) * 100}%`,
-              top: `${((current.y ?? 0) / PLAN_HEIGHT) * 100}%`,
+              left: `${((current.x ?? 0) / plan.width) * 100}%`,
+              top: `${((current.y ?? 0) / plan.height) * 100}%`,
               width: 20,
               height: 20,
               ml: "-10px",
@@ -69,14 +71,14 @@ const PositionField = ({ label, value, onChange }: Props) => {
       <Stack direction="row" spacing={2}>
         <TextField
           type="number"
-          label="x (0–1000)"
+          label={`x (0–${plan.width})`}
           size="small"
           value={current.x ?? ""}
           onChange={(event) => setNumber("x", event.target.value)}
         />
         <TextField
           type="number"
-          label="y (0–700)"
+          label={`y (0–${plan.height})`}
           size="small"
           value={current.y ?? ""}
           onChange={(event) => setNumber("y", event.target.value)}

@@ -23,6 +23,9 @@ const placeSchema = new Schema(
       {
         url: { type: String, required: true },
         caption: { type: localizedTextSchema },
+        // Photo d'archive ou actuelle : sert à la comparaison « hier et aujourd'hui »
+        era: { type: String, enum: ["ancienne", "actuelle", "inconnue"], default: "inconnue" },
+        dateLabel: { type: String }, // ex. « vers 1944 », « février 2026 »
         source: { type: Schema.Types.ObjectId, ref: "Source" },
       },
     ],

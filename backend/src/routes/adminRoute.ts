@@ -1,5 +1,7 @@
 import express, { Response } from "express";
 import mongoose from "mongoose";
+import { z } from "zod";
+import { updatePlan } from "../services/settingsService";
 import { mediaUpload } from "../middlewares/upload";
 import requireRole from "../middlewares/requireRole";
 import validateJWT from "../middlewares/validateJWT";
@@ -46,6 +48,28 @@ router.post("/media", mediaUpload.single("file"), (req, res) => {
     return;
   }
   res.status(201).send({ url: `/media/${req.file.filename}` });
+});
+
+// Réglages du site : plan du fort (admin uniquement)
+const planSchema = z
+  .object({
+    url: z.string().trim().min(1).max(500),
+    width: z.number().int().positive().max(20000),
+    height: z.number().int().positive().max(20000),
+  })
+  .nullable();
+
+router.put("/settings/plan", requireRole("admin"), async (req, res) => {
+  const parsed = planSchema.safeParse(req.body?.plan ?? null);
+  if (!parsed.success) {
+    res.status(400).send({ message: parsed.error.issues[0]?.message ?? "Invalid plan" });
+    return;
+  }
+  try {
+    res.status(200).send(await updatePlan(parsed.data));
+  } catch (err) {
+    handleError(res, err);
+  }
 });
 
 router.get("/:entity/options", async (req, res) => {

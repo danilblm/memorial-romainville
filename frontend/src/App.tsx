@@ -24,6 +24,7 @@ const AdminHomePage = lazy(() => import("./pages/admin/AdminHomePage"));
 const AdminContributionsPage = lazy(() => import("./pages/admin/AdminContributionsPage"));
 const AdminUsersPage = lazy(() => import("./pages/admin/AdminUsersPage"));
 const MyAccountPage = lazy(() => import("./pages/admin/MyAccountPage"));
+const AdminSettingsPage = lazy(() => import("./pages/admin/AdminSettingsPage"));
 const AdminListPage = lazy(() => import("./pages/admin/AdminListPage"));
 const AdminEditPage = lazy(() => import("./pages/admin/AdminEditPage"));
 
@@ -68,6 +69,7 @@ function App() {
                       <Route path="/admin/contributions" element={<AdminContributionsPage />} />
                       <Route path="/admin/comptes" element={<AdminUsersPage />} />
                       <Route path="/admin/mon-compte" element={<MyAccountPage />} />
+                      <Route path="/admin/reglages" element={<AdminSettingsPage />} />
                       <Route path="/admin/:entity" element={<AdminListPage />} />
                       <Route path="/admin/:entity/:id" element={<AdminEditPage />} />
                     </Route>

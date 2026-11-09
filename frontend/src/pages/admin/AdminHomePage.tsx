@@ -14,6 +14,11 @@ const AdminHomePage = () => {
             title: "Comptes de l'équipe",
             description: "Créer les comptes des membres du groupe, changer leur rôle, réinitialiser un mot de passe.",
           },
+          {
+            to: "/admin/reglages",
+            title: "Réglages du site",
+            description: "Téléverser le vrai plan du fort pour la carte interactive.",
+          },
         ]
       : []),
     { to: "/admin/mon-compte", title: "Mon compte", description: "Changer mon mot de passe." },

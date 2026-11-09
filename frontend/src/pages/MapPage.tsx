@@ -3,7 +3,11 @@ import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import {
   ArrowRight,
+  BookOpen,
   Building2,
+  ChevronsLeftRight,
+  CircleDashed,
+  Maximize2,
   ChevronLeft,
   ChevronRight,
   DoorClosed,
@@ -23,21 +27,19 @@ import { ImageOverlay, MapContainer, Marker, TileLayer, Tooltip, useMap } from "
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import PageState from "../components/PageState";
+import PhotoViewer from "../components/PhotoViewer";
+import ReliabilityBadge from "../components/ReliabilityBadge";
 import { Container, Page, PageHeader } from "../components/ui";
 import { FORT_CENTER, FORT_ZOOM, SATELLITE_ATTRIBUTION, SATELLITE_TILES } from "../constants/geo";
-import { PLAN_HEIGHT, PLAN_URL, PLAN_WIDTH } from "../constants/plan";
 import { useApi } from "../hooks/useApi";
+import { usePlan } from "../hooks/usePlan";
 import { Place, PlaceSummary } from "../types/Place";
 import { cn } from "../utils/cn";
 import { localize } from "../utils/localize";
 import { mediaUrl } from "../utils/mediaUrl";
+import { findComparison, toViewerPhotos } from "../utils/photos";
 
 type Mode = "plan" | "real";
-
-const PLAN_BOUNDS: L.LatLngBoundsExpression = [
-  [0, 0],
-  [PLAN_HEIGHT, PLAN_WIDTH],
-];
 
 const KIND_ICONS = { casemate: DoorClosed, cour: LandPlot, batiment: Building2, autre: MapPin } as const;
 type Kind = keyof typeof KIND_ICONS;
@@ -46,10 +48,10 @@ const kindOf = (place: PlaceSummary): Kind =>
   place.kind && place.kind in KIND_ICONS ? (place.kind as Kind) : "autre";
 
 // Coordonnées d'un lieu dans la vue choisie (null s'il n'y est pas encore placé)
-const coordsOf = (place: PlaceSummary, mode: Mode): [number, number] | null => {
+const coordsOf = (place: PlaceSummary, mode: Mode, planHeight: number): [number, number] | null => {
   if (mode === "plan") {
     const { x, y } = place.position ?? {};
-    return x != null && y != null ? [PLAN_HEIGHT - y, x] : null;
+    return x != null && y != null ? [planHeight - y, x] : null;
   }
   const { lat, lng } = place.geo ?? {};
   return lat != null && lng != null ? [lat, lng] : null;
@@ -82,6 +84,7 @@ const FlyTo = ({ target, zoom }: { target: [number, number] | null; zoom?: numbe
 const PlacePreview = ({ code, onClose }: { code: string; onClose: () => void }) => {
   const { t, i18n } = useTranslation();
   const { data: place, loading } = useApi<Place>(`/places/${code}`);
+  const [viewerIndex, setViewerIndex] = useState<number | null>(null);
   const lang = i18n.language;
 
   if (loading || !place) {
@@ -94,16 +97,31 @@ const PlacePreview = ({ code, onClose }: { code: string; onClose: () => void }) 
     );
   }
 
-  const photo = place.photos?.[0];
+  const photos = place.photos ?? [];
+  const photo = photos[0];
   const description = localize(place.description, lang);
   const persons = place.persons ?? [];
   const testimonies = place.testimonies ?? [];
+  const claims = place.claims ?? [];
+  const missing = place.missingInfo ?? [];
+  const sources = place.sources ?? [];
+  const comparison = findComparison(photos);
 
   return (
-    <div>
+    <div className="max-h-[36rem] overflow-y-auto">
       <div className="relative h-44 overflow-hidden bg-night">
         {photo ? (
-          <img src={mediaUrl(photo.url)} alt={localize(photo.caption, lang)} className="h-full w-full object-cover opacity-90" />
+          <button type="button" onClick={() => setViewerIndex(0)} className="group block h-full w-full" aria-label={t("viewer.open")}>
+            <img
+              src={mediaUrl(photo.url)}
+              alt={localize(photo.caption, lang)}
+              className="h-full w-full object-cover opacity-90 transition duration-500 group-hover:scale-105"
+            />
+            <span className="absolute bottom-3 left-3 inline-flex items-center gap-1.5 rounded-full bg-night/80 px-3 py-1 text-xs font-semibold text-on-night">
+              <Maximize2 className="h-3.5 w-3.5" aria-hidden="true" />
+              {t("map.photos", { count: photos.length })}
+            </span>
+          </button>
         ) : (
           <div className="grain flex h-full items-center justify-center text-on-night-soft">
             <ImageIcon className="h-10 w-10 opacity-50" aria-hidden="true" />
@@ -123,7 +141,32 @@ const PlacePreview = ({ code, onClose }: { code: string; onClose: () => void }) 
         <h2 className="mt-2 font-display text-3xl text-ink">{localize(place.name, lang)}</h2>
         {description && <p className="mt-3 line-clamp-4 leading-relaxed text-ink-soft">{description}</p>}
 
-        <div className="mt-5 flex flex-wrap gap-3 text-sm text-ink-soft">
+        {/* Ce que disent les sources, avec leur fiabilité */}
+        {claims.length > 0 && (
+          <div className="mt-5">
+            <p className="text-xs font-semibold uppercase tracking-[0.15em] text-ink-soft">{t("person.claims")}</p>
+            <ul className="mt-2 space-y-2">
+              {claims.slice(0, 3).map((claim) => (
+                <li key={claim._id} className="flex items-start justify-between gap-2 text-sm">
+                  <span className="text-ink">{localize(claim.value, lang)}</span>
+                  <ReliabilityBadge level={claim.reliability} />
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+
+        {missing.length > 0 && (
+          <p className="mt-4 flex items-start gap-2 rounded-xl border border-dashed border-line p-3 text-sm text-ink-soft">
+            <CircleDashed className="mt-0.5 h-4 w-4 shrink-0" aria-hidden="true" />
+            <span>
+              <span className="font-semibold text-ink">{t("missing.title")} : </span>
+              {missing.map((item) => localize(item, lang)).filter(Boolean).join(" · ")}
+            </span>
+          </p>
+        )}
+
+        <div className="mt-5 flex flex-wrap gap-x-4 gap-y-2 text-sm text-ink-soft">
           <span className="inline-flex items-center gap-1.5">
             <UsersRound className="h-4 w-4" aria-hidden="true" />
             {t("map.persons", { count: persons.length })}
@@ -132,6 +175,16 @@ const PlacePreview = ({ code, onClose }: { code: string; onClose: () => void }) 
             <Mic className="h-4 w-4" aria-hidden="true" />
             {t("map.testimonies", { count: testimonies.length })}
           </span>
+          <span className="inline-flex items-center gap-1.5">
+            <BookOpen className="h-4 w-4" aria-hidden="true" />
+            {t("map.sources", { count: sources.length })}
+          </span>
+          {comparison && (
+            <span className="inline-flex items-center gap-1.5 text-accent">
+              <ChevronsLeftRight className="h-4 w-4" aria-hidden="true" />
+              {t("place.beforeAfter")}
+            </span>
+          )}
         </div>
 
         <Link
@@ -142,6 +195,8 @@ const PlacePreview = ({ code, onClose }: { code: string; onClose: () => void }) 
           <ArrowRight className="h-4 w-4" aria-hidden="true" />
         </Link>
       </div>
+
+      <PhotoViewer photos={toViewerPhotos(photos, lang, t)} index={viewerIndex} onIndexChange={setViewerIndex} />
     </div>
   );
 };
@@ -150,6 +205,12 @@ const MapPage = () => {
   const { t, i18n } = useTranslation();
   const lang = i18n.language;
   const { data: places, loading, error } = useApi<PlaceSummary[]>("/places");
+  const plan = usePlan();
+  const planBounds: L.LatLngBoundsExpression = [
+    [0, 0],
+    [plan.height, plan.width],
+  ];
+  const coords = (place: PlaceSummary, view: Mode) => coordsOf(place, view, plan.height);
 
   const [mode, setMode] = useState<Mode>("plan");
   const [kind, setKind] = useState<Kind | "all">("all");
@@ -161,13 +222,13 @@ const MapPage = () => {
     () => (places ?? []).filter((place) => kind === "all" || kindOf(place) === kind),
     [places, kind]
   );
-  const visible = filtered.filter((place) => coordsOf(place, mode));
+  const visible = filtered.filter((place) => coords(place, mode));
   const notPlaced = filtered.length - visible.length;
   const kinds = [...new Set((places ?? []).map(kindOf))];
   const numberOf = (code: string) => filtered.findIndex((place) => place.code === code) + 1;
 
   const selectedPlace = visible.find((place) => place.code === selected) ?? null;
-  const target = selectedPlace ? coordsOf(selectedPlace, mode) : null;
+  const target = selectedPlace ? coords(selectedPlace, mode) : null;
 
   const select = (code: string | null) => {
     setSelected(code);
@@ -255,12 +316,12 @@ const MapPage = () => {
         <div className="grid gap-6 lg:grid-cols-[1fr_22rem]">
           {/* Carte */}
           <div className="relative h-[26rem] overflow-hidden rounded-3xl border border-line bg-paper-2 shadow-sm sm:h-[36rem]">
-            {mode === "plan" ? (
+            {mode === "plan" ? (!plan.loaded ? null : 
               <MapContainer
-                key="plan"
+                key={`plan-${plan.url}`}
                 crs={L.CRS.Simple}
-                bounds={PLAN_BOUNDS}
-                maxBounds={PLAN_BOUNDS}
+                bounds={planBounds}
+                maxBounds={planBounds}
                 maxBoundsViscosity={0.8}
                 minZoom={-1}
                 maxZoom={2}
@@ -268,12 +329,12 @@ const MapPage = () => {
                 className="h-full w-full"
                 attributionControl={false}
               >
-                <ImageOverlay url={PLAN_URL} bounds={PLAN_BOUNDS} />
+                <ImageOverlay url={plan.url} bounds={planBounds} />
                 <FlyTo target={target} />
                 {visible.map((place) => (
                   <Marker
                     key={place._id}
-                    position={coordsOf(place, "plan")!}
+                    position={coords(place, "plan")!}
                     icon={pinIcon(numberOf(place.code), place.code === selected, place.code === hovered)}
                     title={localize(place.name, lang)}
                     alt={localize(place.name, lang)}
@@ -297,7 +358,7 @@ const MapPage = () => {
                 {visible.map((place) => (
                   <Marker
                     key={place._id}
-                    position={coordsOf(place, "real")!}
+                    position={coords(place, "real")!}
                     icon={pinIcon(numberOf(place.code), place.code === selected, place.code === hovered)}
                     title={localize(place.name, lang)}
                     alt={localize(place.name, lang)}
@@ -317,7 +378,7 @@ const MapPage = () => {
 
             {/* Pastilles d'information */}
             <div className="pointer-events-none absolute top-3 right-3 z-[500] flex flex-col items-end gap-2">
-              {mode === "plan" && (
+              {mode === "plan" && plan.provisional && (
                 <span className="rounded-full bg-night/80 px-3 py-1 text-xs text-on-night">{t("map.planNote")}</span>
               )}
               {notPlaced > 0 && (
@@ -395,7 +456,7 @@ const MapPage = () => {
                   <ul className="mt-4 space-y-3">
                     {filtered.map((place) => {
                       const Icon = KIND_ICONS[kindOf(place)];
-                      const onMap = Boolean(coordsOf(place, mode));
+                      const onMap = Boolean(coords(place, mode));
                       return (
                         <li key={place._id}>
                           <button

@@ -1,4 +1,4 @@
-import { Autocomplete, Button, Chip, Paper, Stack, TextField, Typography } from "@mui/material";
+import { Autocomplete, Button, Chip, MenuItem, Paper, Stack, TextField, Typography } from "@mui/material";
 import { LocalizedText } from "../../types/common";
 import LocalizedTextField from "./LocalizedTextField";
 import MediaField from "./MediaField";
@@ -73,8 +73,16 @@ export interface PhotoValue {
   _id?: string;
   url: string;
   caption?: LocalizedText;
+  era?: "ancienne" | "actuelle" | "inconnue";
+  dateLabel?: string;
   source?: string | null;
 }
+
+const ERAS = [
+  { value: "ancienne", label: "Photo d'archive (ancienne)" },
+  { value: "actuelle", label: "Photo actuelle" },
+  { value: "inconnue", label: "Époque inconnue" },
+];
 
 // Photographies d'un lieu
 export const PhotosEditor = ({
@@ -104,6 +112,29 @@ export const PhotosEditor = ({
               value={photo.caption}
               onChange={(caption) => update(index, { caption })}
             />
+            <Stack direction={{ xs: "column", sm: "row" }} spacing={2}>
+              <TextField
+                select
+                label="Époque"
+                value={photo.era ?? "inconnue"}
+                helperText="Une photo d'archive + une photo actuelle = comparaison « hier et aujourd'hui »."
+                onChange={(event) => update(index, { era: event.target.value as PhotoValue["era"] })}
+                sx={{ minWidth: 260 }}
+              >
+                {ERAS.map((era) => (
+                  <MenuItem key={era.value} value={era.value}>
+                    {era.label}
+                  </MenuItem>
+                ))}
+              </TextField>
+              <TextField
+                label="Date de la photo"
+                value={photo.dateLabel ?? ""}
+                helperText="Ex. vers 1944, février 2026"
+                onChange={(event) => update(index, { dateLabel: event.target.value })}
+                fullWidth
+              />
+            </Stack>
             <Button color="error" sx={{ alignSelf: "flex-end" }} onClick={() => onChange(photos.filter((_, i) => i !== index))}>
               Retirer
             </Button>
@@ -112,7 +143,7 @@ export const PhotosEditor = ({
       ))}
       <Button
         variant="outlined"
-        onClick={() => onChange([...photos, { url: "", caption: { fr: "", en: "" } }])}
+        onClick={() => onChange([...photos, { url: "", caption: { fr: "", en: "" }, era: "inconnue" }])}
         sx={{ alignSelf: "flex-start" }}
       >
         Ajouter une photo
