@@ -16,7 +16,13 @@ const load = (): AccessibilitySettings => {
 const AccessibilityProvider: FC<PropsWithChildren> = ({ children }) => {
   const [settings, setSettings] = useState<AccessibilitySettings>(load);
 
+  // Les pages Tailwind lisent ces attributs (voir index.css)
   useEffect(() => {
+    const root = document.documentElement;
+    root.dataset.contrast = settings.highContrast ? "high" : "normal";
+    root.dataset.dyslexic = String(settings.dyslexicFont);
+    root.style.setProperty("--font-scale", String(settings.fontScale));
+
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(settings));
     } catch {
@@ -24,6 +30,8 @@ const AccessibilityProvider: FC<PropsWithChildren> = ({ children }) => {
     }
   }, [settings]);
 
+  // Thème MUI des pages d'administration, accordé aux mêmes couleurs.
+  // La taille du texte passe par la taille de <html> (unités rem) : pas de facteur ici.
   const theme = useMemo(
     () =>
       createTheme({
@@ -33,22 +41,21 @@ const AccessibilityProvider: FC<PropsWithChildren> = ({ children }) => {
               background: { default: "#000000", paper: "#000000" },
               text: { primary: "#ffffff", secondary: "#ffffff" },
               primary: { main: "#ffe600" },
+              secondary: { main: "#ffe600" },
               divider: "#ffffff",
             }
           : {
               mode: "light",
-              background: { default: "#f7f5f0", paper: "#ffffff" },
-              primary: { main: "#3d3a33" },
-              secondary: { main: "#8a5a44" },
+              background: { default: "#f4eee3", paper: "#fbf8f1" },
+              primary: { main: "#1e1a15" },
+              secondary: { main: "#9a3a22" },
+              text: { primary: "#1e1a15", secondary: "#5d5447" },
+              divider: "#d8cdb9",
             },
-        typography: {
-          fontSize: 14 * settings.fontScale,
-          fontFamily: settings.dyslexicFont
-            ? '"OpenDyslexic", Arial, sans-serif'
-            : '"Source Serif 4", Georgia, "Times New Roman", serif',
-        },
+        typography: { fontFamily: "var(--body-font)" },
+        shape: { borderRadius: 10 },
       }),
-    [settings]
+    [settings.highContrast]
   );
 
   return (

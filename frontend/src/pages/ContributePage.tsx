@@ -1,103 +1,171 @@
-import {
-  Alert,
-  Box,
-  Button,
-  Checkbox,
-  Container,
-  FormControl,
-  FormControlLabel,
-  InputLabel,
-  MenuItem,
-  Select,
-  Stack,
-  TextField,
-  Typography,
-} from "@mui/material";
-import { FormEvent, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import { CircleAlert, CircleCheck, FileUp, Lock, Send } from "lucide-react";
+import { FormEvent, ReactNode, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { apiSend } from "../api/client";
+import { SelectInput, TextArea, TextInput } from "../components/FormField";
+import { Button, Container, Page, PageHeader } from "../components/ui";
 import { ContributionTarget } from "../types/Contribution";
 
 const TARGETS: ContributionTarget[] = ["person", "place", "event", "source", "autre"];
 
+const Step = ({ number, title, children }: { number: number; title: string; children: ReactNode }) => (
+  <fieldset className="grid gap-6 border-t border-line pt-8 first:border-t-0 first:pt-0 md:grid-cols-[12rem_1fr]">
+    <legend className="contents">
+      <span className="flex items-center gap-3 md:items-start">
+        <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-ink font-display text-lg text-paper">
+          {number}
+        </span>
+        <span className="font-display text-xl text-ink md:mt-1">{title}</span>
+      </span>
+    </legend>
+    <div className="space-y-5">{children}</div>
+  </fieldset>
+);
+
 const ContributePage = () => {
   const { t } = useTranslation();
-  const [targetKind, setTargetKind] = useState<ContributionTarget>("person");
-  const [consent, setConsent] = useState(false);
   const [state, setState] = useState<"idle" | "sending" | "success" | "error">("idle");
+  const [files, setFiles] = useState<string[]>([]);
 
   const submit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const form = event.currentTarget;
     const data = new FormData(form);
-    data.set("targetKind", targetKind);
-    data.set("consentToPublish", String(consent));
+    data.set("consentToPublish", "true");
 
     setState("sending");
     try {
       await apiSend("/contributions", "POST", data);
       setState("success");
       form.reset();
-      setConsent(false);
+      setFiles([]);
+      window.scrollTo({ top: 0, behavior: "smooth" });
     } catch {
       setState("error");
     }
   };
 
   return (
-    <Container maxWidth="md" sx={{ py: 4 }}>
-      <Typography variant="h3" component="h1" gutterBottom>
-        {t("contribute.title")}
-      </Typography>
-      <Typography sx={{ mb: 3 }}>{t("contribute.intro")}</Typography>
+    <Page>
+      <PageHeader eyebrow={t("contribute.eyebrow")} title={t("contribute.title")} lead={t("contribute.intro")} />
 
-      {state === "success" && <Alert severity="success" sx={{ mb: 3 }}>{t("contribute.success")}</Alert>}
-      {state === "error" && <Alert severity="error" sx={{ mb: 3 }}>{t("contribute.error")}</Alert>}
-
-      <Box component="form" onSubmit={submit}>
-        <Stack spacing={2}>
-          <TextField name="contributorName" label={t("contribute.name")} required />
-          <TextField name="contributorEmail" type="email" label={t("contribute.email")} required helperText={t("contribute.privacy")} />
-          <TextField name="contributorRelation" label={t("contribute.relation")} />
-
-          <FormControl>
-            <InputLabel id="target-label">{t("contribute.targetKind")}</InputLabel>
-            <Select
-              labelId="target-label"
-              label={t("contribute.targetKind")}
-              value={targetKind}
-              onChange={(event) => setTargetKind(event.target.value as ContributionTarget)}
+      <Container className="max-w-4xl py-12">
+        <AnimatePresence mode="wait">
+          {state === "success" ? (
+            <motion.div
+              key="success"
+              initial={{ opacity: 0, scale: 0.96 }}
+              animate={{ opacity: 1, scale: 1 }}
+              className="rounded-3xl border border-leaf/40 bg-card p-10 text-center shadow-lg"
+              role="status"
             >
-              {TARGETS.map((kind) => (
-                <MenuItem key={kind} value={kind}>
-                  {t(`contribute.kinds.${kind}`)}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
+              <motion.span
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                transition={{ type: "spring", delay: 0.15 }}
+                className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-leaf/15 text-leaf"
+              >
+                <CircleCheck className="h-9 w-9" aria-hidden="true" />
+              </motion.span>
+              <h2 className="mt-6 font-display text-3xl text-ink">{t("contribute.successTitle")}</h2>
+              <p className="mx-auto mt-3 max-w-md text-ink-soft">{t("contribute.success")}</p>
+              <Button variant="secondary" className="mt-8" onClick={() => setState("idle")}>
+                {t("contribute.another")}
+              </Button>
+            </motion.div>
+          ) : (
+            <motion.form
+              key="form"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              onSubmit={submit}
+              className="space-y-8 rounded-3xl border border-line bg-card p-6 shadow-sm sm:p-10"
+            >
+              {state === "error" && (
+                <div className="flex items-start gap-3 rounded-2xl border border-accent/40 bg-accent-soft p-4" role="alert">
+                  <CircleAlert className="mt-0.5 h-5 w-5 shrink-0 text-accent" aria-hidden="true" />
+                  <p>{t("contribute.error")}</p>
+                </div>
+              )}
 
-          <TextField name="targetLabel" label={t("contribute.targetLabel")} />
-          <TextField name="content" label={t("contribute.content")} required multiline minRows={5} inputProps={{ minLength: 10 }} />
-          <TextField name="declaredProvenance" label={t("contribute.provenance")} required multiline minRows={2} />
+              <Step number={1} title={t("contribute.stepYou")}>
+                <div className="grid gap-5 sm:grid-cols-2">
+                  <TextInput id="contributorName" name="contributorName" label={t("contribute.name")} required autoComplete="name" />
+                  <TextInput
+                    id="contributorEmail"
+                    name="contributorEmail"
+                    type="email"
+                    label={t("contribute.email")}
+                    required
+                    autoComplete="email"
+                  />
+                </div>
+                <TextInput id="contributorRelation" name="contributorRelation" label={t("contribute.relation")} />
+                <p className="flex items-center gap-2 text-sm text-ink-soft">
+                  <Lock className="h-4 w-4" aria-hidden="true" />
+                  {t("contribute.privacy")}
+                </p>
+              </Step>
 
-          <Box>
-            <Typography component="label" htmlFor="files" sx={{ display: "block", mb: 1 }}>
-              {t("contribute.files")}
-            </Typography>
-            <input id="files" name="files" type="file" multiple accept="image/*,application/pdf,audio/*" />
-          </Box>
+              <Step number={2} title={t("contribute.stepProposal")}>
+                <div className="grid gap-5 sm:grid-cols-2">
+                  <SelectInput id="targetKind" name="targetKind" label={t("contribute.targetKind")} defaultValue="person">
+                    {TARGETS.map((kind) => (
+                      <option key={kind} value={kind}>
+                        {t(`contribute.kinds.${kind}`)}
+                      </option>
+                    ))}
+                  </SelectInput>
+                  <TextInput id="targetLabel" name="targetLabel" label={t("contribute.targetLabel")} />
+                </div>
+                <TextArea id="content" name="content" label={t("contribute.content")} required minLength={10} rows={6} />
+                <TextArea id="declaredProvenance" name="declaredProvenance" label={t("contribute.provenance")} required rows={3} />
+              </Step>
 
-          <FormControlLabel
-            control={<Checkbox checked={consent} onChange={(event) => setConsent(event.target.checked)} required />}
-            label={t("contribute.consent")}
-          />
+              <Step number={3} title={t("contribute.stepFiles")}>
+                <div>
+                  <p className="text-sm font-semibold text-ink">{t("contribute.files")}</p>
+                  <label
+                    htmlFor="files"
+                    className="mt-2 flex cursor-pointer flex-col items-center justify-center gap-2 rounded-2xl border-2 border-dashed border-line bg-paper/60 px-6 py-10 text-center transition hover:border-accent hover:bg-accent-soft/40"
+                  >
+                    <FileUp className="h-8 w-8 text-accent" aria-hidden="true" />
+                    <span className="font-medium text-ink">{t("contribute.filesHint")}</span>
+                    {files.length > 0 && <span className="text-sm text-ink-soft">{files.join(" · ")}</span>}
+                  </label>
+                  <input
+                    id="files"
+                    name="files"
+                    type="file"
+                    multiple
+                    accept="image/*,application/pdf,audio/*"
+                    className="sr-only"
+                    onChange={(event) => setFiles(Array.from(event.target.files ?? []).map((file) => file.name))}
+                  />
+                </div>
 
-          <Button type="submit" variant="contained" size="large" disabled={state === "sending"}>
-            {t("contribute.submit")}
-          </Button>
-        </Stack>
-      </Box>
-    </Container>
+                <label className="flex cursor-pointer items-start gap-3 rounded-2xl border border-line p-4 transition hover:border-ink/30">
+                  <input type="checkbox" required className="mt-1 h-5 w-5 shrink-0 accent-[var(--accent)]" />
+                  <span className="text-ink">{t("contribute.consent")}</span>
+                </label>
+              </Step>
+
+              <div className="flex justify-end border-t border-line pt-8">
+                <Button type="submit" disabled={state === "sending"} className="px-7 py-3 text-base">
+                  {state === "sending" ? (
+                    <span className="h-4 w-4 animate-spin rounded-full border-2 border-accent-ink/40 border-t-accent-ink" aria-hidden="true" />
+                  ) : (
+                    <Send className="h-4 w-4" aria-hidden="true" />
+                  )}
+                  {state === "sending" ? t("contribute.sending") : t("contribute.submit")}
+                </Button>
+              </div>
+            </motion.form>
+          )}
+        </AnimatePresence>
+      </Container>
+    </Page>
   );
 };
 

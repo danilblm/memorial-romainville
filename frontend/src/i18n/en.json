@@ -1,5 +1,5 @@
 {
-  "site": { "title": "Fort de Romainville Memorial" },
+  "site": { "title": "Fort de Romainville Memorial", "short": "Fort de Romainville", "kicker": "Digital memorial" },
   "nav": {
     "home": "Home",
     "timeline": "Timeline",
@@ -9,7 +9,10 @@
     "admin": "Administration",
     "login": "Team login",
     "logout": "Log out",
-    "skip": "Skip to content"
+    "skip": "Skip to content",
+    "menu": "Open menu",
+    "close": "Close",
+    "mainNav": "Main navigation"
   },
   "a11y": {
     "title": "Display settings",
@@ -17,7 +20,8 @@
     "textSize": "Text size",
     "contrast": "High contrast",
     "dyslexic": "Dyslexia-friendly font",
-    "reset": "Reset"
+    "reset": "Reset",
+    "language": "Language"
   },
   "lang": { "label": "Language", "fr": "FR", "en": "EN" },
   "reliability": {
@@ -35,27 +39,61 @@
     "refuse": "Rejected"
   },
   "home": {
+    "eyebrow": "Digital memorial · 1940 – 1944",
     "title": "The women of the Fort de Romainville",
-    "intro": "Between 1940 and 1944, the Fort de Romainville was used as an internment camp. Each apple on the tree stands for a woman held at the fort, grouped by when she arrived.",
+    "lead": "Resisters, hostages, deportees: many women passed through this fort in Les Lilas. This memorial gathers their traces, always showing where each piece of information comes from and what remains unknown.",
+    "slogan": "Dusting off the history of these places",
+    "ctaTree": "Discover their stories",
+    "ctaMap": "Explore the fort",
+    "statWomen": "records of women",
+    "statPlaces": "documented places",
+    "statEvents": "dated events",
+    "statPeriod": "years of the camp",
+    "treeEyebrow": "Their stories",
     "treeTitle": "The tree of women",
-    "treeHelp": "Select an apple to discover her story. An empty apple marks a restricted record.",
+    "treeHelp": "Each apple is a woman, hanging from the branch of her arrival at the fort. An empty apple marks a restricted record.",
+    "treeHint": "Hover or select an apple to discover a woman.",
+    "treeOpen": "See her record",
+    "treeEmpty": "No records published yet.",
     "unknownPeriod": "Unknown period",
-    "listTitle": "List of women"
+    "listTitle": "All records",
+    "principlesEyebrow": "Our approach",
+    "principlesTitle": "A memory honest about what it knows",
+    "principles": {
+      "source": { "title": "Every fact has its source", "desc": "Archives, registers, testimonies: you always know where what you read comes from, and how certain it is." },
+      "unknown": { "title": "What is missing is said", "desc": "Memory is incomplete. Each record also shows what we do not know yet." },
+      "silence": { "title": "Silence is respected", "desc": "When a person or their family refuses exposure, we only keep the trace of their presence." }
+    },
+    "exploreEyebrow": "Explore",
+    "exploreTitle": "Several paths into the memory of the fort",
+    "explore": {
+      "timeline": { "title": "The timeline", "desc": "The key dates of the fort and the documents behind them." },
+      "map": { "title": "Map of the fort", "desc": "The casemates and spaces, including casemate 17 and its graffiti." },
+      "contribute": { "title": "Contribute", "desc": "A photo, a letter, a memory? Share it, the team will check it." },
+      "sources": { "title": "Our sources", "desc": "How we check facts, and what the reliability levels mean." }
+    }
   },
+  "tree": { "arrival": "Arrival: {{date}}", "reserved": "Restricted record" },
   "person": {
     "biography": "Biography",
     "arrival": "Arrival at the fort",
     "departure": "Departure from the fort",
+    "birth": "Birth",
+    "death": "Death",
     "claims": "What the sources say",
     "testimonies": "Testimonies",
     "places": "Places",
     "events": "Events",
     "sources": "Sources",
+    "back": "Back to the tree",
     "reservedTitle": "Restricted record",
-    "reservedDefault": "This person or their family asked that this record stay limited. We respect that choice."
+    "reservedDefault": "This person or their family asked that this record stay limited. We respect that choice.",
+    "contributeHint": "Do you have a document or information about her?",
+    "contributeLink": "Submit a contribution"
   },
   "missing": { "title": "What we do not know" },
   "testimony": {
+    "eyebrow": "Testimony",
     "contextTitle": "Context of this testimony",
     "who": "Who is speaking?",
     "forWhom": "For whom?",
@@ -67,34 +105,45 @@
     "fullVersion": "Full version",
     "notCovered": "What this testimony does not say",
     "transcript": "Transcript",
+    "text": "The account",
     "collectedBy": "Collected by",
     "transformations": "Changes",
     "originalLocation": "Original held at",
     "about": "People mentioned"
   },
   "timeline": {
+    "eyebrow": "1940 – 1944",
     "title": "Timeline",
+    "subtitle": "The key stages in the history of the fort. Select an event to see its places, the people involved and its sources.",
     "period": "Period",
-    "allPeriods": "All periods",
-    "previous": "Previous event",
-    "next": "Next event",
+    "allPeriods": "All",
+    "previous": "Previous",
+    "next": "Next",
     "close": "Close",
-    "empty": "No events for this period."
+    "empty": "No events for this period.",
+    "open": "See details"
   },
   "map": {
+    "eyebrow": "Les Lilas",
     "title": "Map of the fort",
     "help": "Select a place on the plan or in the list.",
-    "list": "List of places"
+    "list": "Places",
+    "planNote": "Provisional plan"
   },
   "place": {
     "currentState": "Current state",
     "photos": "Photographs",
     "persons": "Women linked to this place",
-    "backToMap": "Back to the map"
+    "backToMap": "Back to the map",
+    "kinds": { "casemate": "Casemate", "cour": "Courtyard", "batiment": "Building", "autre": "Place" }
   },
   "contribute": {
+    "eyebrow": "Participatory memory",
     "title": "Share a document or information",
     "intro": "Do you have a photograph, a letter or a memory linked to the Fort de Romainville? Share it. Nothing is published before the team checks it.",
+    "stepYou": "You",
+    "stepProposal": "Your submission",
+    "stepFiles": "Documents and consent",
     "name": "Your name",
     "email": "Your email address",
     "relation": "Your link to the person or document",
@@ -104,8 +153,12 @@
     "provenance": "Where does this document come from? (family, archive, purchase…)",
     "consent": "I agree that this content may be published if approved, and I confirm I have the right to share it.",
     "files": "Files (images, PDF, audio – up to 5, 20 MB each)",
+    "filesHint": "Click to choose files",
     "submit": "Send my submission",
+    "sending": "Sending…",
     "success": "Thank you. Your submission will be checked by the team before anything is published.",
+    "successTitle": "Submission sent",
+    "another": "Make another submission",
     "error": "Sending failed. Check the fields and try again.",
     "privacy": "Your email address is only used to contact you and is never published.",
     "kinds": {
@@ -117,13 +170,28 @@
     }
   },
   "sources": {
+    "eyebrow": "Transparency",
     "title": "Our sources and rules",
     "intro": "Every piece of information shows where it comes from and how certain it is. Memory is incomplete: we also show what we do not know.",
     "reliabilityTitle": "Reliability levels",
+    "reliabilityLead": "Each statement carries one of these levels. They are shown with an icon and a word, never by colour alone.",
     "validationTitle": "How submissions are checked",
     "validationText": "Public submissions are checked by the team (authenticity, provenance, historical interest) before anything is published. Every decision is explained.",
+    "steps": {
+      "1": "You submit a document or information",
+      "2": "The team checks its provenance and authenticity",
+      "3": "The decision is explained, whether positive or not",
+      "4": "Approved content is published with its source"
+    },
     "aiTitle": "The role of artificial intelligence",
     "aiText": "AI can help us search, transcribe or link documents. It is neither a source nor an authority: anything produced with its help is checked by a person and labelled as such."
+  },
+  "footer": {
+    "slogan": "Dusting off the history of these places.",
+    "project": "Master's project, THYP – Université Paris 8",
+    "team": "Fatoumata, Théo, Daphné, Zakaria, Danil",
+    "explore": "Explore",
+    "about": "The project"
   },
   "admin": {
     "title": "Submissions to review",
@@ -142,6 +210,7 @@
   },
   "login": {
     "title": "Team login",
+    "lead": "Reserved for project members who write the records and review submissions.",
     "email": "Email",
     "password": "Password",
     "submit": "Log in",
@@ -151,6 +220,7 @@
     "loading": "Loading…",
     "error": "The content could not be loaded.",
     "notFound": "Page not found.",
+    "notFoundLead": "This page does not exist or has moved.",
     "back": "Back to home",
     "aiAssisted": "AI-assisted",
     "yes": "Yes",

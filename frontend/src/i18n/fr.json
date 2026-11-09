@@ -1,5 +1,5 @@
 {
-  "site": { "title": "Mémorial du Fort de Romainville" },
+  "site": { "title": "Mémorial du Fort de Romainville", "short": "Fort de Romainville", "kicker": "Mémorial numérique" },
   "nav": {
     "home": "Accueil",
     "timeline": "Frise",
@@ -9,7 +9,10 @@
     "admin": "Administration",
     "login": "Connexion équipe",
     "logout": "Déconnexion",
-    "skip": "Aller au contenu"
+    "skip": "Aller au contenu",
+    "menu": "Ouvrir le menu",
+    "close": "Fermer",
+    "mainNav": "Navigation principale"
   },
   "a11y": {
     "title": "Réglages d'affichage",
@@ -17,7 +20,8 @@
     "textSize": "Taille du texte",
     "contrast": "Contraste élevé",
     "dyslexic": "Police adaptée à la dyslexie",
-    "reset": "Réinitialiser"
+    "reset": "Réinitialiser",
+    "language": "Langue"
   },
   "lang": { "label": "Langue", "fr": "FR", "en": "EN" },
   "reliability": {
@@ -35,27 +39,61 @@
     "refuse": "Refusée"
   },
   "home": {
+    "eyebrow": "Mémorial numérique · 1940 – 1944",
     "title": "Les femmes du Fort de Romainville",
-    "intro": "Entre 1940 et 1944, le Fort de Romainville a servi de camp d'internement. Chaque pomme de l'arbre représente une femme passée par le fort, regroupée selon la période de son arrivée.",
+    "lead": "Résistantes, otages, déportées : de nombreuses femmes sont passées par ce fort des Lilas. Ce mémorial rassemble leurs traces, en disant toujours d'où vient chaque information et ce qui reste inconnu.",
+    "slogan": "Dépoussiérer l'histoire de ces lieux",
+    "ctaTree": "Découvrir leurs parcours",
+    "ctaMap": "Explorer le fort",
+    "statWomen": "fiches de femmes",
+    "statPlaces": "lieux documentés",
+    "statEvents": "événements datés",
+    "statPeriod": "années de camp",
+    "treeEyebrow": "Leurs parcours",
     "treeTitle": "L'arbre des femmes",
-    "treeHelp": "Sélectionnez une pomme pour découvrir son parcours. Une pomme vide signale une fiche réservée.",
+    "treeHelp": "Chaque pomme est une femme, accrochée à la branche de son arrivée au fort. Une pomme vide signale une fiche réservée.",
+    "treeHint": "Survolez ou sélectionnez une pomme pour découvrir une femme.",
+    "treeOpen": "Voir sa fiche",
+    "treeEmpty": "Aucune fiche publiée pour le moment.",
     "unknownPeriod": "Période inconnue",
-    "listTitle": "Liste des femmes"
+    "listTitle": "Toutes les fiches",
+    "principlesEyebrow": "Notre démarche",
+    "principlesTitle": "Une mémoire honnête sur ce qu'elle sait",
+    "principles": {
+      "source": { "title": "Chaque information a sa source", "desc": "Archives, registres, témoignages : vous savez toujours d'où vient ce que vous lisez, et à quel point c'est sûr." },
+      "unknown": { "title": "Ce qui manque est dit", "desc": "La mémoire est incomplète. Chaque fiche montre aussi ce que nous ne savons pas encore." },
+      "silence": { "title": "Le silence est respecté", "desc": "Quand une personne ou sa famille refuse d'être exposée, nous gardons seulement la trace de sa présence." }
+    },
+    "exploreEyebrow": "Explorer",
+    "exploreTitle": "Plusieurs chemins dans la mémoire du fort",
+    "explore": {
+      "timeline": { "title": "La frise", "desc": "Les grandes dates du fort et les documents qui les attestent." },
+      "map": { "title": "La carte du fort", "desc": "Les casemates et les espaces, dont la casemate 17 et ses graffitis." },
+      "contribute": { "title": "Contribuer", "desc": "Une photo, une lettre, un souvenir ? Proposez-le, l'équipe le vérifiera." },
+      "sources": { "title": "Nos sources", "desc": "Comment nous vérifions, et ce que signifient les niveaux de fiabilité." }
+    }
   },
+  "tree": { "arrival": "Arrivée : {{date}}", "reserved": "Fiche réservée" },
   "person": {
     "biography": "Biographie",
     "arrival": "Arrivée au fort",
     "departure": "Départ du fort",
+    "birth": "Naissance",
+    "death": "Décès",
     "claims": "Ce que disent les sources",
     "testimonies": "Témoignages",
     "places": "Lieux",
     "events": "Événements",
     "sources": "Sources",
+    "back": "Retour à l'arbre",
     "reservedTitle": "Fiche réservée",
-    "reservedDefault": "Cette personne ou sa famille a demandé que sa fiche reste limitée. Nous respectons ce choix."
+    "reservedDefault": "Cette personne ou sa famille a demandé que sa fiche reste limitée. Nous respectons ce choix.",
+    "contributeHint": "Vous avez un document ou une information sur elle ?",
+    "contributeLink": "Proposer une contribution"
   },
   "missing": { "title": "Ce que l'on ne sait pas" },
   "testimony": {
+    "eyebrow": "Témoignage",
     "contextTitle": "Contexte du témoignage",
     "who": "Qui parle ?",
     "forWhom": "Pour qui ?",
@@ -67,34 +105,45 @@
     "fullVersion": "Version complète",
     "notCovered": "Ce que ce témoignage ne dit pas",
     "transcript": "Transcription",
+    "text": "Le récit",
     "collectedBy": "Recueilli par",
     "transformations": "Transformations",
     "originalLocation": "Original conservé à",
     "about": "Personnes citées"
   },
   "timeline": {
+    "eyebrow": "1940 – 1944",
     "title": "Frise chronologique",
+    "subtitle": "Les grandes étapes de l'histoire du fort. Sélectionnez un événement pour voir ses lieux, les personnes concernées et ses sources.",
     "period": "Période",
-    "allPeriods": "Toutes les périodes",
-    "previous": "Événement précédent",
-    "next": "Événement suivant",
+    "allPeriods": "Toutes",
+    "previous": "Précédent",
+    "next": "Suivant",
     "close": "Fermer",
-    "empty": "Aucun événement pour cette période."
+    "empty": "Aucun événement pour cette période.",
+    "open": "Voir le détail"
   },
   "map": {
+    "eyebrow": "Les Lilas",
     "title": "Carte du fort",
     "help": "Sélectionnez un lieu sur le plan ou dans la liste.",
-    "list": "Liste des lieux"
+    "list": "Les lieux",
+    "planNote": "Plan provisoire"
   },
   "place": {
     "currentState": "État actuel",
     "photos": "Photographies",
     "persons": "Femmes liées à ce lieu",
-    "backToMap": "Retour à la carte"
+    "backToMap": "Retour à la carte",
+    "kinds": { "casemate": "Casemate", "cour": "Cour", "batiment": "Bâtiment", "autre": "Lieu" }
   },
   "contribute": {
+    "eyebrow": "Mémoire participative",
     "title": "Proposer un document ou une information",
     "intro": "Vous possédez une photographie, une lettre ou un souvenir lié au Fort de Romainville ? Proposez-le. Rien n'est publié avant vérification par l'équipe.",
+    "stepYou": "Vous",
+    "stepProposal": "Votre proposition",
+    "stepFiles": "Documents et accord",
     "name": "Votre nom",
     "email": "Votre adresse e-mail",
     "relation": "Votre lien avec la personne ou le document",
@@ -104,8 +153,12 @@
     "provenance": "D'où vient ce document ? (famille, archive, achat…)",
     "consent": "J'accepte que ce contenu soit publié s'il est validé, et je confirme en avoir le droit.",
     "files": "Fichiers (images, PDF, audio – 5 maximum, 20 Mo chacun)",
+    "filesHint": "Cliquez pour choisir des fichiers",
     "submit": "Envoyer ma proposition",
+    "sending": "Envoi…",
     "success": "Merci. Votre proposition sera vérifiée par l'équipe avant toute publication.",
+    "successTitle": "Proposition envoyée",
+    "another": "Faire une autre proposition",
     "error": "L'envoi a échoué. Vérifiez les champs et réessayez.",
     "privacy": "Votre adresse e-mail sert uniquement à vous recontacter et n'est jamais publiée.",
     "kinds": {
@@ -117,13 +170,28 @@
     }
   },
   "sources": {
+    "eyebrow": "Transparence",
     "title": "Nos sources et nos règles",
     "intro": "Chaque information du mémorial indique d'où elle vient et à quel point elle est sûre. La mémoire est incomplète : nous montrons aussi ce que nous ne savons pas.",
     "reliabilityTitle": "Niveaux de fiabilité",
+    "reliabilityLead": "Chaque affirmation porte l'un de ces niveaux. Ils sont signalés par une icône et un mot, jamais par la seule couleur.",
     "validationTitle": "Validation des contributions",
     "validationText": "Les propositions du public sont vérifiées par l'équipe (authenticité, provenance, intérêt historique) avant toute publication. Chaque décision est motivée.",
+    "steps": {
+      "1": "Vous proposez un document ou une information",
+      "2": "L'équipe vérifie sa provenance et son authenticité",
+      "3": "La décision est motivée, qu'elle soit positive ou non",
+      "4": "Le contenu validé est publié avec sa source"
+    },
     "aiTitle": "Le rôle de l'intelligence artificielle",
     "aiText": "L'IA peut nous aider à chercher, transcrire ou relier des documents. Elle n'est ni une source ni une autorité : tout contenu produit avec son aide est vérifié par une personne et signalé comme tel."
+  },
+  "footer": {
+    "slogan": "Dépoussiérer l'histoire de ces lieux.",
+    "project": "Projet du Master 2 THYP – Université Paris 8",
+    "team": "Fatoumata, Théo, Daphné, Zakaria, Danil",
+    "explore": "Explorer",
+    "about": "Le projet"
   },
   "admin": {
     "title": "Contributions à modérer",
@@ -142,6 +210,7 @@
   },
   "login": {
     "title": "Connexion de l'équipe",
+    "lead": "Espace réservé aux membres du projet qui saisissent les fiches et modèrent les contributions.",
     "email": "E-mail",
     "password": "Mot de passe",
     "submit": "Se connecter",
@@ -151,6 +220,7 @@
     "loading": "Chargement…",
     "error": "Le contenu n'a pas pu être chargé.",
     "notFound": "Page introuvable.",
+    "notFoundLead": "Cette page n'existe pas ou a été déplacée.",
     "back": "Retour à l'accueil",
     "aiAssisted": "Assisté par IA",
     "yes": "Oui",
