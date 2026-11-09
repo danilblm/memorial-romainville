@@ -4,7 +4,7 @@ import testimonyModel from "../models/testimonyModel";
 import { onlyValidatedClaims, PUBLIC_PERSON_FILTER, PUBLISHED } from "./publicFilters";
 
 export const listPublicPlaces = async () => {
-  return await placeModel.find(PUBLISHED).select("code kind name position").lean();
+  return await placeModel.find(PUBLISHED).select("code kind name position geo").lean();
 };
 
 export const getPublicPlace = async (code: string) => {

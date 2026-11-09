@@ -126,9 +126,25 @@
   "map": {
     "eyebrow": "Les Lilas",
     "title": "Carte du fort",
-    "help": "Sélectionnez un lieu sur le plan ou dans la liste.",
+    "help": "Passez du plan du fort à la vue satellite, sélectionnez un lieu pour voir son aperçu, ou laissez-vous guider pas à pas.",
     "list": "Les lieux",
-    "planNote": "Plan provisoire"
+    "selectHint": "Sélectionnez un lieu pour voir son aperçu.",
+    "planNote": "Plan provisoire",
+    "view": "Type de vue",
+    "modePlan": "Plan du fort",
+    "modeReal": "Vue satellite",
+    "filter": "Filtrer par type de lieu",
+    "allKinds": "Tous",
+    "tour": "Visite guidée",
+    "stopTour": "Arrêter la visite",
+    "tourStep": "Étape {{n}} sur {{total}}",
+    "preview": "Aperçu du lieu",
+    "openPlace": "Voir le lieu en détail",
+    "persons": "Femmes liées : {{count}}",
+    "testimonies": "Témoignages : {{count}}",
+    "notOnThisView": "pas encore placé sur cette vue",
+    "notPlacedPlan": "Lieux à placer sur le plan : {{count}}",
+    "notPlacedReal": "Lieux à placer sur la vue satellite : {{count}}"
   },
   "place": {
     "currentState": "État actuel",

@@ -14,6 +14,11 @@ const placeSchema = new Schema(
       x: { type: Number },
       y: { type: Number },
     },
+    // Position réelle (vue satellite), en degrés
+    geo: {
+      lat: { type: Number, min: -90, max: 90 },
+      lng: { type: Number, min: -180, max: 180 },
+    },
     photos: [
       {
         url: { type: String, required: true },

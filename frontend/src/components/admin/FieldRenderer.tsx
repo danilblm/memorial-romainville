@@ -4,6 +4,7 @@ import { FieldConfig } from "../../constants/adminEntities";
 import { FuzzyDate, LocalizedText, Publication } from "../../types/common";
 import ClaimsEditor, { ClaimValue } from "./ClaimsEditor";
 import FuzzyDateField from "./FuzzyDateField";
+import GeoPositionField, { GeoValue } from "./GeoPositionField";
 import { LocalizedListEditor, PhotosEditor, PhotoValue, TagsField } from "./ListEditors";
 import LocalizedTextField from "./LocalizedTextField";
 import MediaField from "./MediaField";
@@ -128,6 +129,9 @@ const FieldRenderer = ({ field, value, onChange }: Props) => {
 
     case "position":
       return <PositionField label={label} value={value as { x?: number; y?: number } | undefined} onChange={onChange} />;
+
+    case "geo":
+      return <GeoPositionField label={label} value={value as GeoValue | undefined} onChange={onChange} />;
 
     case "photos":
       return <PhotosEditor label={label} value={value as PhotoValue[] | undefined} onChange={onChange} />;

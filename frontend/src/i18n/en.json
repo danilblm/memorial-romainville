@@ -126,9 +126,25 @@
   "map": {
     "eyebrow": "Les Lilas",
     "title": "Map of the fort",
-    "help": "Select a place on the plan or in the list.",
+    "help": "Switch between the plan of the fort and the satellite view, select a place to preview it, or follow the guided tour step by step.",
     "list": "Places",
-    "planNote": "Provisional plan"
+    "selectHint": "Select a place to preview it.",
+    "planNote": "Provisional plan",
+    "view": "View type",
+    "modePlan": "Plan of the fort",
+    "modeReal": "Satellite view",
+    "filter": "Filter by type of place",
+    "allKinds": "All",
+    "tour": "Guided tour",
+    "stopTour": "Stop the tour",
+    "tourStep": "Step {{n}} of {{total}}",
+    "preview": "Place preview",
+    "openPlace": "See the place in detail",
+    "persons": "Linked women: {{count}}",
+    "testimonies": "Testimonies: {{count}}",
+    "notOnThisView": "not yet placed on this view",
+    "notPlacedPlan": "Places to put on the plan: {{count}}",
+    "notPlacedReal": "Places to put on the satellite view: {{count}}"
   },
   "place": {
     "currentState": "Current state",

@@ -9,6 +9,7 @@ export interface PlaceSummary {
   kind?: string;
   name: LocalizedText;
   position?: { x?: number; y?: number };
+  geo?: { lat?: number | null; lng?: number | null };
 }
 
 export interface PlacePhoto {
