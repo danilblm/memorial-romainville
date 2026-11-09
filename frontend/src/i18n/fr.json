@@ -1,0 +1,159 @@
+{
+  "site": { "title": "Mémorial du Fort de Romainville" },
+  "nav": {
+    "home": "Accueil",
+    "timeline": "Frise",
+    "map": "Carte du fort",
+    "contribute": "Contribuer",
+    "sources": "Nos sources",
+    "admin": "Administration",
+    "login": "Connexion équipe",
+    "logout": "Déconnexion",
+    "skip": "Aller au contenu"
+  },
+  "a11y": {
+    "title": "Réglages d'affichage",
+    "open": "Ouvrir les réglages d'affichage",
+    "textSize": "Taille du texte",
+    "contrast": "Contraste élevé",
+    "dyslexic": "Police adaptée à la dyslexie",
+    "reset": "Réinitialiser"
+  },
+  "lang": { "label": "Langue", "fr": "FR", "en": "EN" },
+  "reliability": {
+    "documentee": { "label": "Documentée", "desc": "Attestée par une source d'archive identifiée." },
+    "recoupee": { "label": "Recoupée", "desc": "Confirmée par au moins deux sources indépendantes." },
+    "temoignee": { "label": "Témoignée", "desc": "Rapportée par un témoin direct, sans document qui la confirme." },
+    "transmise": { "label": "Transmise", "desc": "Rapportée par un proche ou un tiers, pas par un témoin direct." },
+    "incertaine": { "label": "Incertaine", "desc": "Les sources sont en désaccord ou l'information est partielle." },
+    "inconnue": { "label": "Inconnue", "desc": "L'information existe mais nous ne l'avons pas retrouvée." }
+  },
+  "status": {
+    "propose": "Proposée",
+    "en_verification": "En vérification",
+    "valide": "Validée",
+    "refuse": "Refusée"
+  },
+  "home": {
+    "title": "Les femmes du Fort de Romainville",
+    "intro": "Entre 1940 et 1944, le Fort de Romainville a servi de camp d'internement. Chaque pomme de l'arbre représente une femme passée par le fort, regroupée selon la période de son arrivée.",
+    "treeTitle": "L'arbre des femmes",
+    "treeHelp": "Sélectionnez une pomme pour découvrir son parcours. Une pomme vide signale une fiche réservée.",
+    "unknownPeriod": "Période inconnue",
+    "listTitle": "Liste des femmes"
+  },
+  "person": {
+    "biography": "Biographie",
+    "arrival": "Arrivée au fort",
+    "departure": "Départ du fort",
+    "claims": "Ce que disent les sources",
+    "testimonies": "Témoignages",
+    "places": "Lieux",
+    "events": "Événements",
+    "sources": "Sources",
+    "reservedTitle": "Fiche réservée",
+    "reservedDefault": "Cette personne ou sa famille a demandé que sa fiche reste limitée. Nous respectons ce choix."
+  },
+  "missing": { "title": "Ce que l'on ne sait pas" },
+  "testimony": {
+    "contextTitle": "Contexte du témoignage",
+    "who": "Qui parle ?",
+    "forWhom": "Pour qui ?",
+    "when": "Depuis quand ?",
+    "path": "Par quel chemin ?",
+    "lived": "a vécu ce qu'elle raconte",
+    "notLived": "n'a pas vécu directement ce qu'elle raconte",
+    "excerpt": "Ceci est un extrait.",
+    "fullVersion": "Version complète",
+    "notCovered": "Ce que ce témoignage ne dit pas",
+    "transcript": "Transcription",
+    "collectedBy": "Recueilli par",
+    "transformations": "Transformations",
+    "originalLocation": "Original conservé à",
+    "about": "Personnes citées"
+  },
+  "timeline": {
+    "title": "Frise chronologique",
+    "period": "Période",
+    "allPeriods": "Toutes les périodes",
+    "previous": "Événement précédent",
+    "next": "Événement suivant",
+    "close": "Fermer",
+    "empty": "Aucun événement pour cette période."
+  },
+  "map": {
+    "title": "Carte du fort",
+    "help": "Sélectionnez un lieu sur le plan ou dans la liste.",
+    "list": "Liste des lieux"
+  },
+  "place": {
+    "currentState": "État actuel",
+    "photos": "Photographies",
+    "persons": "Femmes liées à ce lieu",
+    "backToMap": "Retour à la carte"
+  },
+  "contribute": {
+    "title": "Proposer un document ou une information",
+    "intro": "Vous possédez une photographie, une lettre ou un souvenir lié au Fort de Romainville ? Proposez-le. Rien n'est publié avant vérification par l'équipe.",
+    "name": "Votre nom",
+    "email": "Votre adresse e-mail",
+    "relation": "Votre lien avec la personne ou le document",
+    "targetKind": "Votre proposition concerne",
+    "targetLabel": "Précisez (nom de la personne, du lieu…)",
+    "content": "Votre information ou la description du document",
+    "provenance": "D'où vient ce document ? (famille, archive, achat…)",
+    "consent": "J'accepte que ce contenu soit publié s'il est validé, et je confirme en avoir le droit.",
+    "files": "Fichiers (images, PDF, audio – 5 maximum, 20 Mo chacun)",
+    "submit": "Envoyer ma proposition",
+    "success": "Merci. Votre proposition sera vérifiée par l'équipe avant toute publication.",
+    "error": "L'envoi a échoué. Vérifiez les champs et réessayez.",
+    "privacy": "Votre adresse e-mail sert uniquement à vous recontacter et n'est jamais publiée.",
+    "kinds": {
+      "person": "Une femme internée",
+      "place": "Un lieu du fort",
+      "event": "Un événement",
+      "source": "Un document existant",
+      "autre": "Autre"
+    }
+  },
+  "sources": {
+    "title": "Nos sources et nos règles",
+    "intro": "Chaque information du mémorial indique d'où elle vient et à quel point elle est sûre. La mémoire est incomplète : nous montrons aussi ce que nous ne savons pas.",
+    "reliabilityTitle": "Niveaux de fiabilité",
+    "validationTitle": "Validation des contributions",
+    "validationText": "Les propositions du public sont vérifiées par l'équipe (authenticité, provenance, intérêt historique) avant toute publication. Chaque décision est motivée.",
+    "aiTitle": "Le rôle de l'intelligence artificielle",
+    "aiText": "L'IA peut nous aider à chercher, transcrire ou relier des documents. Elle n'est ni une source ni une autorité : tout contenu produit avec son aide est vérifié par une personne et signalé comme tel."
+  },
+  "admin": {
+    "title": "Contributions à modérer",
+    "filter": "Statut",
+    "all": "Toutes",
+    "from": "Proposée par",
+    "provenance": "Provenance déclarée",
+    "consent": "Accord de publication",
+    "files": "Fichiers joints",
+    "reason": "Motif de la décision (obligatoire)",
+    "verify": "Mettre en vérification",
+    "approve": "Valider",
+    "refuse": "Refuser",
+    "empty": "Aucune contribution.",
+    "decidedBy": "Décision"
+  },
+  "login": {
+    "title": "Connexion de l'équipe",
+    "email": "E-mail",
+    "password": "Mot de passe",
+    "submit": "Se connecter",
+    "error": "Identifiants incorrects."
+  },
+  "common": {
+    "loading": "Chargement…",
+    "error": "Le contenu n'a pas pu être chargé.",
+    "notFound": "Page introuvable.",
+    "back": "Retour à l'accueil",
+    "aiAssisted": "Assisté par IA",
+    "yes": "Oui",
+    "no": "Non"
+  }
+}

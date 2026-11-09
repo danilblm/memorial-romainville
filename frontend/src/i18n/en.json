@@ -1,0 +1,159 @@
+{
+  "site": { "title": "Fort de Romainville Memorial" },
+  "nav": {
+    "home": "Home",
+    "timeline": "Timeline",
+    "map": "Map of the fort",
+    "contribute": "Contribute",
+    "sources": "Our sources",
+    "admin": "Administration",
+    "login": "Team login",
+    "logout": "Log out",
+    "skip": "Skip to content"
+  },
+  "a11y": {
+    "title": "Display settings",
+    "open": "Open display settings",
+    "textSize": "Text size",
+    "contrast": "High contrast",
+    "dyslexic": "Dyslexia-friendly font",
+    "reset": "Reset"
+  },
+  "lang": { "label": "Language", "fr": "FR", "en": "EN" },
+  "reliability": {
+    "documentee": { "label": "Documented", "desc": "Attested by an identified archival source." },
+    "recoupee": { "label": "Cross-checked", "desc": "Confirmed by at least two independent sources." },
+    "temoignee": { "label": "Witnessed", "desc": "Reported by a direct witness, with no confirming document." },
+    "transmise": { "label": "Passed on", "desc": "Reported by a relative or third party, not a direct witness." },
+    "incertaine": { "label": "Uncertain", "desc": "Sources disagree or the information is partial." },
+    "inconnue": { "label": "Unknown", "desc": "The information exists but we have not found it." }
+  },
+  "status": {
+    "propose": "Submitted",
+    "en_verification": "Under review",
+    "valide": "Approved",
+    "refuse": "Rejected"
+  },
+  "home": {
+    "title": "The women of the Fort de Romainville",
+    "intro": "Between 1940 and 1944, the Fort de Romainville was used as an internment camp. Each apple on the tree stands for a woman held at the fort, grouped by when she arrived.",
+    "treeTitle": "The tree of women",
+    "treeHelp": "Select an apple to discover her story. An empty apple marks a restricted record.",
+    "unknownPeriod": "Unknown period",
+    "listTitle": "List of women"
+  },
+  "person": {
+    "biography": "Biography",
+    "arrival": "Arrival at the fort",
+    "departure": "Departure from the fort",
+    "claims": "What the sources say",
+    "testimonies": "Testimonies",
+    "places": "Places",
+    "events": "Events",
+    "sources": "Sources",
+    "reservedTitle": "Restricted record",
+    "reservedDefault": "This person or their family asked that this record stay limited. We respect that choice."
+  },
+  "missing": { "title": "What we do not know" },
+  "testimony": {
+    "contextTitle": "Context of this testimony",
+    "who": "Who is speaking?",
+    "forWhom": "For whom?",
+    "when": "When?",
+    "path": "How did it reach us?",
+    "lived": "lived through what she describes",
+    "notLived": "did not directly live through what she describes",
+    "excerpt": "This is an excerpt.",
+    "fullVersion": "Full version",
+    "notCovered": "What this testimony does not say",
+    "transcript": "Transcript",
+    "collectedBy": "Collected by",
+    "transformations": "Changes",
+    "originalLocation": "Original held at",
+    "about": "People mentioned"
+  },
+  "timeline": {
+    "title": "Timeline",
+    "period": "Period",
+    "allPeriods": "All periods",
+    "previous": "Previous event",
+    "next": "Next event",
+    "close": "Close",
+    "empty": "No events for this period."
+  },
+  "map": {
+    "title": "Map of the fort",
+    "help": "Select a place on the plan or in the list.",
+    "list": "List of places"
+  },
+  "place": {
+    "currentState": "Current state",
+    "photos": "Photographs",
+    "persons": "Women linked to this place",
+    "backToMap": "Back to the map"
+  },
+  "contribute": {
+    "title": "Share a document or information",
+    "intro": "Do you have a photograph, a letter or a memory linked to the Fort de Romainville? Share it. Nothing is published before the team checks it.",
+    "name": "Your name",
+    "email": "Your email address",
+    "relation": "Your link to the person or document",
+    "targetKind": "Your submission is about",
+    "targetLabel": "Details (name of the person, place…)",
+    "content": "Your information or a description of the document",
+    "provenance": "Where does this document come from? (family, archive, purchase…)",
+    "consent": "I agree that this content may be published if approved, and I confirm I have the right to share it.",
+    "files": "Files (images, PDF, audio – up to 5, 20 MB each)",
+    "submit": "Send my submission",
+    "success": "Thank you. Your submission will be checked by the team before anything is published.",
+    "error": "Sending failed. Check the fields and try again.",
+    "privacy": "Your email address is only used to contact you and is never published.",
+    "kinds": {
+      "person": "A woman held at the fort",
+      "place": "A place in the fort",
+      "event": "An event",
+      "source": "An existing document",
+      "autre": "Other"
+    }
+  },
+  "sources": {
+    "title": "Our sources and rules",
+    "intro": "Every piece of information shows where it comes from and how certain it is. Memory is incomplete: we also show what we do not know.",
+    "reliabilityTitle": "Reliability levels",
+    "validationTitle": "How submissions are checked",
+    "validationText": "Public submissions are checked by the team (authenticity, provenance, historical interest) before anything is published. Every decision is explained.",
+    "aiTitle": "The role of artificial intelligence",
+    "aiText": "AI can help us search, transcribe or link documents. It is neither a source nor an authority: anything produced with its help is checked by a person and labelled as such."
+  },
+  "admin": {
+    "title": "Submissions to review",
+    "filter": "Status",
+    "all": "All",
+    "from": "Submitted by",
+    "provenance": "Declared provenance",
+    "consent": "Consent to publish",
+    "files": "Attached files",
+    "reason": "Reason for the decision (required)",
+    "verify": "Mark under review",
+    "approve": "Approve",
+    "refuse": "Reject",
+    "empty": "No submissions.",
+    "decidedBy": "Decision"
+  },
+  "login": {
+    "title": "Team login",
+    "email": "Email",
+    "password": "Password",
+    "submit": "Log in",
+    "error": "Incorrect credentials."
+  },
+  "common": {
+    "loading": "Loading…",
+    "error": "The content could not be loaded.",
+    "notFound": "Page not found.",
+    "back": "Back to home",
+    "aiAssisted": "AI-assisted",
+    "yes": "Yes",
+    "no": "No"
+  }
+}

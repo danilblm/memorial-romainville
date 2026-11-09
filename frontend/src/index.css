@@ -1,0 +1,28 @@
+/* Police pour les personnes dyslexiques : déposer OpenDyslexic-Regular.woff2
+   dans public/fonts (https://opendyslexic.org, licence SIL OFL) */
+@font-face {
+  font-family: "OpenDyslexic";
+  src: url("/fonts/OpenDyslexic-Regular.woff2") format("woff2");
+  font-display: swap;
+}
+
+/* Lien d'évitement : visible seulement au clavier */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 2000;
+  padding: 8px 16px;
+  background: #ffe600;
+  color: #000;
+}
+
+.skip-link:focus {
+  left: 8px;
+  top: 8px;
+}
+
+:focus-visible {
+  outline: 3px solid #ffb300;
+  outline-offset: 2px;
+}

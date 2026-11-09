@@ -1,0 +1,182 @@
+import {
+  Alert,
+  Box,
+  Breadcrumbs,
+  Button,
+  Container,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  Link,
+  Paper,
+  Snackbar,
+  Stack,
+  Typography,
+} from "@mui/material";
+import { FormEvent, useEffect, useState } from "react";
+import { Link as RouterLink, useNavigate, useParams } from "react-router-dom";
+import { ApiError, apiSend } from "../../api/client";
+import FieldRenderer from "../../components/admin/FieldRenderer";
+import PageState from "../../components/PageState";
+import { FormValues, getEntityConfig } from "../../constants/adminEntities";
+import { useAuth } from "../../context/Auth/AuthContext";
+import { useApi } from "../../hooks/useApi";
+import NotFoundPage from "../NotFoundPage";
+
+interface SaveError {
+  message: string;
+  details?: Record<string, string>;
+}
+
+const AdminEditPage = () => {
+  const { entity, id } = useParams();
+  const config = getEntityConfig(entity);
+  const isNew = id === "nouveau";
+  const { token, role } = useAuth();
+  const navigate = useNavigate();
+
+  const { data, loading, error } = useApi<FormValues>(config && !isNew ? `/admin/${entity}/${id}` : null, token);
+  const [values, setValues] = useState<FormValues | null>(null);
+  const [saving, setSaving] = useState(false);
+  const [saveError, setSaveError] = useState<SaveError | null>(null);
+  const [saved, setSaved] = useState(false);
+  const [confirmDelete, setConfirmDelete] = useState(false);
+
+  useEffect(() => {
+    if (!config) return;
+    if (isNew) setValues(config.defaults());
+    else if (data) setValues(data);
+  }, [config, isNew, data]);
+
+  if (!config) return <NotFoundPage />;
+
+  const setField = (key: string, value: unknown) => setValues((current) => ({ ...(current ?? {}), [key]: value }));
+
+  const save = async (event: FormEvent) => {
+    event.preventDefault();
+    if (!values) return;
+
+    setSaving(true);
+    setSaveError(null);
+    try {
+      if (isNew) {
+        const created = await apiSend<{ _id: string }>(`/admin/${entity}`, "POST", values, token);
+        navigate(`/admin/${entity}/${created._id}`, { replace: true });
+      } else {
+        setValues(await apiSend<FormValues>(`/admin/${entity}/${id}`, "PUT", values, token));
+      }
+      setSaved(true);
+    } catch (err) {
+      setSaveError(
+        err instanceof ApiError ? { message: err.message, details: err.details } : { message: "Erreur inconnue" }
+      );
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  const remove = async () => {
+    try {
+      await apiSend(`/admin/${entity}/${id}`, "DELETE", undefined, token);
+      navigate(`/admin/${entity}`);
+    } catch (err) {
+      setConfirmDelete(false);
+      setSaveError({ message: err instanceof Error ? err.message : "Suppression impossible" });
+    }
+  };
+
+  const title = isNew ? `Nouvelle fiche : ${config.singular.toLowerCase()}` : `Modifier : ${config.singular.toLowerCase()}`;
+
+  return (
+    <Container sx={{ py: 4 }}>
+      <Breadcrumbs sx={{ mb: 2 }}>
+        <Link component={RouterLink} to="/admin">
+          Administration
+        </Link>
+        <Link component={RouterLink} to={`/admin/${entity}`}>
+          {config.plural}
+        </Link>
+        <Typography color="text.primary">{isNew ? "Nouvelle fiche" : "Modifier"}</Typography>
+      </Breadcrumbs>
+
+      <Typography variant="h4" component="h1" gutterBottom>
+        {title}
+      </Typography>
+
+      {!isNew && <PageState loading={loading && !values} error={error} />}
+
+      {values && (
+        <Box component="form" onSubmit={save}>
+          <Stack spacing={3}>
+            {config.fields.map((field) => (
+              <Box key={field.key}>
+                <FieldRenderer field={field} value={values[field.key]} onChange={(value) => setField(field.key, value)} />
+              </Box>
+            ))}
+          </Stack>
+
+          {saveError && (
+            <Alert severity="error" sx={{ mt: 3 }}>
+              {saveError.message}
+              {saveError.details && (
+                <Box component="ul" sx={{ m: 0, pl: 2.5 }}>
+                  {Object.entries(saveError.details).map(([key, message]) => (
+                    <li key={key}>
+                      {key} : {message}
+                    </li>
+                  ))}
+                </Box>
+              )}
+            </Alert>
+          )}
+
+          {/* Barre d'actions toujours visible */}
+          <Paper
+            elevation={3}
+            sx={{ position: "sticky", bottom: 0, mt: 3, p: 2, display: "flex", gap: 2, flexWrap: "wrap", zIndex: 10 }}
+          >
+            <Button type="submit" variant="contained" disabled={saving}>
+              {saving ? "Enregistrement…" : "Enregistrer"}
+            </Button>
+            <Button component={RouterLink} to={`/admin/${entity}`}>
+              Retour à la liste
+            </Button>
+            {!isNew && role === "admin" && (
+              <Button color="error" sx={{ ml: "auto" }} onClick={() => setConfirmDelete(true)}>
+                Supprimer
+              </Button>
+            )}
+          </Paper>
+        </Box>
+      )}
+
+      <Dialog open={confirmDelete} onClose={() => setConfirmDelete(false)}>
+        <DialogTitle>Supprimer définitivement cette fiche ?</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            Cette action est irréversible. Pour retirer une fiche du site sans la perdre, passez plutôt son statut à
+            « Refusée ».
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setConfirmDelete(false)}>Annuler</Button>
+          <Button color="error" onClick={remove}>
+            Supprimer
+          </Button>
+        </DialogActions>
+      </Dialog>
+
+      <Snackbar
+        open={saved}
+        autoHideDuration={3000}
+        onClose={() => setSaved(false)}
+        message="Fiche enregistrée"
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+      />
+    </Container>
+  );
+};
+
+export default AdminEditPage;
