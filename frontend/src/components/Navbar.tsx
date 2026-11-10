@@ -42,10 +42,10 @@ const Navbar = () => {
         <Link to="/" className="flex items-center gap-2.5 text-ink">
           <LogoMark className="h-8 w-8" />
           <span className="leading-none">
-            <span className="block text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-accent">
+            <span className="hidden text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-accent sm:block">
               {t("site.kicker")}
             </span>
-            <span className="block font-display text-lg">{t("site.short")}</span>
+            <span className="block whitespace-nowrap font-display text-base sm:text-lg">{t("site.short")}</span>
           </span>
         </Link>
 
@@ -58,7 +58,9 @@ const Navbar = () => {
         </nav>
 
         <div className="ml-auto flex items-center gap-2">
-          <LanguageSwitcher className="hidden sm:inline-flex" />
+          <span className="hidden sm:block">
+            <LanguageSwitcher />
+          </span>
           <AccessibilityPanel />
 
           {isAuthenticated ? (

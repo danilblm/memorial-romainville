@@ -14,6 +14,8 @@ const placeSchema = new Schema(
       x: { type: Number },
       y: { type: Number },
     },
+    // Ordre de passage dans la visite guidée (1, 2, 3…)
+    tourOrder: { type: Number, min: 0 },
     // Position réelle (vue satellite), en degrés
     geo: {
       lat: { type: Number, min: -90, max: 90 },

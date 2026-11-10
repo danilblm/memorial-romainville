@@ -4,7 +4,13 @@ import testimonyModel from "../models/testimonyModel";
 import { onlyValidatedClaims, PUBLIC_PERSON_FILTER, PUBLISHED } from "./publicFilters";
 
 export const listPublicPlaces = async () => {
-  return await placeModel.find(PUBLISHED).select("code kind name position geo").lean();
+  // Trié dans l'ordre de la visite guidée (les lieux sans ordre passent à la fin)
+  const places = await placeModel.find(PUBLISHED).select("code kind name position geo tourOrder createdAt").lean();
+  return places.sort(
+    (a, b) =>
+      (a.tourOrder ?? Number.MAX_SAFE_INTEGER) - (b.tourOrder ?? Number.MAX_SAFE_INTEGER) ||
+      new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
+  );
 };
 
 export const getPublicPlace = async (code: string) => {

@@ -38,6 +38,19 @@ const FieldRenderer = ({ field, value, onChange }: Props) => {
         />
       );
 
+    case "number":
+      return (
+        <TextField
+          type="number"
+          label={label}
+          required={required}
+          helperText={help}
+          value={value ?? ""}
+          onChange={(event) => onChange(event.target.value === "" ? null : Number(event.target.value))}
+          sx={{ maxWidth: 320 }}
+        />
+      );
+
     case "localized":
     case "localizedMultiline":
       return (

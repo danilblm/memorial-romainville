@@ -5,6 +5,7 @@ export type EntityName = "persons" | "places" | "events" | "sources" | "testimon
 
 export type FieldType =
   | "text"
+  | "number"
   | "localized"
   | "localizedMultiline"
   | "fuzzyDate"
@@ -136,6 +137,12 @@ export const ADMIN_ENTITIES: Record<EntityName, EntityConfig> = {
       { key: "name", label: "Nom", type: "localized", required: true },
       { key: "description", label: "Description", type: "localizedMultiline" },
       { key: "currentState", label: "État actuel", type: "localizedMultiline" },
+      {
+        key: "tourOrder",
+        label: "Ordre dans la visite guidée",
+        type: "number",
+        help: "1 = premier lieu de la visite. Laisser vide pour le mettre à la fin.",
+      },
       { key: "position", label: "Position sur le plan", type: "position" },
       { key: "geo", label: "Position sur la vue satellite", type: "geo" },
       { key: "photos", label: "Photographies", type: "photos" },
