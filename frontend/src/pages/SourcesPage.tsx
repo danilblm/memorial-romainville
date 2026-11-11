@@ -48,12 +48,12 @@ const SourcesPage = () => {
         </section>
 
         <Reveal>
-          <section aria-labelledby="ai-title" className="grain overflow-hidden rounded-3xl bg-night p-8 text-on-night sm:p-12">
-            <Sparkles className="h-8 w-8 text-gold" aria-hidden="true" />
+          <section aria-labelledby="ai-title" className="relative overflow-hidden rounded-3xl border border-line bg-paper-2 p-8 text-ink sm:p-12">
+            <Sparkles className="h-8 w-8 text-accent" aria-hidden="true" />
             <h2 id="ai-title" className="mt-5 font-display text-3xl sm:text-4xl">
               {t("sources.aiTitle")}
             </h2>
-            <p className="mt-5 max-w-3xl text-lg leading-relaxed text-on-night-soft">{t("sources.aiText")}</p>
+            <p className="mt-5 max-w-3xl text-lg leading-relaxed text-ink-soft">{t("sources.aiText")}</p>
           </section>
         </Reveal>
       </Container>

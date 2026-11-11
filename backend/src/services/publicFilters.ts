@@ -3,8 +3,10 @@
 export const PUBLISHED = { status: "valide" };
 
 // Une fiche masquée n'apparaît nulle part ; une fiche réservée garde seulement le nom.
+// Une fiche en vérification est annoncée (nom, arrivée) sans rien de ce qui reste à vérifier :
+// le public voit que la mémoire se construit, sans lire d'informations non validées.
 export const PUBLIC_PERSON_FILTER = {
-  status: "valide",
+  status: { $in: ["valide", "en_verification"] },
   "publication.visibility": { $ne: "masquee" },
 };
 

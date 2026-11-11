@@ -11,7 +11,6 @@ import LogoMark from "./LogoMark";
 
 const LINKS = [
   { to: "/", key: "nav.home", end: true },
-  { to: "/frise", key: "nav.timeline" },
   { to: "/carte", key: "nav.map" },
   { to: "/contribuer", key: "nav.contribute" },
   { to: "/nos-sources", key: "nav.sources" },

@@ -3,3 +3,8 @@ dist
 .env
 uploads
 .claude/
+
+# Fichiers générés par la compilation TypeScript
+*.tsbuildinfo
+frontend/vite.config.js
+frontend/vite.config.d.ts

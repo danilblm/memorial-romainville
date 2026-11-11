@@ -32,7 +32,6 @@ const TestimonyContext = ({ testimony }: { testimony: Testimony }) => {
       aria-labelledby="testimony-context-title"
       className="relative overflow-hidden rounded-2xl border border-line bg-paper-2/70 p-6 sm:p-8"
     >
-      <span className="absolute top-0 right-0 h-16 w-16 bg-gradient-to-bl from-gold/30 to-transparent" aria-hidden="true" />
       <h2 id="testimony-context-title" className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">
         {t("testimony.contextTitle")}
       </h2>

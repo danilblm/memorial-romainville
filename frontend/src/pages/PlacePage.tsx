@@ -37,16 +37,16 @@ const PlacePage = () => {
 
   return (
     <Page>
-      <header className="grain bg-night text-on-night">
+      <header className="relative overflow-hidden border-b border-line bg-paper-2 text-ink">
         <Container className="py-12 sm:py-16">
-          <Link to="/carte" className="inline-flex items-center gap-2 text-sm font-medium text-on-night-soft hover:text-on-night">
+          <Link to="/carte" className="inline-flex items-center gap-2 text-sm font-medium text-ink-soft hover:text-ink">
             <ArrowLeft className="h-4 w-4" aria-hidden="true" />
             {t("place.backToMap")}
           </Link>
-          <Eyebrow className="mt-8 text-gold">{t(`place.kinds.${place.kind ?? "autre"}`)}</Eyebrow>
+          <Eyebrow className="mt-8">{t(`place.kinds.${place.kind ?? "autre"}`)}</Eyebrow>
           <h1 className="mt-3 font-display text-5xl sm:text-6xl">{localize(place.name, lang)}</h1>
           {localize(place.description, lang) && (
-            <p className="mt-6 max-w-2xl whitespace-pre-line text-lg leading-relaxed text-on-night-soft">
+            <p className="mt-6 max-w-2xl whitespace-pre-line text-lg leading-relaxed text-ink-soft">
               {localize(place.description, lang)}
             </p>
           )}

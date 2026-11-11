@@ -1,4 +1,4 @@
-import { ArrowLeft, ArrowRight, CircleDashed, MapPin, Mic } from "lucide-react";
+import { ArrowLeft, ArrowRight, CircleDashed, Hourglass, MapPin, Mic } from "lucide-react";
 import { ReactNode } from "react";
 import { useTranslation } from "react-i18next";
 import { Link, useParams } from "react-router-dom";
@@ -39,6 +39,28 @@ const PersonPage = () => {
       <Container className="py-12">
         <PageState loading={loading} error={error} />
       </Container>
+    );
+  }
+
+  // Fiche en vérification : on annonce la femme, sans rien publier de ce qui n'est pas validé
+  if (person.status && person.status !== "valide") {
+    return (
+      <Page>
+        <Container className="py-12">
+          <BackLink>{t("person.back")}</BackLink>
+          <div className="mx-auto mt-16 max-w-xl text-center">
+            <span className="mx-auto flex h-28 w-28 items-center justify-center rounded-full border-2 border-accent bg-[repeating-linear-gradient(45deg,var(--accent-soft)_0_4px,transparent_4px_8px)]">
+              <Hourglass className="h-10 w-10 text-accent" aria-hidden="true" />
+            </span>
+            <h1 className="mt-8 font-display text-5xl text-ink">{person.displayName}</h1>
+            <p className="mt-3 text-xs font-semibold uppercase tracking-[0.2em] text-accent">{t("person.pendingTitle")}</p>
+            <p className="mt-2 text-sm text-ink-soft">
+              {t("person.arrival")} : {formatFuzzyDate(person.arrivalAtFort, lang)}
+            </p>
+            <p className="mt-6 text-lg leading-relaxed text-ink-soft">{t("person.pendingText", { name: person.displayName })}</p>
+          </div>
+        </Container>
+      </Page>
     );
   }
 
@@ -199,9 +221,9 @@ const PersonPage = () => {
             </Card>
           )}
 
-          <div className="rounded-2xl bg-night p-6 text-on-night">
+          <div className="rounded-2xl border border-line bg-paper-2 p-6 text-ink">
             <p className="font-display text-lg">{t("person.contributeHint")}</p>
-            <Link to="/contribuer" className="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-gold hover:underline">
+            <Link to="/contribuer" className="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-accent hover:underline">
               {t("person.contributeLink")}
               <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </Link>

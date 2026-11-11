@@ -12,6 +12,7 @@ export interface PersonSummary {
   arrivalAtFort?: FuzzyDate;
   departureFromFort?: FuzzyDate;
   publication?: Publication;
+  status?: string;
 }
 
 export interface Person extends PersonSummary {

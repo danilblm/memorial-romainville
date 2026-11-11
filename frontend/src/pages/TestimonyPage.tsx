@@ -39,8 +39,8 @@ const TestimonyPage = () => {
         </Reveal>
 
         {testimony.isExcerpt && (
-          <div className="flex items-start gap-3 rounded-2xl border border-gold/60 bg-gold/10 p-4 text-ink">
-            <TriangleAlert className="mt-0.5 h-5 w-5 shrink-0 text-gold" aria-hidden="true" />
+          <div className="flex items-start gap-3 rounded-2xl border border-accent/30 bg-accent-soft p-4 text-ink">
+            <TriangleAlert className="mt-0.5 h-5 w-5 shrink-0 text-accent" aria-hidden="true" />
             <p>
               {t("testimony.excerpt")}{" "}
               {testimony.fullVersionUrl && (

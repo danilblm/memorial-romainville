@@ -8,8 +8,8 @@ import { cn } from "../utils/cn";
 const LEVELS: Record<Reliability, { icon: LucideIcon; tone: string }> = {
   documentee: { icon: FileText, tone: "border-leaf/50 text-leaf" },
   recoupee: { icon: BadgeCheck, tone: "border-leaf/50 text-leaf" },
-  temoignee: { icon: Mic, tone: "border-gold/60 text-ink" },
-  transmise: { icon: MessagesSquare, tone: "border-gold/60 text-ink" },
+  temoignee: { icon: Mic, tone: "border-ink/30 text-ink" },
+  transmise: { icon: MessagesSquare, tone: "border-ink/30 text-ink" },
   incertaine: { icon: CircleHelp, tone: "border-accent/50 text-accent" },
   inconnue: { icon: CircleOff, tone: "border-ink/30 text-ink-soft" },
 };

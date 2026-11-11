@@ -6,6 +6,7 @@ import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
 import PageState from "./components/PageState";
 import ProtectedRoute from "./components/ProtectedRoute";
+import ScrollProgress from "./components/ScrollProgress";
 import AccessibilityProvider from "./context/Accessibility/AccessibilityProvider";
 import AuthProvider from "./context/Auth/AuthProvider";
 import ContributePage from "./pages/ContributePage";
@@ -16,7 +17,6 @@ import PersonPage from "./pages/PersonPage";
 import PlacePage from "./pages/PlacePage";
 import SourcesPage from "./pages/SourcesPage";
 import TestimonyPage from "./pages/TestimonyPage";
-import TimelinePage from "./pages/TimelinePage";
 
 // Chargées à la demande : la carte (Leaflet) et l'administration (MUI)
 const MapPage = lazy(() => import("./pages/MapPage"));
@@ -47,6 +47,7 @@ function App() {
         <MotionConfig reducedMotion="user">
           <BrowserRouter>
             <ScrollToTop />
+            <ScrollProgress />
             <a href="#contenu" className="skip-link">
               {t("nav.skip")}
             </a>
@@ -56,7 +57,6 @@ function App() {
                 <Suspense fallback={<PageState loading error={null} />}>
                   <Routes>
                     <Route path="/" element={<HomePage />} />
-                    <Route path="/frise" element={<TimelinePage />} />
                     <Route path="/carte" element={<MapPage />} />
                     <Route path="/lieux/:code" element={<PlacePage />} />
                     <Route path="/personnes/:id" element={<PersonPage />} />

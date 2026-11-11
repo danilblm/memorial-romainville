@@ -1,8 +1,11 @@
 {
-  "site": { "title": "Mémorial du Fort de Romainville", "short": "Fort de Romainville", "kicker": "Mémorial numérique" },
+  "site": {
+    "title": "Mémorial du Fort de Romainville",
+    "short": "Fort de Romainville",
+    "kicker": "Mémorial numérique"
+  },
   "nav": {
     "home": "Accueil",
-    "timeline": "Frise",
     "map": "Carte du fort",
     "contribute": "Contribuer",
     "sources": "Nos sources",
@@ -23,14 +26,36 @@
     "reset": "Réinitialiser",
     "language": "Langue"
   },
-  "lang": { "label": "Langue", "fr": "FR", "en": "EN" },
+  "lang": {
+    "label": "Langue",
+    "fr": "FR",
+    "en": "EN"
+  },
   "reliability": {
-    "documentee": { "label": "Documentée", "desc": "Attestée par une source d'archive identifiée." },
-    "recoupee": { "label": "Recoupée", "desc": "Confirmée par au moins deux sources indépendantes." },
-    "temoignee": { "label": "Témoignée", "desc": "Rapportée par un témoin direct, sans document qui la confirme." },
-    "transmise": { "label": "Transmise", "desc": "Rapportée par un proche ou un tiers, pas par un témoin direct." },
-    "incertaine": { "label": "Incertaine", "desc": "Les sources sont en désaccord ou l'information est partielle." },
-    "inconnue": { "label": "Inconnue", "desc": "L'information existe mais nous ne l'avons pas retrouvée." }
+    "documentee": {
+      "label": "Documentée",
+      "desc": "Attestée par une source d'archive identifiée."
+    },
+    "recoupee": {
+      "label": "Recoupée",
+      "desc": "Confirmée par au moins deux sources indépendantes."
+    },
+    "temoignee": {
+      "label": "Témoignée",
+      "desc": "Rapportée par un témoin direct, sans document qui la confirme."
+    },
+    "transmise": {
+      "label": "Transmise",
+      "desc": "Rapportée par un proche ou un tiers, pas par un témoin direct."
+    },
+    "incertaine": {
+      "label": "Incertaine",
+      "desc": "Les sources sont en désaccord ou l'information est partielle."
+    },
+    "inconnue": {
+      "label": "Inconnue",
+      "desc": "L'information existe mais nous ne l'avons pas retrouvée."
+    }
   },
   "status": {
     "propose": "Proposée",
@@ -51,29 +76,71 @@
     "statPeriod": "années de camp",
     "treeEyebrow": "Leurs parcours",
     "treeTitle": "L'arbre des femmes",
-    "treeHelp": "Chaque pomme est une femme, accrochée à la branche de son arrivée au fort. Une pomme vide signale une fiche réservée.",
+    "treeHelp": "Le tronc, c'est le temps : de l'ouverture du camp en 1940, en bas, à la Libération en 1944, en haut. Chaque branche est une année d'arrivée au fort, chaque pomme une femme.",
     "treeHint": "Survolez ou sélectionnez une pomme pour découvrir une femme.",
     "treeOpen": "Voir sa fiche",
     "treeEmpty": "Aucune fiche publiée pour le moment.",
-    "unknownPeriod": "Période inconnue",
+    "unknownPeriod": "Date d'arrivée inconnue",
     "listTitle": "Toutes les fiches",
     "principlesEyebrow": "Notre démarche",
     "principlesTitle": "Une mémoire honnête sur ce qu'elle sait",
     "principles": {
-      "source": { "title": "Chaque information a sa source", "desc": "Archives, registres, témoignages : vous savez toujours d'où vient ce que vous lisez, et à quel point c'est sûr." },
-      "unknown": { "title": "Ce qui manque est dit", "desc": "La mémoire est incomplète. Chaque fiche montre aussi ce que nous ne savons pas encore." },
-      "silence": { "title": "Le silence est respecté", "desc": "Quand une personne ou sa famille refuse d'être exposée, nous gardons seulement la trace de sa présence." }
+      "source": {
+        "title": "Chaque information a sa source",
+        "desc": "Archives, registres, témoignages : vous savez toujours d'où vient ce que vous lisez, et à quel point c'est sûr."
+      },
+      "unknown": {
+        "title": "Ce qui manque est dit",
+        "desc": "La mémoire est incomplète. Chaque fiche montre aussi ce que nous ne savons pas encore."
+      },
+      "silence": {
+        "title": "Le silence est respecté",
+        "desc": "Quand une personne ou sa famille refuse d'être exposée, nous gardons seulement la trace de sa présence."
+      }
     },
+    "scrollCue": "Découvrir l'histoire",
+    "heroCredit": "Entrée du fort et mirador, photographie prise à la Libération – fonds partagé par le Mémorial national des femmes en Résistance et en Déportation",
+    "exploreGo": "Découvrir",
     "exploreEyebrow": "Explorer",
     "exploreTitle": "Plusieurs chemins dans la mémoire du fort",
     "explore": {
-      "timeline": { "title": "La frise", "desc": "Les grandes dates du fort et les documents qui les attestent." },
-      "map": { "title": "La carte du fort", "desc": "Les casemates et les espaces, dont la casemate 17 et ses graffitis." },
-      "contribute": { "title": "Contribuer", "desc": "Une photo, une lettre, un souvenir ? Proposez-le, l'équipe le vérifiera." },
-      "sources": { "title": "Nos sources", "desc": "Comment nous vérifions, et ce que signifient les niveaux de fiabilité." }
+      "map": {
+        "title": "La carte du fort",
+        "desc": "Les casemates et les espaces, dont la casemate 17 et ses graffitis.",
+        "image": "Rangée de casemates du fort – fonds partagé par le Mémorial national"
+      },
+      "contribute": {
+        "title": "Contribuer",
+        "desc": "Une photo, une lettre, un souvenir ? Proposez-le, l'équipe le vérifiera.",
+        "image": "Carte postale ancienne de l'entrée du fort – fonds partagé par le Mémorial national"
+      },
+      "sources": {
+        "title": "Nos sources",
+        "desc": "Comment nous vérifions, et ce que signifient les niveaux de fiabilité.",
+        "image": "Intérieur d'une casemate aménagée en dortoir – fonds partagé par le Mémorial national"
+      }
     }
   },
-  "tree": { "arrival": "Arrivée : {{date}}", "reserved": "Fiche réservée" },
+  "tree": {
+    "arrival": "Arrivée : {{date}}",
+    "reserved": "Fiche réservée",
+    "howTo": "Comment lire l'arbre",
+    "howToText": "Survolez une pomme pour voir qui elle représente, cliquez pour ouvrir sa fiche. La forme de la pomme dit où en est la fiche.",
+    "kinds": {
+      "valid": "Fiche vérifiée",
+      "pending": "Fiche en vérification",
+      "reserved": "Fiche réservée"
+    },
+    "kindsHelp": {
+      "valid": "Chaque information a été validée par l'équipe à partir de ses sources.",
+      "pending": "Les sources sont réunies, l'équipe les vérifie. Seuls le nom et la date d'arrivée sont visibles.",
+      "reserved": "La personne ou sa famille a refusé l'exposition : on dit sa présence, rien de plus."
+    },
+    "emptyYear": "aucune fiche pour l'instant",
+    "count_one": "{{count}} femme",
+    "count_other": "{{count}} femmes",
+    "timeArrow": "↑ le temps"
+  },
   "person": {
     "biography": "Biographie",
     "arrival": "Arrivée au fort",
@@ -89,9 +156,13 @@
     "reservedTitle": "Fiche réservée",
     "reservedDefault": "Cette personne ou sa famille a demandé que sa fiche reste limitée. Nous respectons ce choix.",
     "contributeHint": "Vous avez un document ou une information sur elle ?",
-    "contributeLink": "Proposer une contribution"
+    "contributeLink": "Proposer une contribution",
+    "pendingTitle": "Fiche en cours de vérification",
+    "pendingText": "Les sources sur {{name}} ont été réunies. Avant de publier sa biographie, l'équipe vérifie chaque information, une par une : rien n'est affiché tant que ce n'est pas fait."
   },
-  "missing": { "title": "Ce que l'on ne sait pas" },
+  "missing": {
+    "title": "Ce que l'on ne sait pas"
+  },
   "testimony": {
     "eyebrow": "Témoignage",
     "contextTitle": "Contexte du témoignage",
@@ -110,18 +181,6 @@
     "transformations": "Transformations",
     "originalLocation": "Original conservé à",
     "about": "Personnes citées"
-  },
-  "timeline": {
-    "eyebrow": "1940 – 1944",
-    "title": "Frise chronologique",
-    "subtitle": "Les grandes étapes de l'histoire du fort. Sélectionnez un événement pour voir ses lieux, les personnes concernées et ses sources.",
-    "period": "Période",
-    "allPeriods": "Toutes",
-    "previous": "Précédent",
-    "next": "Suivant",
-    "close": "Fermer",
-    "empty": "Aucun événement pour cette période.",
-    "open": "Voir le détail"
   },
   "map": {
     "eyebrow": "Les Lilas",
@@ -146,20 +205,35 @@
     "photos": "Photos : {{count}}",
     "notOnThisView": "pas encore placé sur cette vue",
     "notPlacedPlan": "Lieux à placer sur le plan : {{count}}",
-    "notPlacedReal": "Lieux à placer sur la vue satellite : {{count}}"
+    "notPlacedReal": "Lieux à placer sur la vue satellite : {{count}}",
+    "play": "Lecture automatique",
+    "pause": "Mettre en pause",
+    "steps": "Étapes de la visite",
+    "noPhoto": "Aucune photographie connue de ce lieu pour l'instant.",
+    "previous": "Étape précédente",
+    "next": "Étape suivante"
   },
   "place": {
     "currentState": "État actuel",
     "photos": "Photographies",
     "persons": "Femmes liées à ce lieu",
     "backToMap": "Retour à la carte",
-    "kinds": { "casemate": "Casemate", "cour": "Cour", "batiment": "Bâtiment", "autre": "Lieu" },
+    "kinds": {
+      "casemate": "Casemate",
+      "cour": "Cour",
+      "batiment": "Bâtiment",
+      "autre": "Lieu"
+    },
     "beforeAfter": "Hier et aujourd'hui",
     "then": "Archive",
     "now": "Aujourd'hui",
     "compare": "Faites glisser le curseur pour comparer l'archive et l'état actuel.",
     "photosHint": "Sélectionnez une photo pour l'agrandir et zoomer sur les détails, comme les graffitis.",
-    "eras": { "ancienne": "Archive", "actuelle": "Aujourd'hui", "inconnue": "Époque inconnue" }
+    "eras": {
+      "ancienne": "Archive",
+      "actuelle": "Aujourd'hui",
+      "inconnue": "Époque inconnue"
+    }
   },
   "viewer": {
     "photo": "Photographie",
@@ -260,5 +334,60 @@
     "aiAssisted": "Assisté par IA",
     "yes": "Oui",
     "no": "Non"
+  },
+  "story": {
+    "eyebrow": "Récit",
+    "title": "Quatre années au fort",
+    "lead": "Faites défiler la page pour traverser l'histoire du camp, de son ouverture à la Libération.",
+    "credit": "Photographies : fonds partagé par le Mémorial national des femmes en Résistance et en Déportation",
+    "sources": "D'où viennent ces informations ?",
+    "steps": {
+      "1": {
+        "date": "1940",
+        "title": "Un fort devient un camp",
+        "text": "Après la défaite de juin 1940, l'armée allemande s'installe au fort. À partir du 1er novembre 1940, les premiers détenus y sont enregistrés. Des miradors se dressent, des barbelés courent le long du chemin de ronde : c'est le premier camp allemand installé en France occupée.",
+        "alt": "Barbelés devant une rangée de casemates du fort"
+      },
+      "2": {
+        "date": "1942",
+        "title": "Le camp des otages",
+        "text": "À partir de l'été 1942, le fort rassemble les otages de la région parisienne. Le 21 septembre 1942, 46 otages extraits du fort sont fusillés au Mont-Valérien. Au total, 209 détenus passés par le fort sont fusillés pendant l'Occupation.",
+        "alt": "Rangée de casemates du fort"
+      },
+      "3": {
+        "date": "24 janvier 1943",
+        "title": "Le convoi des « 31000 »",
+        "text": "230 femmes, résistantes pour la plupart, sont déportées vers Auschwitz-Birkenau. Parmi elles, Charlotte Delbo, Danielle Casanova, Marie-Claude Vaillant-Couturier et Maï Politzer. Seules 49 reviendront.",
+        "alt": "Plaques commémoratives à l'entrée du fort, dont celle du convoi du 24 janvier 1943"
+      },
+      "4": {
+        "date": "1944",
+        "title": "Le camp des femmes",
+        "text": "Le fort devient le camp des femmes à déporter. Plus de 3 800 femmes y sont internées pendant la guerre ; plus de 90 % sont ensuite déportées, principalement vers Ravensbrück.",
+        "alt": "Dortoir aménagé dans une casemate"
+      },
+      "5": {
+        "date": "Août 1944",
+        "title": "Une libération tragique",
+        "text": "Le 15 août, le dernier convoi part de la gare de Pantin. Le 20 août, au moment de fuir, la garnison fusille onze résistants et civils. Le lendemain, les habitants découvrent leurs corps derrière le bâtiment central.",
+        "alt": "Entrée du fort et son mirador, photographiés à la Libération"
+      }
+    }
+  },
+  "torch": {
+    "eyebrow": "Les murs se souviennent",
+    "title": "Éclairer les graffitis",
+    "lead": "Dans l'obscurité des casemates, des internés ont tracé leur nom, une date, quelques mots. Promenez la lampe pour les faire apparaître.",
+    "hint": "Déplacez la souris ou votre doigt pour éclairer le mur",
+    "on": "Tout éclairer",
+    "off": "Reprendre la lampe",
+    "choose": "Choisir un graffiti",
+    "credit": "photographie, fonds partagé par le Mémorial national",
+    "items": {
+      "hoovers": "Graffiti où l'on lit le nom « Hoovers »",
+      "glaser": "Graffiti « Glaser 14-4-43 »",
+      "crepy": "Inscriptions au crayon : plusieurs noms et dates",
+      "dalaine": "Graffiti attribué à « Dalaine »"
+    }
   }
 }

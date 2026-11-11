@@ -1,4 +1,4 @@
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import {
@@ -17,13 +17,15 @@ import {
   Layers,
   MapPin,
   Mic,
+  Pause,
+  Play,
   Satellite,
   Square,
   UsersRound,
   X,
 } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
-import { ImageOverlay, MapContainer, Marker, TileLayer, Tooltip, useMap } from "react-leaflet";
+import { ImageOverlay, MapContainer, Marker, Polyline, TileLayer, Tooltip, useMap } from "react-leaflet";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import PageState from "../components/PageState";
@@ -40,6 +42,11 @@ import { mediaUrl } from "../utils/mediaUrl";
 import { findComparison, toViewerPhotos } from "../utils/photos";
 
 type Mode = "plan" | "real";
+
+// Durée d'une étape en lecture automatique
+const STEP_MS = 7000;
+// Zoom du plan quand on s'approche d'un lieu : assez près pour lire, assez loin pour garder le fort en vue
+const PLAN_FOCUS_ZOOM = -0.5;
 
 const KIND_ICONS = { casemate: DoorClosed, cour: LandPlot, batiment: Building2, autre: MapPin } as const;
 type Kind = keyof typeof KIND_ICONS;
@@ -108,8 +115,8 @@ const PlacePreview = ({ code, onClose }: { code: string; onClose: () => void }) 
   const comparison = findComparison(photos);
 
   return (
-    <div className="max-h-[36rem] overflow-y-auto">
-      <div className="relative h-44 overflow-hidden bg-night">
+    <div className="max-h-[40rem] overflow-y-auto">
+      <div className="relative h-52 overflow-hidden bg-paper-2">
         {photo ? (
           <button type="button" onClick={() => setViewerIndex(0)} className="group block h-full w-full" aria-label={t("viewer.open")}>
             <img
@@ -123,8 +130,9 @@ const PlacePreview = ({ code, onClose }: { code: string; onClose: () => void }) 
             </span>
           </button>
         ) : (
-          <div className="grain flex h-full items-center justify-center text-on-night-soft">
-            <ImageIcon className="h-10 w-10 opacity-50" aria-hidden="true" />
+          <div className="flex h-full flex-col items-center justify-center gap-2 bg-paper-2 px-8 text-center text-ink-soft">
+            <ImageIcon className="h-8 w-8 opacity-60" aria-hidden="true" />
+            <p className="text-sm">{t("map.noPhoto")}</p>
           </div>
         )}
         <button
@@ -217,6 +225,8 @@ const MapPage = () => {
   const [selected, setSelected] = useState<string | null>(null);
   const [hovered, setHovered] = useState<string | null>(null);
   const [tour, setTour] = useState<number | null>(null);
+  const [playing, setPlaying] = useState(false);
+  const reduceMotion = useReducedMotion();
 
   const filtered = useMemo(
     () => (places ?? []).filter((place) => kind === "all" || kindOf(place) === kind),
@@ -232,7 +242,10 @@ const MapPage = () => {
 
   const select = (code: string | null) => {
     setSelected(code);
-    if (code === null) setTour(null);
+    if (code === null) {
+      setTour(null);
+      setPlaying(false);
+    }
   };
 
   const goToStep = (step: number) => {
@@ -245,7 +258,43 @@ const MapPage = () => {
   const changeMode = (next: Mode) => {
     setMode(next);
     setTour(null);
+    setPlaying(false);
     setSelected(null);
+  };
+
+  const startTour = () => {
+    goToStep(0);
+    setPlaying(!reduceMotion);
+  };
+
+  // Lecture automatique : on avance d'un lieu toutes les quelques secondes, et on s'arrête au dernier
+  useEffect(() => {
+    if (!playing || tour === null) return;
+    if (tour >= visible.length - 1) {
+      setPlaying(false);
+      return;
+    }
+    const timer = window.setTimeout(() => goToStep(tour + 1), STEP_MS);
+    return () => window.clearTimeout(timer);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [playing, tour, visible.length]);
+
+  // Parcours de la visite : la partie déjà parcourue est tracée, la suite reste en pointillés discrets
+  const route = (view: Mode) => {
+    if (tour === null || visible.length < 2) return null;
+    const points = visible.map((place) => coords(place, view)!);
+    return (
+      <>
+        <Polyline positions={points.slice(tour)} pathOptions={{ weight: 2, dashArray: "2 8", className: "tour-ahead" }} interactive={false} />
+        {tour > 0 && (
+          <Polyline
+            positions={points.slice(0, tour + 1)}
+            pathOptions={{ weight: 4, dashArray: "8 10", className: "tour-route" }}
+            interactive={false}
+          />
+        )}
+      </>
+    );
   };
 
   return (
@@ -305,7 +354,7 @@ const MapPage = () => {
           <button
             type="button"
             disabled={visible.length === 0}
-            onClick={() => (tour === null ? goToStep(0) : select(null))}
+            onClick={() => (tour === null ? startTour() : select(null))}
             className="ml-auto inline-flex items-center gap-2 rounded-full bg-accent px-5 py-2.5 text-sm font-semibold text-accent-ink shadow-sm transition hover:brightness-110 disabled:opacity-50"
           >
             {tour === null ? <Footprints className="h-4 w-4" aria-hidden="true" /> : <Square className="h-4 w-4" aria-hidden="true" />}
@@ -315,7 +364,7 @@ const MapPage = () => {
 
         <div className="grid gap-6 lg:grid-cols-[1fr_22rem]">
           {/* Carte */}
-          <div className="relative h-[26rem] overflow-hidden rounded-3xl border border-line bg-paper-2 shadow-sm sm:h-[36rem]">
+          <div className="relative h-[28rem] overflow-hidden rounded-3xl border border-line bg-paper-2 shadow-soft sm:h-[40rem]">
             {mode === "plan" ? (!plan.loaded ? null : 
               <MapContainer
                 key={`plan-${plan.url}`}
@@ -330,7 +379,8 @@ const MapPage = () => {
                 attributionControl={false}
               >
                 <ImageOverlay url={plan.url} bounds={planBounds} />
-                <FlyTo target={target} />
+                <FlyTo target={target} zoom={PLAN_FOCUS_ZOOM} />
+                {route("plan")}
                 {visible.map((place) => (
                   <Marker
                     key={place._id}
@@ -354,6 +404,7 @@ const MapPage = () => {
               <MapContainer key="real" center={FORT_CENTER} zoom={FORT_ZOOM} minZoom={14} maxZoom={19} className="h-full w-full">
                 <TileLayer url={SATELLITE_TILES} attribution={SATELLITE_ATTRIBUTION} maxZoom={19} />
                 <FlyTo target={target} zoom={18} />
+                {route("real")}
                 <Marker position={FORT_CENTER} icon={fortIcon(t("site.short"))} interactive={false} keyboard={false} />
                 {visible.map((place) => (
                   <Marker
@@ -376,6 +427,20 @@ const MapPage = () => {
               </MapContainer>
             )}
 
+            {/* Projecteur : pendant la visite, les bords s'assombrissent autour du lieu au centre */}
+            <AnimatePresence>
+              {tour !== null && (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.8 }}
+                  className="pointer-events-none absolute inset-0 z-[450] bg-[radial-gradient(circle_at_50%_45%,transparent_22%,rgb(255_255_255/0.7)_80%)]"
+                  aria-hidden="true"
+                />
+              )}
+            </AnimatePresence>
+
             {/* Pastilles d'information */}
             <div className="pointer-events-none absolute top-3 right-3 z-[500] flex flex-col items-end gap-2">
               {mode === "plan" && plan.provisional && (
@@ -395,39 +460,79 @@ const MapPage = () => {
                   initial={{ y: 40, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
                   exit={{ y: 40, opacity: 0 }}
-                  className="absolute inset-x-3 bottom-3 z-[500] flex items-center gap-3 rounded-2xl bg-night/90 p-3 text-on-night shadow-xl backdrop-blur"
+                  className="absolute inset-x-3 bottom-3 z-[500] overflow-hidden rounded-2xl border border-line bg-card text-ink shadow-lift"
                   role="region"
                   aria-label={t("map.tour")}
                 >
-                  <button
-                    type="button"
-                    onClick={() => goToStep(tour - 1)}
-                    disabled={tour === 0}
-                    aria-label={t("timeline.previous")}
-                    className="rounded-full p-2 hover:bg-on-night/10 disabled:opacity-30"
-                  >
-                    <ChevronLeft className="h-5 w-5" aria-hidden="true" />
-                  </button>
-                  <div className="min-w-0 flex-1 text-center" aria-live="polite">
-                    <p className="text-xs text-on-night-soft">{t("map.tourStep", { n: tour + 1, total: visible.length })}</p>
-                    <p className="truncate font-display text-lg">{selectedPlace ? localize(selectedPlace.name, lang) : ""}</p>
+                  <div className="flex items-center gap-2 p-3">
+                    <button
+                      type="button"
+                      onClick={() => goToStep(tour - 1)}
+                      disabled={tour === 0}
+                      aria-label={t("map.previous")}
+                      className="rounded-full p-2 hover:bg-ink/5 disabled:opacity-30"
+                    >
+                      <ChevronLeft className="h-5 w-5" aria-hidden="true" />
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        if (!playing && tour >= visible.length - 1) goToStep(0);
+                        setPlaying(!playing);
+                      }}
+                      aria-label={playing ? t("map.pause") : t("map.play")}
+                      aria-pressed={playing}
+                      className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-accent text-accent-ink transition hover:brightness-110"
+                    >
+                      {playing ? <Pause className="h-4 w-4" aria-hidden="true" /> : <Play className="h-4 w-4 translate-x-px" aria-hidden="true" />}
+                    </button>
+                    <div className="min-w-0 flex-1 px-2" aria-live="polite">
+                      <p className="text-xs text-ink-soft">{t("map.tourStep", { n: tour + 1, total: visible.length })}</p>
+                      <p className="truncate font-display text-lg">{selectedPlace ? localize(selectedPlace.name, lang) : ""}</p>
+                    </div>
+                    <div className="hidden items-center gap-1.5 sm:flex" role="group" aria-label={t("map.steps")}>
+                      {visible.map((place, step) => (
+                        <button
+                          key={place._id}
+                          type="button"
+                          onClick={() => goToStep(step)}
+                          aria-label={localize(place.name, lang)}
+                          aria-current={step === tour ? "step" : undefined}
+                          className={cn(
+                            "h-2.5 rounded-full transition-all",
+                            step === tour ? "w-7 bg-accent" : step < tour ? "w-2.5 bg-ink/60" : "w-2.5 bg-ink/20 hover:bg-ink/40"
+                          )}
+                        />
+                      ))}
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => goToStep(tour + 1)}
+                      disabled={tour >= visible.length - 1}
+                      aria-label={t("map.next")}
+                      className="rounded-full p-2 hover:bg-ink/5 disabled:opacity-30"
+                    >
+                      <ChevronRight className="h-5 w-5" aria-hidden="true" />
+                    </button>
                   </div>
-                  <button
-                    type="button"
-                    onClick={() => goToStep(tour + 1)}
-                    disabled={tour >= visible.length - 1}
-                    aria-label={t("timeline.next")}
-                    className="rounded-full p-2 hover:bg-on-night/10 disabled:opacity-30"
-                  >
-                    <ChevronRight className="h-5 w-5" aria-hidden="true" />
-                  </button>
+                  {/* Temps restant avant l'étape suivante */}
+                  {playing && (
+                    <motion.div
+                      key={tour}
+                      className="h-0.5 origin-left bg-accent"
+                      initial={{ scaleX: 0 }}
+                      animate={{ scaleX: 1 }}
+                      transition={{ duration: STEP_MS / 1000, ease: "linear" }}
+                      aria-hidden="true"
+                    />
+                  )}
                 </motion.div>
               )}
             </AnimatePresence>
           </div>
 
           {/* Aperçu du lieu sélectionné, sinon la liste */}
-          <div className="lg:max-h-[36rem]">
+          <div className="lg:max-h-[40rem]">
             <AnimatePresence mode="wait">
               {selected ? (
                 <motion.aside

@@ -2,7 +2,8 @@ import { CssBaseline, ThemeProvider, createTheme } from "@mui/material";
 import { FC, PropsWithChildren, useEffect, useMemo, useState } from "react";
 import { AccessibilityContext, AccessibilitySettings, DEFAULT_SETTINGS } from "./AccessibilityContext";
 
-const STORAGE_KEY = "a11y-settings";
+// v2 : nouvelle taille par défaut, les anciens réglages enregistrés (100 %) sont ignorés
+const STORAGE_KEY = "a11y-settings-v2";
 
 const load = (): AccessibilitySettings => {
   try {
@@ -46,11 +47,11 @@ const AccessibilityProvider: FC<PropsWithChildren> = ({ children }) => {
             }
           : {
               mode: "light",
-              background: { default: "#f4eee3", paper: "#fbf8f1" },
-              primary: { main: "#1e1a15" },
-              secondary: { main: "#9a3a22" },
-              text: { primary: "#1e1a15", secondary: "#5d5447" },
-              divider: "#d8cdb9",
+              background: { default: "#ffffff", paper: "#ffffff" },
+              primary: { main: "#18181b" },
+              secondary: { main: "#9e2b1f" },
+              text: { primary: "#18181b", secondary: "#52525b" },
+              divider: "#e4e4e7",
             },
         typography: { fontFamily: "var(--body-font)" },
         shape: { borderRadius: 10 },

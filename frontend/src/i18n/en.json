@@ -1,8 +1,11 @@
 {
-  "site": { "title": "Fort de Romainville Memorial", "short": "Fort de Romainville", "kicker": "Digital memorial" },
+  "site": {
+    "title": "Fort de Romainville Memorial",
+    "short": "Fort de Romainville",
+    "kicker": "Digital memorial"
+  },
   "nav": {
     "home": "Home",
-    "timeline": "Timeline",
     "map": "Map of the fort",
     "contribute": "Contribute",
     "sources": "Our sources",
@@ -23,14 +26,36 @@
     "reset": "Reset",
     "language": "Language"
   },
-  "lang": { "label": "Language", "fr": "FR", "en": "EN" },
+  "lang": {
+    "label": "Language",
+    "fr": "FR",
+    "en": "EN"
+  },
   "reliability": {
-    "documentee": { "label": "Documented", "desc": "Attested by an identified archival source." },
-    "recoupee": { "label": "Cross-checked", "desc": "Confirmed by at least two independent sources." },
-    "temoignee": { "label": "Witnessed", "desc": "Reported by a direct witness, with no confirming document." },
-    "transmise": { "label": "Passed on", "desc": "Reported by a relative or third party, not a direct witness." },
-    "incertaine": { "label": "Uncertain", "desc": "Sources disagree or the information is partial." },
-    "inconnue": { "label": "Unknown", "desc": "The information exists but we have not found it." }
+    "documentee": {
+      "label": "Documented",
+      "desc": "Attested by an identified archival source."
+    },
+    "recoupee": {
+      "label": "Cross-checked",
+      "desc": "Confirmed by at least two independent sources."
+    },
+    "temoignee": {
+      "label": "Witnessed",
+      "desc": "Reported by a direct witness, with no confirming document."
+    },
+    "transmise": {
+      "label": "Passed on",
+      "desc": "Reported by a relative or third party, not a direct witness."
+    },
+    "incertaine": {
+      "label": "Uncertain",
+      "desc": "Sources disagree or the information is partial."
+    },
+    "inconnue": {
+      "label": "Unknown",
+      "desc": "The information exists but we have not found it."
+    }
   },
   "status": {
     "propose": "Submitted",
@@ -51,29 +76,71 @@
     "statPeriod": "years of the camp",
     "treeEyebrow": "Their stories",
     "treeTitle": "The tree of women",
-    "treeHelp": "Each apple is a woman, hanging from the branch of her arrival at the fort. An empty apple marks a restricted record.",
+    "treeHelp": "The trunk is time: from the opening of the camp in 1940, at the bottom, to the Liberation in 1944, at the top. Each branch is a year of arrival at the fort, each apple a woman.",
     "treeHint": "Hover or select an apple to discover a woman.",
     "treeOpen": "See her record",
     "treeEmpty": "No records published yet.",
-    "unknownPeriod": "Unknown period",
+    "unknownPeriod": "Arrival date unknown",
     "listTitle": "All records",
     "principlesEyebrow": "Our approach",
     "principlesTitle": "A memory honest about what it knows",
     "principles": {
-      "source": { "title": "Every fact has its source", "desc": "Archives, registers, testimonies: you always know where what you read comes from, and how certain it is." },
-      "unknown": { "title": "What is missing is said", "desc": "Memory is incomplete. Each record also shows what we do not know yet." },
-      "silence": { "title": "Silence is respected", "desc": "When a person or their family refuses exposure, we only keep the trace of their presence." }
+      "source": {
+        "title": "Every fact has its source",
+        "desc": "Archives, registers, testimonies: you always know where what you read comes from, and how certain it is."
+      },
+      "unknown": {
+        "title": "What is missing is said",
+        "desc": "Memory is incomplete. Each record also shows what we do not know yet."
+      },
+      "silence": {
+        "title": "Silence is respected",
+        "desc": "When a person or their family refuses exposure, we only keep the trace of their presence."
+      }
     },
+    "scrollCue": "Discover the story",
+    "heroCredit": "Entrance of the fort and watchtower, photograph taken at the Liberation – collection shared by the National memorial to women in the Resistance and Deportation",
+    "exploreGo": "Discover",
     "exploreEyebrow": "Explore",
     "exploreTitle": "Several paths into the memory of the fort",
     "explore": {
-      "timeline": { "title": "The timeline", "desc": "The key dates of the fort and the documents behind them." },
-      "map": { "title": "Map of the fort", "desc": "The casemates and spaces, including casemate 17 and its graffiti." },
-      "contribute": { "title": "Contribute", "desc": "A photo, a letter, a memory? Share it, the team will check it." },
-      "sources": { "title": "Our sources", "desc": "How we check facts, and what the reliability levels mean." }
+      "map": {
+        "title": "Map of the fort",
+        "desc": "The casemates and spaces, including casemate 17 and its graffiti.",
+        "image": "Row of casemates at the fort – collection shared by the Mémorial national"
+      },
+      "contribute": {
+        "title": "Contribute",
+        "desc": "A photo, a letter, a memory? Share it, the team will check it.",
+        "image": "Old postcard of the fort entrance – collection shared by the Mémorial national"
+      },
+      "sources": {
+        "title": "Our sources",
+        "desc": "How we check facts, and what the reliability levels mean.",
+        "image": "Inside a casemate used as a dormitory – collection shared by the Mémorial national"
+      }
     }
   },
-  "tree": { "arrival": "Arrival: {{date}}", "reserved": "Restricted record" },
+  "tree": {
+    "arrival": "Arrival: {{date}}",
+    "reserved": "Restricted record",
+    "howTo": "How to read the tree",
+    "howToText": "Hover over an apple to see who it stands for, click to open her record. The shape of the apple tells you where the record stands.",
+    "kinds": {
+      "valid": "Verified record",
+      "pending": "Record under review",
+      "reserved": "Restricted record"
+    },
+    "kindsHelp": {
+      "valid": "Every piece of information has been checked by the team against its sources.",
+      "pending": "The sources are gathered and the team is checking them. Only the name and arrival date are shown.",
+      "reserved": "The person or their family declined exposure: we record her presence, nothing more."
+    },
+    "emptyYear": "no record yet",
+    "count_one": "{{count}} woman",
+    "count_other": "{{count}} women",
+    "timeArrow": "↑ time"
+  },
   "person": {
     "biography": "Biography",
     "arrival": "Arrival at the fort",
@@ -89,9 +156,13 @@
     "reservedTitle": "Restricted record",
     "reservedDefault": "This person or their family asked that this record stay limited. We respect that choice.",
     "contributeHint": "Do you have a document or information about her?",
-    "contributeLink": "Submit a contribution"
+    "contributeLink": "Submit a contribution",
+    "pendingTitle": "Record under review",
+    "pendingText": "The sources on {{name}} have been gathered. Before publishing her biography, the team checks each piece of information one by one: nothing is shown until that is done."
   },
-  "missing": { "title": "What we do not know" },
+  "missing": {
+    "title": "What we do not know"
+  },
   "testimony": {
     "eyebrow": "Testimony",
     "contextTitle": "Context of this testimony",
@@ -110,18 +181,6 @@
     "transformations": "Changes",
     "originalLocation": "Original held at",
     "about": "People mentioned"
-  },
-  "timeline": {
-    "eyebrow": "1940 – 1944",
-    "title": "Timeline",
-    "subtitle": "The key stages in the history of the fort. Select an event to see its places, the people involved and its sources.",
-    "period": "Period",
-    "allPeriods": "All",
-    "previous": "Previous",
-    "next": "Next",
-    "close": "Close",
-    "empty": "No events for this period.",
-    "open": "See details"
   },
   "map": {
     "eyebrow": "Les Lilas",
@@ -146,20 +205,35 @@
     "photos": "Photos: {{count}}",
     "notOnThisView": "not yet placed on this view",
     "notPlacedPlan": "Places to put on the plan: {{count}}",
-    "notPlacedReal": "Places to put on the satellite view: {{count}}"
+    "notPlacedReal": "Places to put on the satellite view: {{count}}",
+    "play": "Autoplay",
+    "pause": "Pause",
+    "steps": "Tour steps",
+    "noPhoto": "No known photograph of this place yet.",
+    "previous": "Previous step",
+    "next": "Next step"
   },
   "place": {
     "currentState": "Current state",
     "photos": "Photographs",
     "persons": "Women linked to this place",
     "backToMap": "Back to the map",
-    "kinds": { "casemate": "Casemate", "cour": "Courtyard", "batiment": "Building", "autre": "Place" },
+    "kinds": {
+      "casemate": "Casemate",
+      "cour": "Courtyard",
+      "batiment": "Building",
+      "autre": "Place"
+    },
     "beforeAfter": "Then and now",
     "then": "Archive",
     "now": "Today",
     "compare": "Drag the slider to compare the archive with the present state.",
     "photosHint": "Select a photo to enlarge it and zoom in on details, such as the graffiti.",
-    "eras": { "ancienne": "Archive", "actuelle": "Today", "inconnue": "Unknown period" }
+    "eras": {
+      "ancienne": "Archive",
+      "actuelle": "Today",
+      "inconnue": "Unknown period"
+    }
   },
   "viewer": {
     "photo": "Photograph",
@@ -260,5 +334,60 @@
     "aiAssisted": "AI-assisted",
     "yes": "Yes",
     "no": "No"
+  },
+  "story": {
+    "eyebrow": "Story",
+    "title": "Four years at the fort",
+    "lead": "Scroll down to travel through the history of the camp, from its opening to the Liberation.",
+    "credit": "Photographs: collection shared by the National memorial to women in the Resistance and Deportation",
+    "sources": "Where does this information come from?",
+    "steps": {
+      "1": {
+        "date": "1940",
+        "title": "A fort becomes a camp",
+        "text": "After the defeat of June 1940, the German army moved into the fort. From 1 November 1940, the first detainees were registered. Watchtowers went up and barbed wire ran along the rampart walk: it was the first German camp set up in occupied France.",
+        "alt": "Barbed wire in front of a row of the fort's casemates"
+      },
+      "2": {
+        "date": "1942",
+        "title": "The hostage camp",
+        "text": "From summer 1942, the fort held the hostages of the Paris region. On 21 September 1942, 46 hostages taken from the fort were shot at Mont-Valérien. In all, 209 detainees who passed through the fort were shot during the Occupation.",
+        "alt": "Row of the fort's casemates"
+      },
+      "3": {
+        "date": "24 January 1943",
+        "title": "The “31000” convoy",
+        "text": "230 women, most of them in the Resistance, were deported to Auschwitz-Birkenau. Among them were Charlotte Delbo, Danielle Casanova, Marie-Claude Vaillant-Couturier and Maï Politzer. Only 49 came back.",
+        "alt": "Memorial plaques at the entrance of the fort, including the one for the convoy of 24 January 1943"
+      },
+      "4": {
+        "date": "1944",
+        "title": "The women's camp",
+        "text": "The fort became the camp for women to be deported. More than 3,800 women were held there during the war; over 90% were then deported, mainly to Ravensbrück.",
+        "alt": "Dormitory set up in a casemate"
+      },
+      "5": {
+        "date": "August 1944",
+        "title": "A tragic liberation",
+        "text": "On 15 August, the last convoy left from Pantin station. On 20 August, as it fled, the garrison shot eleven resistance fighters and civilians. The next day, residents found their bodies behind the central building.",
+        "alt": "Entrance of the fort and its watchtower, photographed at the Liberation"
+      }
+    }
+  },
+  "torch": {
+    "eyebrow": "The walls remember",
+    "title": "Light up the graffiti",
+    "lead": "In the darkness of the casemates, internees wrote their names, a date, a few words. Move the lamp to reveal them.",
+    "hint": "Move your mouse or finger to light up the wall",
+    "on": "Light everything",
+    "off": "Back to the lamp",
+    "choose": "Choose a graffiti",
+    "credit": "photograph, collection shared by the National memorial",
+    "items": {
+      "hoovers": "Graffiti reading the name “Hoovers”",
+      "glaser": "Graffiti “Glaser 14-4-43”",
+      "crepy": "Pencil inscriptions: several names and dates",
+      "dalaine": "Graffiti attributed to “Dalaine”"
+    }
   }
 }
