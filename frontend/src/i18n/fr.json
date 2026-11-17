@@ -84,22 +84,6 @@
     "treeEmpty": "Aucune fiche publiée pour le moment.",
     "unknownPeriod": "Date d'arrivée inconnue",
     "listTitle": "Toutes les fiches",
-    "principlesEyebrow": "Notre démarche",
-    "principlesTitle": "Une mémoire honnête sur ce qu'elle sait",
-    "principles": {
-      "source": {
-        "title": "Chaque information a sa source",
-        "desc": "Archives, registres, témoignages : vous savez toujours d'où vient ce que vous lisez, et à quel point c'est sûr."
-      },
-      "unknown": {
-        "title": "Ce qui manque est dit",
-        "desc": "La mémoire est incomplète. Chaque fiche montre aussi ce que nous ne savons pas encore."
-      },
-      "silence": {
-        "title": "Le silence est respecté",
-        "desc": "Quand une personne ou sa famille refuse d'être exposée, nous gardons seulement la trace de sa présence."
-      }
-    },
     "scrollCue": "Découvrir l'histoire",
     "heroCredit": "Entrée du fort et mirador, photographie prise à la Libération – fonds partagé par le Mémorial national des femmes en Résistance et en Déportation",
     "exploreGo": "Découvrir",
@@ -129,6 +113,29 @@
         "title": "Archives publiées",
         "desc": "Les documents confiés par le public, vérifiés par l'équipe et publiés avec l'accord de leurs auteurs."
       }
+    },
+    "method": {
+      "eyebrow": "Notre démarche",
+      "title": "Ce que l'on sait, et ce que l'on ne sait pas",
+      "p1": "Les archives du fort sont incomplètes. Une date peut venir d'un registre allemand, une autre d'un souvenir raconté en famille. Nous ne les mettons pas sur le même plan : à côté de chaque information, nous indiquons d'où elle vient et si elle a pu être vérifiée.",
+      "p2": "Quand une famille ne souhaite pas qu'une personne soit exposée, nous gardons seulement son nom. Dans l'arbre, sa pomme reste vide.",
+      "link": "Voir comment nous vérifions",
+      "sample": "Exemple : comment se lit une fiche",
+      "rows": {
+        "arrival": {
+          "label": "Arrivée au fort",
+          "value": "Août 1942"
+        },
+        "convoy": {
+          "label": "Déportation",
+          "value": "Convoi du 24 janvier 1943"
+        },
+        "birthplace": {
+          "label": "Lieu de naissance",
+          "value": "Pas encore retrouvé"
+        }
+      },
+      "missing": "La casemate où elle a été internée, et ce qu'elle est devenue après la guerre."
     }
   },
   "tree": {

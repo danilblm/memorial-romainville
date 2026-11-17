@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<style>
+  html, body { margin: 0; padding: 0; background: #ffffff; }
+  svg { display: block; }
+</style>
+</head>
+<body>
+<svg xmlns="http://www.w3.org/2000/svg" width="1520" height="700" viewBox="0 0 1520 700" font-family="Arial, Helvetica, sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0L10 5L0 10z" fill="#52525b"/>
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="1520" height="700" fill="#ffffff"/>
+
+  <!-- Titre -->
+  <text x="60" y="70" font-size="34" font-weight="700" fill="#18181b">Architecture technique du dispositif</text>
+  <text x="60" y="108" font-size="20" fill="#52525b">Le site ne parle qu'au serveur ; seul le serveur accède à la base de données et aux fichiers.</text>
+
+  <!-- Connecteurs -->
+  <g fill="none" stroke="#52525b" stroke-width="2.5">
+    <path d="M480 290H556" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+    <path d="M964 290H1040" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+    <path d="M760 400V555H1040" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+  </g>
+  <text x="518" y="272" font-size="18" text-anchor="middle" fill="#52525b">JSON</text>
+  <text x="1002" y="272" font-size="18" text-anchor="middle" fill="#52525b">accès</text>
+  <text x="900" y="538" font-size="18" text-anchor="middle" fill="#52525b">envoi / lecture</text>
+
+  <!-- 1. Site (navigateur) -->
+  <g>
+    <rect x="60" y="180" width="420" height="220" rx="16" fill="#eef2f7" stroke="#64748b" stroke-width="2"/>
+    <rect x="60" y="180" width="420" height="56" rx="16" fill="#64748b"/>
+    <rect x="60" y="216" width="420" height="20" fill="#64748b"/>
+    <text x="84" y="217" font-size="24" font-weight="700" fill="#ffffff">Le site (navigateur)</text>
+    <text x="84" y="274" font-size="20" fill="#18181b">React, Vite, TypeScript</text>
+    <text x="84" y="306" font-size="20" fill="#18181b">Pages publiques et communauté</text>
+    <text x="84" y="338" font-size="20" fill="#18181b">Espace d'administration</text>
+    <text x="84" y="374" font-size="17" fill="#52525b">Ce que voit le visiteur</text>
+  </g>
+
+  <!-- 2. Serveur (API) - élément central, rouge du mémorial -->
+  <g>
+    <rect x="556" y="180" width="408" height="220" rx="16" fill="#f8e8e5" stroke="#9e2b1f" stroke-width="3"/>
+    <rect x="556" y="180" width="408" height="56" rx="16" fill="#9e2b1f"/>
+    <rect x="556" y="216" width="408" height="20" fill="#9e2b1f"/>
+    <text x="580" y="217" font-size="24" font-weight="700" fill="#ffffff">Le serveur (API)</text>
+    <text x="580" y="274" font-size="20" fill="#18181b">Node.js et Express</text>
+    <text x="580" y="306" font-size="20" fill="#18181b">Vérifie les droits (connexion)</text>
+    <text x="580" y="338" font-size="20" fill="#18181b">Contrôle les formulaires</text>
+    <text x="580" y="374" font-size="17" fill="#52525b">Applique les règles de publication</text>
+  </g>
+
+  <!-- 3. Base de données -->
+  <g>
+    <rect x="1040" y="180" width="420" height="220" rx="16" fill="#ecf5ee" stroke="#3f7a52" stroke-width="2"/>
+    <rect x="1040" y="180" width="420" height="56" rx="16" fill="#3f7a52"/>
+    <rect x="1040" y="216" width="420" height="20" fill="#3f7a52"/>
+    <text x="1064" y="217" font-size="24" font-weight="700" fill="#ffffff">La base de données</text>
+    <text x="1064" y="274" font-size="20" fill="#18181b">MongoDB</text>
+    <text x="1064" y="306" font-size="20" fill="#18181b">Fiches, sources, lieux, frise</text>
+    <text x="1064" y="338" font-size="20" fill="#18181b">Contributions, comptes, communauté</text>
+    <text x="1064" y="374" font-size="17" fill="#52525b">Informations avec leur fiabilité</text>
+  </g>
+
+  <!-- 4. Fichiers -->
+  <g>
+    <rect x="1040" y="450" width="420" height="200" rx="16" fill="#fbf3e4" stroke="#a16207" stroke-width="2"/>
+    <rect x="1040" y="450" width="420" height="56" rx="16" fill="#a16207"/>
+    <rect x="1040" y="486" width="420" height="20" fill="#a16207"/>
+    <text x="1064" y="487" font-size="24" font-weight="700" fill="#ffffff">Les fichiers</text>
+    <text x="1064" y="544" font-size="20" fill="#18181b">Plan du fort, photographies</text>
+    <text x="1064" y="576" font-size="20" fill="#18181b">Documents des contributions (privés)</text>
+    <text x="1064" y="616" font-size="17" fill="#52525b">Images de la communauté</text>
+  </g>
+</svg>
+</body>
+</html>

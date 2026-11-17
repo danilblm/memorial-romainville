@@ -84,22 +84,6 @@
     "treeEmpty": "No records published yet.",
     "unknownPeriod": "Arrival date unknown",
     "listTitle": "All records",
-    "principlesEyebrow": "Our approach",
-    "principlesTitle": "A memory honest about what it knows",
-    "principles": {
-      "source": {
-        "title": "Every fact has its source",
-        "desc": "Archives, registers, testimonies: you always know where what you read comes from, and how certain it is."
-      },
-      "unknown": {
-        "title": "What is missing is said",
-        "desc": "Memory is incomplete. Each record also shows what we do not know yet."
-      },
-      "silence": {
-        "title": "Silence is respected",
-        "desc": "When a person or their family refuses exposure, we only keep the trace of their presence."
-      }
-    },
     "scrollCue": "Discover the story",
     "heroCredit": "Entrance of the fort and watchtower, photograph taken at the Liberation – collection shared by the National memorial to women in the Resistance and Deportation",
     "exploreGo": "Discover",
@@ -129,6 +113,29 @@
         "title": "Published archives",
         "desc": "Documents entrusted by the public, checked by the team and published with their authors' consent."
       }
+    },
+    "method": {
+      "eyebrow": "Our approach",
+      "title": "What we know, and what we don't",
+      "p1": "The fort's archives are incomplete. One date may come from a German register, another from a memory told within a family. We don't treat them the same way: next to each piece of information, we show where it comes from and whether it could be checked.",
+      "p2": "When a family does not want a person to be exposed, we keep only her name. In the tree, her apple stays empty.",
+      "link": "See how we check",
+      "sample": "Example: how to read a record",
+      "rows": {
+        "arrival": {
+          "label": "Arrival at the fort",
+          "value": "August 1942"
+        },
+        "convoy": {
+          "label": "Deportation",
+          "value": "Convoy of 24 January 1943"
+        },
+        "birthplace": {
+          "label": "Place of birth",
+          "value": "Not found yet"
+        }
+      },
+      "missing": "The casemate where she was held, and what became of her after the war."
     }
   },
   "tree": {

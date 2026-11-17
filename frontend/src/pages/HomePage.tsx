@@ -1,16 +1,12 @@
 import { motion } from "framer-motion";
-import {
-  ArrowRight,
-  ChevronDown,
-  CircleDashed,
-  EyeOff,
-  FileSearch,
-} from "lucide-react";
+import { ArrowRight, ChevronDown } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 import AnimatedNumber from "../components/AnimatedNumber";
 import ExploreIndex from "../components/ExploreIndex";
 import GraffitiTorch from "../components/GraffitiTorch";
 import PageState from "../components/PageState";
+import ReliabilityBadge from "../components/ReliabilityBadge";
 import StoryScroll from "../components/StoryScroll";
 import Reveal from "../components/Reveal";
 import { ButtonLink, Container, Page, SectionHeading, Tag } from "../components/ui";
@@ -34,12 +30,6 @@ const HomePage = () => {
     { value: places?.length, label: t("home.statPlaces") },
     { value: events?.length, label: t("home.statEvents") },
     { value: "1940–44", label: t("home.statPeriod") },
-  ];
-
-  const principles = [
-    { icon: FileSearch, key: "source" },
-    { icon: CircleDashed, key: "unknown" },
-    { icon: EyeOff, key: "silence" },
   ];
 
   return (
@@ -190,26 +180,48 @@ const HomePage = () => {
 
       <GraffitiTorch />
 
-      {/* Démarche */}
-      <section aria-labelledby="principles-title" className="relative overflow-hidden bg-paper-2 py-24 text-ink sm:py-28">
-        <Container className="relative">
+      {/* Démarche : on montre un extrait de fiche plutôt que de longs discours */}
+      <section aria-labelledby="method-title" className="border-y border-line bg-paper-2 py-24 text-ink sm:py-28">
+        <Container className="grid items-center gap-12 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)]">
           <Reveal>
-            <SectionHeading id="principles-title" eyebrow={t("home.principlesEyebrow")} title={t("home.principlesTitle")} />
+            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-accent">{t("home.method.eyebrow")}</p>
+            <h2 id="method-title" className="mt-4 max-w-xl font-display text-4xl font-medium leading-[1.1] tracking-tight text-balance sm:text-5xl">
+              {t("home.method.title")}
+            </h2>
+            <p className="mt-6 max-w-xl text-lg leading-relaxed text-ink-soft">{t("home.method.p1")}</p>
+            <p className="mt-4 max-w-xl text-lg leading-relaxed text-ink-soft">{t("home.method.p2")}</p>
+            <Link to="/nos-sources" className="mt-8 inline-flex items-center gap-2 font-semibold text-accent hover:underline">
+              {t("home.method.link")}
+              <ArrowRight className="h-4 w-4" aria-hidden="true" />
+            </Link>
           </Reveal>
-          <div className="mt-14 grid gap-x-10 gap-y-12 md:grid-cols-3">
-            {principles.map(({ icon: Icon, key }, index) => (
-              <Reveal key={key} delay={index * 0.1}>
-                <div className="group h-full border-t border-line pt-6 transition duration-300 hover:border-accent">
-                  <div className="flex items-center justify-between">
-                    <span className="font-display text-sm tracking-[0.2em] text-accent">{String(index + 1).padStart(2, "0")}</span>
-                    <Icon className="h-5 w-5 text-ink-soft transition group-hover:text-accent" aria-hidden="true" />
+
+          <Reveal delay={0.15}>
+            <figure className="rounded-2xl border border-line bg-card p-6 shadow-soft sm:p-7">
+              <figcaption className="text-xs font-semibold uppercase tracking-[0.18em] text-ink-soft">{t("home.method.sample")}</figcaption>
+              <dl className="mt-5 divide-y divide-line">
+                {(
+                  [
+                    ["arrival", "recoupee"],
+                    ["convoy", "documentee"],
+                    ["birthplace", "inconnue"],
+                  ] as const
+                ).map(([key, level]) => (
+                  <div key={key} className="flex items-start justify-between gap-4 py-3.5">
+                    <div>
+                      <dt className="text-sm text-ink-soft">{t(`home.method.rows.${key}.label`)}</dt>
+                      <dd className="mt-0.5 font-medium text-ink">{t(`home.method.rows.${key}.value`)}</dd>
+                    </div>
+                    <ReliabilityBadge level={level} />
                   </div>
-                  <h3 className="mt-5 font-display text-2xl tracking-tight">{t(`home.principles.${key}.title`)}</h3>
-                  <p className="mt-3 leading-relaxed text-ink-soft">{t(`home.principles.${key}.desc`)}</p>
-                </div>
-              </Reveal>
-            ))}
-          </div>
+                ))}
+              </dl>
+              <div className="mt-4 rounded-xl border-2 border-dashed border-line p-4">
+                <p className="text-sm font-semibold text-ink">{t("missing.title")}</p>
+                <p className="mt-1 text-sm text-ink-soft">{t("home.method.missing")}</p>
+              </div>
+            </figure>
+          </Reveal>
         </Container>
       </section>
 
