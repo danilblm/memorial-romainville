@@ -8,6 +8,8 @@ const Footer = () => {
 
   const links = [
     { to: "/carte", key: "nav.map" },
+    { to: "/archives", key: "nav.archives" },
+    { to: "/communaute", key: "nav.community" },
     { to: "/contribuer", key: "nav.contribute" },
     { to: "/nos-sources", key: "nav.sources" },
   ];

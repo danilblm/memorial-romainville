@@ -6,9 +6,12 @@ import {
   createContribution,
   decideContribution,
   getContributionFile,
+  getPublishedContribution,
+  getPublishedContributionFile,
   listContributions,
+  listPublishedContributions,
 } from "../services/contributionService";
-import { VALIDATION_STATUSES, ValidationStatus } from "../types/common";
+import { CONTRIBUTION_TARGETS, VALIDATION_STATUSES, ValidationStatus } from "../types/common";
 import { ExtendRequest } from "../types/extendedRequest";
 import { contributionInputSchema, decisionSchema } from "../validators/contributionSchemas";
 
@@ -25,6 +28,48 @@ router.post("/", upload.array("files", 5), async (req, res) => {
     const files = (req.files as Express.Multer.File[] | undefined) ?? [];
     const contribution = await createContribution(parsed.data, files);
     res.status(201).send(contribution);
+  } catch {
+    res.status(500).send("Something went wrong!");
+  }
+});
+
+// Public : archives publiées (contributions validées dont l'auteur a accepté la publication)
+router.get("/published", async (req, res) => {
+  try {
+    const kind = CONTRIBUTION_TARGETS.find((k) => k === req.query.kind);
+    const q = typeof req.query.q === "string" ? req.query.q.trim() : undefined;
+    res.status(200).send(await listPublishedContributions({ kind, q: q || undefined }));
+  } catch {
+    res.status(500).send("Something went wrong!");
+  }
+});
+
+router.get("/published/:id", async (req, res) => {
+  try {
+    const item = await getPublishedContribution(req.params.id);
+    if (!item) {
+      res.status(404).send("Not found");
+      return;
+    }
+    res.status(200).send(item);
+  } catch {
+    res.status(500).send("Something went wrong!");
+  }
+});
+
+// Public : fichier d'une archive publiée (affiché dans la page, pas forcément téléchargé)
+router.get("/published/:id/files/:index", async (req, res) => {
+  try {
+    const file = await getPublishedContributionFile(req.params.id, Number(req.params.index));
+    if (!file) {
+      res.status(404).send("Not found");
+      return;
+    }
+    res.type(file.mimeType);
+    res.setHeader("X-Content-Type-Options", "nosniff");
+    res.sendFile(file.absolutePath, (err) => {
+      if (err && !res.headersSent) res.status(404).send("Not found");
+    });
   } catch {
     res.status(500).send("Something went wrong!");
   }

@@ -15,7 +15,9 @@
     "skip": "Skip to content",
     "menu": "Open menu",
     "close": "Close",
-    "mainNav": "Main navigation"
+    "mainNav": "Main navigation",
+    "archives": "Archives",
+    "community": "Community"
   },
   "a11y": {
     "title": "Display settings",
@@ -118,6 +120,14 @@
         "title": "Our sources",
         "desc": "How we check facts, and what the reliability levels mean.",
         "image": "Inside a casemate used as a dormitory – collection shared by the Mémorial national"
+      },
+      "community": {
+        "title": "The fort community",
+        "desc": "Join the network of families, researchers and history lovers: share, ask, exchange."
+      },
+      "archives": {
+        "title": "Published archives",
+        "desc": "Documents entrusted by the public, checked by the team and published with their authors' consent."
       }
     }
   },
@@ -389,5 +399,184 @@
       "crepy": "Pencil inscriptions: several names and dates",
       "dalaine": "Graffiti attributed to “Dalaine”"
     }
+  },
+  "archives": {
+    "eyebrow": "Shared memory",
+    "title": "Published archives",
+    "intro": "Letters, photographs, memories: these documents were entrusted by families and visitors. Each one was checked by the team before publication, with the consent of the person who shared it.",
+    "verified": "Checked by the team",
+    "verifiedLong": "Checked and approved by the memorial team",
+    "consented": "Published with its author's consent",
+    "search": "Search the archives",
+    "filter": "Filter by subject",
+    "all": "All",
+    "count_one": "{{count}} published archive",
+    "count_other": "{{count}} published archives",
+    "empty": "No archives yet",
+    "emptyLead": "The first documents will appear here once the team has checked them.",
+    "sharedBy": "Shared by {{name}}",
+    "read": "Read the archive",
+    "openFile": "Open the file",
+    "provenance": "Declared provenance",
+    "status": "Status",
+    "ctaTitle": "Do you have traces too?",
+    "ctaLead": "A letter, a photo, a family memory: submit it to the memorial, or talk about it with the community first.",
+    "contribute": "Submit a document",
+    "discuss": "Discuss it in the community",
+    "kinds": {
+      "person": "An interned woman",
+      "place": "A place in the fort",
+      "event": "An event",
+      "source": "A document",
+      "autre": "Other"
+    }
+  },
+  "community": {
+    "eyebrow": "Thematic network",
+    "title": "The fort community",
+    "intro": "A meeting place for everyone who keeps the memory of Fort de Romainville alive: families, descendants, researchers, teachers and history lovers. Share, ask questions, exchange.",
+    "join": "Join the community",
+    "alreadyMember": "Already a member? Sign in",
+    "myProfile": "My profile",
+    "signOut": "Sign out of the community",
+    "feed": "Community feed",
+    "aside": "About the community",
+    "stats": {
+      "members": "members",
+      "posts": "posts",
+      "comments": "comments",
+      "likesReceived": "likes received"
+    },
+    "joinCardTitle": "Join the conversation",
+    "joinCardLead": "Create your profile to post, comment and meet people who share your interests.",
+    "search": "Search a post, a topic…",
+    "filterKind": "Filter by type",
+    "allPosts": "All",
+    "clearFilter": "Remove filter",
+    "resultsFor": "Results for",
+    "noResults": "No matching posts",
+    "empty": "No posts yet",
+    "emptyLead": "Start the first discussion: a question, a memory, a research lead.",
+    "loadMore": "Load more posts",
+    "popularTags": "Popular topics",
+    "newMembers": "New members",
+    "toMemorialTitle": "From the network to the memorial",
+    "toMemorialLead": "Community exchanges are not verified. For a document to enter the memorial, submit it to the team: they will check it before publication.",
+    "charter": {
+      "title": "Community charter",
+      "respect": "Respect the memory of the internees and their families.",
+      "sources": "Say where your information comes from, and what you don't know.",
+      "privacy": "Do not post private information about a living person without their consent.",
+      "memorial": "The memorial team may hide reported content."
+    },
+    "kinds": {
+      "discussion": "Discussion",
+      "question": "Question",
+      "archive": "Archive",
+      "souvenir": "Memory",
+      "recherche": "Research"
+    },
+    "kindsPlural": {
+      "discussion": "Discussions",
+      "question": "Questions",
+      "archive": "Archives",
+      "souvenir": "Memories",
+      "recherche": "Research"
+    },
+    "kindHints": {
+      "discussion": "A topic to discuss with the community.",
+      "question": "You are looking for information, advice, a lead.",
+      "archive": "A document or photo to show. It will not be verified: for the memorial, use “Contribute”.",
+      "souvenir": "A story passed down in your family or circle.",
+      "recherche": "A project, a call for witnesses, a collaboration."
+    },
+    "profiles": {
+      "descendant": "Family / descendant",
+      "chercheur": "Researcher, historian",
+      "enseignant": "Teacher",
+      "passionne": "History lover",
+      "habitant": "Local resident",
+      "autre": "Other"
+    },
+    "composer": {
+      "label": "New post",
+      "placeholder": "What would you like to share, {{name}}?",
+      "kind": "Post type",
+      "title": "Title (optional)",
+      "tags": "Topics (optional)",
+      "tagsPlaceholder": "e.g. casemates, letters, genealogy",
+      "addImage": "Add an image",
+      "removeImage": "Remove the image",
+      "publish": "Post",
+      "sending": "Posting…",
+      "tooBig": "The image is larger than 8 MB."
+    },
+    "unverified": "Document shared by a member, not verified by the team.",
+    "proposeToMemorial": "Submit it to the memorial",
+    "readMore": "Read more",
+    "tags": "Topics",
+    "likes": "likes",
+    "comments": "comments",
+    "share": "Copy link",
+    "copied": "Link copied",
+    "delete": "Delete",
+    "confirmDeletePost": "Permanently delete this post and its comments?",
+    "confirmDeleteComment": "Delete this comment?",
+    "noComments": "No comments yet. Start the conversation.",
+    "writeComment": "Write a comment…",
+    "send": "Send",
+    "joinToComment": "Join the community to comment",
+    "cancel": "Cancel",
+    "save": "Save",
+    "error": "Something went wrong. Please try again.",
+    "report": {
+      "action": "Report",
+      "title": "Report content",
+      "lead": "Your report is sent to the memorial team, who will decide whether to hide this content.",
+      "details": "Details (optional)",
+      "submit": "Send report",
+      "done": "Thank you. The memorial team will review this content.",
+      "reasons": {
+        "inexact": "False or misleading information",
+        "irrespectueux": "Disrespectful or hateful",
+        "personnel": "Personal data exposed",
+        "spam": "Advertising or off-topic"
+      }
+    },
+    "joinTitle": "Join the fort community",
+    "joinLead": "A small network built around a shared interest: the history of the fort and the women who passed through it. Here, people share knowledge, skills and memories.",
+    "perks": {
+      "share": {
+        "title": "Share and ask",
+        "desc": "Post a question, a memory, a photo, a research lead."
+      },
+      "meet": {
+        "title": "Meet people",
+        "desc": "Find families, researchers and history lovers who share your interests."
+      },
+      "safe": {
+        "title": "A moderated space",
+        "desc": "A clear charter, reports handled by the memorial team."
+      }
+    },
+    "register": "Create an account",
+    "login": "Sign in",
+    "createAccount": "Create my account",
+    "displayName": "Display name",
+    "displayNameHint": "Visible to everyone. A first name or nickname is enough.",
+    "youAre": "You are",
+    "passwordHint": "At least 8 characters.",
+    "acceptCharter": "I have read the community charter and agree to follow it. My email address will never be shown.",
+    "teamLogin": "Memorial team member?",
+    "backToFeed": "Back to the community",
+    "memberSince": "Member since {{date}}",
+    "editProfile": "Edit my profile",
+    "bio": "About me",
+    "bioHint": "Your link to the fort, what you are looking for… (600 characters max)",
+    "interests": "Interests",
+    "interestsHint": "Separated by commas (e.g. graffiti, genealogy, teaching).",
+    "myPosts": "My posts",
+    "postsBy": "Posts by {{name}}",
+    "noPostsYet": "No posts yet."
   }
 }

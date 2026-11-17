@@ -44,7 +44,7 @@ backend/src/
 
 frontend/src/
   pages/            Home (arbre), Person, Testimony, Timeline, Map, Place,
-                    Contribute, Sources, Login, admin/AdminContributions
+                    Contribute, Sources, Archives, community/, Login, admin/
   components/       Navbar, WomenTree, ReliabilityBadge, ClaimList, MissingInfo,
                     TestimonyContext, MediaPlayer, SourceList, AccessibilityPanel…
   context/          Auth/, Accessibility/ (thème MUI : taille, contraste, police)
@@ -78,6 +78,14 @@ proposition à valider avec le groupe.
 | GET | `/contributions?status=` | équipe |
 | PATCH | `/contributions/:id/decision` | équipe |
 | GET | `/contributions/:id/files/:index` | équipe |
+| GET | `/contributions/published?kind=&q=`, `/contributions/published/:id` | public (validées + accord) |
+| GET | `/contributions/published/:id/files/:index` | public (validées + accord) |
+| POST | `/community/register`, `/community/login` | public |
+| GET / PATCH | `/community/me` | membre |
+| GET | `/community/posts?kind=&tag=&q=&before=`, `/community/posts/:id`, `/community/stats`, `/community/members/:id` | public |
+| POST / DELETE | `/community/posts` (multipart, champ `image`), `/community/posts/:id` | membre (auteur pour supprimer) |
+| POST | `/community/posts/:id/like`, `/community/posts/:id/comments`, `/community/{posts,comments}/:id/report` | membre |
+| GET / PATCH | `/community/moderation/{posts,comments,members}` | équipe |
 | POST | `/user/login` | public |
 | GET / POST | `/user` (lister, créer un compte) | admin |
 | PATCH / DELETE | `/user/:id` (rôle, nouveau mot de passe, suppression) | admin |
@@ -108,6 +116,26 @@ Seul l'admin peut supprimer une fiche ; pour la retirer du site sans la perdre, 
 - `/admin/mon-compte` (tout membre) : changer son mot de passe.
 - Rôles : **modérateur** (saisit les fiches, modère les contributions) et **admin** (gère aussi les comptes, peut supprimer).
 - Garde-fous : on ne peut ni supprimer son propre compte, ni retirer son propre rôle admin, ni supprimer le dernier admin.
+
+## Archives publiées (`/archives`)
+
+Les contributions du public apparaissent ici **uniquement** si l'équipe les a validées **et** si la personne a accepté
+la publication. Le nom est raccourci (« Marie D. »), l'adresse e-mail n'est jamais exposée. Les fichiers joints
+(images, PDF, audio) deviennent alors consultables.
+
+## La communauté du fort (`/communaute`)
+
+Réseau thématique demandé par le prof : les visiteurs créent un compte **membre** (distinct des comptes de l'équipe,
+un membre ne peut jamais accéder à `/admin`), publient (discussion, question, archive, souvenir, recherche) avec image
+et sujets, commentent, aiment, signalent. Pages : fil avec recherche et filtres, `/communaute/rejoindre`,
+profil `/communaute/membres/:id` (modifiable par son propriétaire), publication seule `/communaute/publication/:id`.
+
+- Les publications sont en ligne immédiatement ; l'équipe traite les signalements dans `/admin/communaute`
+  (masquer / conserver avec motif, suspendre un membre).
+- Une publication de type « archive » affiche qu'elle **n'est pas vérifiée** et renvoie vers « Contribuer » :
+  seul ce circuit fait entrer un document au mémorial.
+- Des membres, publications et archives **d'exemple** (fictifs, marqués « exemple ») sont créés au premier démarrage
+  par `backend/src/seed/communityExamples.ts` ; à supprimer avant la mise en ligne.
 
 ## Prochaines étapes
 

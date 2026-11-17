@@ -30,6 +30,11 @@ const AdminHomePage = () => {
       title: "Contributions du public",
       description: "Vérifier, valider ou refuser les propositions envoyées par les visiteurs.",
     },
+    {
+      to: "/admin/communaute",
+      title: "Communauté du fort",
+      description: "Traiter les signalements, masquer une publication, suspendre un membre.",
+    },
     ...ENTITY_NAMES.map((name) => ({
       to: `/admin/${name}`,
       title: ADMIN_ENTITIES[name].plural,

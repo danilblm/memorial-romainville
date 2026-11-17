@@ -29,6 +29,12 @@ const validateJWT = (req: ExtendRequest, res: Response, next: NextFunction) => {
       return;
     }
 
+    // Un jeton de membre de la communauté n'ouvre jamais l'espace de l'équipe
+    if ((payload as { kind?: string }).kind === "member") {
+      res.status(403).send("Invalid token");
+      return;
+    }
+
     const userPayload = payload as { email: string };
 
     const user = await userModel.findOne({ email: userPayload.email });

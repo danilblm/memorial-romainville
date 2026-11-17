@@ -9,6 +9,8 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import ScrollProgress from "./components/ScrollProgress";
 import AccessibilityProvider from "./context/Accessibility/AccessibilityProvider";
 import AuthProvider from "./context/Auth/AuthProvider";
+import MemberProvider from "./context/Member/MemberProvider";
+import ArchivesPage from "./pages/ArchivesPage";
 import ContributePage from "./pages/ContributePage";
 import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
@@ -20,6 +22,11 @@ import TestimonyPage from "./pages/TestimonyPage";
 
 // Chargées à la demande : la carte (Leaflet) et l'administration (MUI)
 const MapPage = lazy(() => import("./pages/MapPage"));
+const CommunityPage = lazy(() => import("./pages/community/CommunityPage"));
+const JoinPage = lazy(() => import("./pages/community/JoinPage"));
+const MemberPage = lazy(() => import("./pages/community/MemberPage"));
+const PostPage = lazy(() => import("./pages/community/PostPage"));
+const AdminCommunityPage = lazy(() => import("./pages/admin/AdminCommunityPage"));
 const AdminHomePage = lazy(() => import("./pages/admin/AdminHomePage"));
 const AdminContributionsPage = lazy(() => import("./pages/admin/AdminContributionsPage"));
 const AdminUsersPage = lazy(() => import("./pages/admin/AdminUsersPage"));
@@ -42,6 +49,7 @@ function App() {
 
   return (
     <AuthProvider>
+      <MemberProvider>
       <AccessibilityProvider>
         {/* Les animations respectent le réglage « réduire les animations » du système */}
         <MotionConfig reducedMotion="user">
@@ -61,12 +69,18 @@ function App() {
                     <Route path="/lieux/:code" element={<PlacePage />} />
                     <Route path="/personnes/:id" element={<PersonPage />} />
                     <Route path="/temoignages/:id" element={<TestimonyPage />} />
+                    <Route path="/archives" element={<ArchivesPage />} />
+                    <Route path="/communaute" element={<CommunityPage />} />
+                    <Route path="/communaute/rejoindre" element={<JoinPage />} />
+                    <Route path="/communaute/membres/:id" element={<MemberPage />} />
+                    <Route path="/communaute/publication/:id" element={<PostPage />} />
                     <Route path="/contribuer" element={<ContributePage />} />
                     <Route path="/nos-sources" element={<SourcesPage />} />
                     <Route path="/connexion" element={<LoginPage />} />
                     <Route element={<ProtectedRoute />}>
                       <Route path="/admin" element={<AdminHomePage />} />
                       <Route path="/admin/contributions" element={<AdminContributionsPage />} />
+                      <Route path="/admin/communaute" element={<AdminCommunityPage />} />
                       <Route path="/admin/comptes" element={<AdminUsersPage />} />
                       <Route path="/admin/mon-compte" element={<MyAccountPage />} />
                       <Route path="/admin/reglages" element={<AdminSettingsPage />} />
@@ -82,6 +96,7 @@ function App() {
           </BrowserRouter>
         </MotionConfig>
       </AccessibilityProvider>
+      </MemberProvider>
     </AuthProvider>
   );
 }

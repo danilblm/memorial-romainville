@@ -3,8 +3,10 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/Auth/AuthContext";
+import { useMember } from "../context/Member/MemberContext";
 import { cn } from "../utils/cn";
 import AccessibilityPanel from "./AccessibilityPanel";
+import Avatar from "./community/Avatar";
 import Dialog from "./Dialog";
 import LanguageSwitcher from "./LanguageSwitcher";
 import LogoMark from "./LogoMark";
@@ -12,20 +14,23 @@ import LogoMark from "./LogoMark";
 const LINKS = [
   { to: "/", key: "nav.home", end: true },
   { to: "/carte", key: "nav.map" },
+  { to: "/archives", key: "nav.archives" },
+  { to: "/communaute", key: "nav.community" },
   { to: "/contribuer", key: "nav.contribute" },
   { to: "/nos-sources", key: "nav.sources" },
 ];
 
 const desktopLink = ({ isActive }: { isActive: boolean }) =>
   cn(
-    "relative px-3 py-2 text-sm font-medium transition-colors",
-    "after:absolute after:inset-x-3 after:-bottom-0.5 after:h-0.5 after:origin-left after:rounded-full after:bg-accent after:transition-transform after:duration-300",
+    "relative whitespace-nowrap px-2.5 py-2 text-sm font-medium transition-colors",
+    "after:absolute after:inset-x-2.5 after:-bottom-0.5 after:h-0.5 after:origin-left after:rounded-full after:bg-accent after:transition-transform after:duration-300",
     isActive ? "text-ink after:scale-x-100" : "text-ink-soft hover:text-ink after:scale-x-0 hover:after:scale-x-100"
   );
 
 const Navbar = () => {
   const { t } = useTranslation();
   const { isAuthenticated, logout } = useAuth();
+  const { member, isMember, signOut: memberSignOut } = useMember();
   const navigate = useNavigate();
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -48,7 +53,7 @@ const Navbar = () => {
           </span>
         </Link>
 
-        <nav aria-label={t("nav.mainNav")} className="ml-6 hidden items-center lg:flex">
+        <nav aria-label={t("nav.mainNav")} className="ml-4 hidden items-center xl:flex">
           {LINKS.map((link) => (
             <NavLink key={link.to} to={link.to} end={link.end} className={desktopLink}>
               {t(link.key)}
@@ -62,12 +67,23 @@ const Navbar = () => {
           </span>
           <AccessibilityPanel />
 
+          {isMember && member && (
+            <Link
+              to={`/communaute/membres/${member._id}`}
+              title={t("community.myProfile")}
+              className="hidden items-center gap-2 rounded-full border border-line bg-card py-1 pl-1 pr-3 text-sm font-medium text-ink hover:border-accent sm:inline-flex"
+            >
+              <Avatar name={member.displayName} id={member._id} size="sm" className="h-7 w-7" />
+              <span className="max-w-28 truncate xl:hidden 2xl:inline">{member.displayName}</span>
+            </Link>
+          )}
+
           {isAuthenticated ? (
-            <div className="hidden items-center gap-1 lg:flex">
+            <div className="hidden items-center gap-1 xl:flex">
               <NavLink to="/admin" className={desktopLink}>
                 <span className="inline-flex items-center gap-1.5">
                   <Settings className="h-4 w-4" aria-hidden="true" />
-                  {t("nav.admin")}
+                  <span className="sr-only 2xl:not-sr-only">{t("nav.admin")}</span>
                 </span>
               </NavLink>
               <button
@@ -83,7 +99,7 @@ const Navbar = () => {
           ) : (
             <Link
               to="/connexion"
-              className="hidden items-center gap-1.5 rounded-full px-3 py-2 text-sm text-ink-soft hover:text-ink lg:inline-flex"
+              className="hidden items-center gap-1.5 rounded-full px-3 py-2 text-sm text-ink-soft hover:text-ink xl:inline-flex"
             >
               <LogIn className="h-4 w-4" aria-hidden="true" />
               {t("nav.login")}
@@ -94,7 +110,7 @@ const Navbar = () => {
             type="button"
             onClick={() => setMenuOpen(true)}
             aria-label={t("nav.menu")}
-            className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-line bg-card lg:hidden"
+            className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-line bg-card xl:hidden"
           >
             <Menu className="h-5 w-5" aria-hidden="true" />
           </button>
@@ -126,6 +142,22 @@ const Navbar = () => {
                 {t(link.key)}
               </NavLink>
             ))}
+            {isMember ? (
+              <button
+                type="button"
+                onClick={() => {
+                  memberSignOut();
+                  setMenuOpen(false);
+                }}
+                className="border-b border-line py-4 text-left text-lg text-ink-soft"
+              >
+                {t("community.signOut")}
+              </button>
+            ) : (
+              <NavLink to="/communaute/rejoindre" onClick={() => setMenuOpen(false)} className="border-b border-line py-4 text-lg text-ink">
+                {t("community.join")}
+              </NavLink>
+            )}
             {isAuthenticated ? (
               <>
                 <NavLink to="/admin" onClick={() => setMenuOpen(false)} className="border-b border-line py-4 text-lg">

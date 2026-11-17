@@ -15,7 +15,9 @@
     "skip": "Aller au contenu",
     "menu": "Ouvrir le menu",
     "close": "Fermer",
-    "mainNav": "Navigation principale"
+    "mainNav": "Navigation principale",
+    "archives": "Archives",
+    "community": "Communauté"
   },
   "a11y": {
     "title": "Réglages d'affichage",
@@ -118,6 +120,14 @@
         "title": "Nos sources",
         "desc": "Comment nous vérifions, et ce que signifient les niveaux de fiabilité.",
         "image": "Intérieur d'une casemate aménagée en dortoir – fonds partagé par le Mémorial national"
+      },
+      "community": {
+        "title": "La communauté du fort",
+        "desc": "Rejoindre le réseau des familles, chercheurs et passionnés : partager, questionner, échanger."
+      },
+      "archives": {
+        "title": "Archives publiées",
+        "desc": "Les documents confiés par le public, vérifiés par l'équipe et publiés avec l'accord de leurs auteurs."
       }
     }
   },
@@ -389,5 +399,184 @@
       "crepy": "Inscriptions au crayon : plusieurs noms et dates",
       "dalaine": "Graffiti attribué à « Dalaine »"
     }
+  },
+  "archives": {
+    "eyebrow": "Mémoire partagée",
+    "title": "Archives publiées",
+    "intro": "Lettres, photographies, souvenirs : ces documents ont été confiés par des familles et des visiteurs. Chacun a été vérifié par l'équipe avant d'être publié, avec l'accord de la personne qui l'a partagé.",
+    "verified": "Vérifié par l'équipe",
+    "verifiedLong": "Vérifié et validé par l'équipe du mémorial",
+    "consented": "Publié avec l'accord de son auteur",
+    "search": "Rechercher dans les archives",
+    "filter": "Filtrer par sujet",
+    "all": "Tout",
+    "count_one": "{{count}} archive publiée",
+    "count_other": "{{count}} archives publiées",
+    "empty": "Aucune archive pour l'instant",
+    "emptyLead": "Les premiers documents apparaîtront ici dès qu'ils auront été vérifiés par l'équipe.",
+    "sharedBy": "Partagé par {{name}}",
+    "read": "Lire l'archive",
+    "openFile": "Ouvrir le fichier",
+    "provenance": "Provenance déclarée",
+    "status": "Statut",
+    "ctaTitle": "Vous aussi, vous avez des traces ?",
+    "ctaLead": "Une lettre, une photo, un souvenir de famille : proposez-le au mémorial, ou parlez-en d'abord avec la communauté.",
+    "contribute": "Proposer un document",
+    "discuss": "En parler dans la communauté",
+    "kinds": {
+      "person": "Une femme internée",
+      "place": "Un lieu du fort",
+      "event": "Un événement",
+      "source": "Un document",
+      "autre": "Autre"
+    }
+  },
+  "community": {
+    "eyebrow": "Réseau thématique",
+    "title": "La communauté du fort",
+    "intro": "Un lieu de rencontre pour celles et ceux qui font vivre la mémoire du Fort de Romainville : familles, descendants, chercheurs, enseignants et passionnés d'histoire. Partagez, posez vos questions, échangez.",
+    "join": "Rejoindre la communauté",
+    "alreadyMember": "Déjà membre ? Se connecter",
+    "myProfile": "Mon profil",
+    "signOut": "Se déconnecter de la communauté",
+    "feed": "Fil de la communauté",
+    "aside": "À propos de la communauté",
+    "stats": {
+      "members": "membres",
+      "posts": "publications",
+      "comments": "commentaires",
+      "likesReceived": "j'aime reçus"
+    },
+    "joinCardTitle": "Participez à la conversation",
+    "joinCardLead": "Créez votre profil pour publier, commenter et retrouver d'autres personnes qui partagent vos centres d'intérêt.",
+    "search": "Rechercher une publication, un sujet…",
+    "filterKind": "Filtrer par type",
+    "allPosts": "Tout",
+    "clearFilter": "Retirer le filtre",
+    "resultsFor": "Résultats pour",
+    "noResults": "Aucune publication ne correspond",
+    "empty": "Aucune publication pour l'instant",
+    "emptyLead": "Lancez la première discussion : une question, un souvenir, une piste de recherche.",
+    "loadMore": "Voir plus de publications",
+    "popularTags": "Sujets populaires",
+    "newMembers": "Nouveaux membres",
+    "toMemorialTitle": "Du réseau au mémorial",
+    "toMemorialLead": "Les échanges de la communauté ne sont pas vérifiés. Pour qu'un document entre au mémorial, proposez-le à l'équipe : elle le vérifiera avant publication.",
+    "charter": {
+      "title": "La charte",
+      "respect": "Respect de la mémoire des personnes internées et de leurs familles.",
+      "sources": "Dites d'où viennent vos informations, et ce que vous ne savez pas.",
+      "privacy": "Ne publiez pas d'informations privées sur une personne vivante sans son accord.",
+      "memorial": "L'équipe du mémorial peut masquer un contenu signalé."
+    },
+    "kinds": {
+      "discussion": "Discussion",
+      "question": "Question",
+      "archive": "Archive",
+      "souvenir": "Souvenir",
+      "recherche": "Recherche"
+    },
+    "kindsPlural": {
+      "discussion": "Discussions",
+      "question": "Questions",
+      "archive": "Archives",
+      "souvenir": "Souvenirs",
+      "recherche": "Recherches"
+    },
+    "kindHints": {
+      "discussion": "Un sujet à débattre avec la communauté.",
+      "question": "Vous cherchez une information, un conseil, une piste.",
+      "archive": "Un document ou une photo à montrer. Il ne sera pas vérifié : pour le mémorial, utilisez « Contribuer ».",
+      "souvenir": "Un récit transmis dans votre famille ou votre entourage.",
+      "recherche": "Un projet, un appel à témoins, une collaboration."
+    },
+    "profiles": {
+      "descendant": "Famille / descendant·e",
+      "chercheur": "Chercheur·se, historien·ne",
+      "enseignant": "Enseignant·e",
+      "passionne": "Passionné·e d'histoire",
+      "habitant": "Habitant·e des Lilas et alentours",
+      "autre": "Autre"
+    },
+    "composer": {
+      "label": "Nouvelle publication",
+      "placeholder": "Que souhaitez-vous partager, {{name}} ?",
+      "kind": "Type de publication",
+      "title": "Titre (facultatif)",
+      "tags": "Sujets (facultatif)",
+      "tagsPlaceholder": "ex. casemates, lettres, généalogie",
+      "addImage": "Ajouter une image",
+      "removeImage": "Retirer l'image",
+      "publish": "Publier",
+      "sending": "Publication…",
+      "tooBig": "L'image dépasse 8 Mo."
+    },
+    "unverified": "Document partagé par un membre, non vérifié par l'équipe.",
+    "proposeToMemorial": "Le proposer au mémorial",
+    "readMore": "Lire la suite",
+    "tags": "Sujets",
+    "likes": "j'aime",
+    "comments": "commentaires",
+    "share": "Copier le lien",
+    "copied": "Lien copié",
+    "delete": "Supprimer",
+    "confirmDeletePost": "Supprimer définitivement cette publication et ses commentaires ?",
+    "confirmDeleteComment": "Supprimer ce commentaire ?",
+    "noComments": "Pas encore de commentaire. Lancez la conversation.",
+    "writeComment": "Écrire un commentaire…",
+    "send": "Envoyer",
+    "joinToComment": "Rejoignez la communauté pour commenter",
+    "cancel": "Annuler",
+    "save": "Enregistrer",
+    "error": "Une erreur est survenue. Réessayez.",
+    "report": {
+      "action": "Signaler",
+      "title": "Signaler un contenu",
+      "lead": "Votre signalement est transmis à l'équipe du mémorial, qui décidera de masquer ou non ce contenu.",
+      "details": "Précisions (facultatif)",
+      "submit": "Envoyer le signalement",
+      "done": "Merci. L'équipe du mémorial va examiner ce contenu.",
+      "reasons": {
+        "inexact": "Information fausse ou trompeuse",
+        "irrespectueux": "Propos irrespectueux ou haineux",
+        "personnel": "Données personnelles exposées",
+        "spam": "Publicité ou hors sujet"
+      }
+    },
+    "joinTitle": "Rejoindre la communauté du fort",
+    "joinLead": "Un petit réseau, centré sur un intérêt commun : l'histoire du fort et des femmes qui y sont passées. Ici, on partage des connaissances, des savoir-faire et des souvenirs.",
+    "perks": {
+      "share": {
+        "title": "Partager et questionner",
+        "desc": "Publiez une question, un souvenir, une photo, une piste de recherche."
+      },
+      "meet": {
+        "title": "Rencontrer",
+        "desc": "Retrouvez des familles, des chercheurs et des passionnés qui partagent vos centres d'intérêt."
+      },
+      "safe": {
+        "title": "Un espace modéré",
+        "desc": "Une charte claire, des signalements traités par l'équipe du mémorial."
+      }
+    },
+    "register": "Créer un compte",
+    "login": "Se connecter",
+    "createAccount": "Créer mon compte",
+    "displayName": "Nom affiché",
+    "displayNameHint": "Visible par tous. Un prénom ou un pseudonyme suffit.",
+    "youAre": "Vous êtes",
+    "passwordHint": "8 caractères minimum.",
+    "acceptCharter": "J'ai lu la charte de la communauté et je m'engage à la respecter. Mon adresse e-mail ne sera jamais affichée.",
+    "teamLogin": "Membre de l'équipe du mémorial ?",
+    "backToFeed": "Retour à la communauté",
+    "memberSince": "Membre depuis {{date}}",
+    "editProfile": "Modifier mon profil",
+    "bio": "Présentation",
+    "bioHint": "Votre lien avec le fort, ce que vous recherchez… (600 caractères maximum)",
+    "interests": "Centres d'intérêt",
+    "interestsHint": "Séparés par des virgules (ex. graffitis, généalogie, pédagogie).",
+    "myPosts": "Mes publications",
+    "postsBy": "Publications de {{name}}",
+    "noPostsYet": "Aucune publication pour le moment."
   }
 }

@@ -8,7 +8,9 @@
     "dev": "nodemon",
     "build": "tsc",
     "start": "node dist/index.js",
-    "seed": "ts-node ./src/seed/run.ts"
+    "seed": "ts-node ./src/seed/run.ts",
+    "sauvegarde": "ts-node ./src/seed/backup.ts backup",
+    "restauration": "ts-node ./src/seed/backup.ts restore"
   },
   "license": "ISC",
   "dependencies": {

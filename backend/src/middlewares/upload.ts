@@ -45,3 +45,17 @@ export const mediaUpload = multer({
   limits: { fileSize: 100 * 1024 * 1024, files: 1 },
   fileFilter: (_req, file, cb) => cb(null, MEDIA_TYPES.includes(file.mimetype)),
 });
+
+// --- Images publiées par les membres de la communauté ---
+// Servies publiquement sur /community-media (images uniquement).
+export const COMMUNITY_DIR = path.join(process.cwd(), "uploads", "community");
+fs.mkdirSync(COMMUNITY_DIR, { recursive: true });
+
+export const communityUpload = multer({
+  storage: multer.diskStorage({
+    destination: COMMUNITY_DIR,
+    filename: (_req, file, cb) => cb(null, uniqueName(file.originalname)),
+  }),
+  limits: { fileSize: 8 * 1024 * 1024, files: 1 },
+  fileFilter: (_req, file, cb) => cb(null, ["image/jpeg", "image/png", "image/webp"].includes(file.mimetype)),
+});

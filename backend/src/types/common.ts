@@ -49,3 +49,17 @@ export const PLACE_KINDS = ["casemate", "cour", "batiment", "autre"] as const;
 export const TESTIMONY_MEDIA = ["ecrit", "audio", "video"] as const;
 
 export const CONTRIBUTION_TARGETS = ["person", "place", "event", "source", "autre"] as const;
+
+// --- Communauté du fort ---
+
+// Type de publication dans le réseau thématique
+export const POST_KINDS = ["discussion", "question", "archive", "souvenir", "recherche"] as const;
+export type PostKind = (typeof POST_KINDS)[number];
+
+// Une publication est visible tout de suite ; l'équipe peut la masquer après signalement
+export const COMMUNITY_STATUSES = ["publie", "masque"] as const;
+export type CommunityStatus = (typeof COMMUNITY_STATUSES)[number];
+
+// Comment le membre se présente
+export const MEMBER_PROFILES = ["descendant", "chercheur", "enseignant", "passionne", "habitant", "autre"] as const;
+export type MemberProfile = (typeof MEMBER_PROFILES)[number];

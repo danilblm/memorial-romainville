@@ -68,3 +68,65 @@ export const getContributionFile = async (id: string, index: number) => {
     mimeType: file.mimeType,
   };
 };
+
+// --- Archives publiées (public) ---
+// Une contribution n'est visible que si l'équipe l'a validée ET que la personne a accepté la publication.
+const PUBLISHED_FILTER = { status: "valide", consentToPublish: true } as const;
+
+// « Marie Dupont » → « Marie D. » : on ne publie jamais le nom complet ni l'e-mail
+export const publicName = (name?: string | null) => {
+  const parts = (name ?? "").trim().split(/\s+/).filter(Boolean);
+  if (parts.length === 0) return "Anonyme";
+  if (parts.length === 1) return parts[0];
+  return `${parts[0]} ${parts[parts.length - 1][0].toUpperCase()}.`;
+};
+
+const escapeRegex = (text: string) => text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const toPublicArchive = (doc: any) => {
+  return {
+    _id: doc._id,
+    contributor: { name: publicName(doc.contributor?.name), relation: doc.contributor?.relation },
+    target: doc.target,
+    content: doc.content,
+    declaredProvenance: doc.declaredProvenance,
+    files: (doc.files ?? []).map((file: any, index: number) => ({
+      index,
+      originalName: file.originalName,
+      mimeType: file.mimeType,
+      size: file.size,
+    })),
+    publishedAt: doc.decision?.at ?? doc.updatedAt,
+    createdAt: doc.createdAt,
+  };
+};
+
+export const listPublishedContributions = async (filters: { kind?: string; q?: string }) => {
+  const query: Record<string, unknown> = { ...PUBLISHED_FILTER };
+  if (filters.kind) query["target.kind"] = filters.kind;
+  if (filters.q) {
+    const pattern = new RegExp(escapeRegex(filters.q.slice(0, 100)), "i");
+    query.$or = [{ content: pattern }, { "target.label": pattern }, { declaredProvenance: pattern }];
+  }
+  const items = await contributionModel.find(query).sort({ "decision.at": -1, createdAt: -1 }).limit(200).lean();
+  return items.map(toPublicArchive);
+};
+
+export const getPublishedContribution = async (id: string) => {
+  if (!isValidObjectId(id)) return null;
+  const item = await contributionModel.findOne({ _id: id, ...PUBLISHED_FILTER }).lean();
+  return item ? toPublicArchive(item) : null;
+};
+
+export const getPublishedContributionFile = async (id: string, index: number) => {
+  if (!isValidObjectId(id)) return null;
+  const item = await contributionModel.findOne({ _id: id, ...PUBLISHED_FILTER }).lean();
+  const file = item?.files?.[index];
+  if (!file) return null;
+  return {
+    absolutePath: path.join(UPLOAD_DIR, path.basename(file.storedName)),
+    originalName: file.originalName,
+    mimeType: file.mimeType,
+  };
+};
