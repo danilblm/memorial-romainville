@@ -7,6 +7,8 @@ import { cn } from "../utils/cn";
 const VARIANTS = {
   embleme: { src: "/brand/logo-embleme.webp", width: 520, height: 329 },
   complet: { src: "/brand/logo-complet.webp", width: 1100, height: 905 },
+  // Version en longueur (dessin à gauche, nom à droite), pour la page de connexion
+  horizontal: { src: "/brand/logo-horizontal.webp", width: 1200, height: 395 },
 } as const;
 
 interface LogoMarkProps {
