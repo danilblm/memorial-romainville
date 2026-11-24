@@ -57,7 +57,7 @@ const Navbar = () => {
           </span>
         </Link>
 
-        <nav aria-label={t("nav.mainNav")} className="ml-4 hidden items-center xl:flex">
+        <nav aria-label={t("nav.mainNav")} className="ml-2 hidden items-center lg:flex xl:ml-4">
           {LINKS.map((link) => (
             <NavLink key={link.to} to={link.to} end={link.end} className={desktopLink}>
               {t(link.key)}
@@ -78,12 +78,12 @@ const Navbar = () => {
               className="hidden items-center gap-2 rounded-full border border-line bg-card py-1 pl-1 pr-3 text-sm font-medium text-ink hover:border-accent sm:inline-flex"
             >
               <Avatar name={member.displayName} id={member._id} size="sm" className="h-7 w-7" />
-              <span className="max-w-28 truncate xl:hidden 2xl:inline">{member.displayName}</span>
+              <span className="max-w-28 truncate lg:hidden 2xl:inline">{member.displayName}</span>
             </Link>
           )}
 
           {isAuthenticated ? (
-            <div className="hidden items-center gap-1 xl:flex">
+            <div className="hidden items-center gap-1 lg:flex">
               <NavLink to="/admin" className={desktopLink}>
                 <span className="inline-flex items-center gap-1.5">
                   <Settings className="h-4 w-4" aria-hidden="true" />
@@ -103,10 +103,12 @@ const Navbar = () => {
           ) : (
             <Link
               to="/connexion"
-              className="hidden items-center gap-1.5 rounded-full px-3 py-2 text-sm text-ink-soft hover:text-ink xl:inline-flex"
+              title={t("nav.login")}
+              className="hidden items-center gap-1.5 whitespace-nowrap rounded-full p-2 text-sm text-ink-soft hover:bg-ink/5 hover:text-ink lg:inline-flex 2xl:px-3"
             >
               <LogIn className="h-4 w-4" aria-hidden="true" />
-              {t("nav.login")}
+              {/* Sur un écran moyen, l'icône seule suffit : le texte reste lu par les lecteurs d'écran */}
+              <span className="sr-only 2xl:not-sr-only">{t("nav.login")}</span>
             </Link>
           )}
 
@@ -114,7 +116,7 @@ const Navbar = () => {
             type="button"
             onClick={() => setMenuOpen(true)}
             aria-label={t("nav.menu")}
-            className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-line bg-card xl:hidden"
+            className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-line bg-card lg:hidden"
           >
             <Menu className="h-5 w-5" aria-hidden="true" />
           </button>
