@@ -293,3 +293,11 @@ dialog::backdrop {
     animation: none;
   }
 }
+
+/* Logo : en mode « contraste élevé » (fond noir), on le pose sur une pastille blanche
+   pour que le fort et les contours noirs restent visibles */
+:root[data-contrast="high"] .brand-logo {
+  background: #ffffff;
+  border-radius: 0.5rem;
+  padding: 0.15rem;
+}

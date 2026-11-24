@@ -22,11 +22,10 @@ const Footer = () => {
     <footer className="relative mt-24 overflow-hidden border-t border-line bg-paper-2 text-ink">
       <Container className="grid gap-10 py-16 md:grid-cols-[2fr_1fr_1fr]">
         <div>
-          <div className="flex items-center gap-3">
-            <LogoMark className="h-10 w-10 text-ink" />
-            <p className="font-display text-xl">{t("site.title")}</p>
-          </div>
-          <p className="mt-6 max-w-md font-display text-3xl italic leading-snug text-accent">{t("footer.slogan")}</p>
+          <Link to="/" className="inline-block" aria-label={t("site.title")}>
+            <LogoMark variant="complet" className="w-56 sm:w-64" alt={t("site.title")} />
+          </Link>
+          <p className="mt-4 max-w-md text-ink-soft">{t("site.title")}</p>
         </div>
 
         <div>

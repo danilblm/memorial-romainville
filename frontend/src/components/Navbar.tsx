@@ -47,8 +47,8 @@ const Navbar = () => {
   return (
     <header className="sticky top-0 z-40 border-b border-line/80 bg-paper/85 backdrop-blur-md">
       <div className="mx-auto flex h-16 max-w-6xl items-center gap-4 px-4 sm:px-6 lg:px-8">
-        <Link to="/" className="flex items-center gap-2.5 text-ink">
-          <LogoMark className="h-8 w-8" />
+        <Link to="/" className="flex shrink-0 items-center gap-2.5 text-ink">
+          <LogoMark className="h-9 w-auto sm:h-10" />
           <span className="leading-none">
             <span className="hidden text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-accent sm:block">
               {t("site.kicker")}

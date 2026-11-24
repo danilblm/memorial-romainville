@@ -45,7 +45,7 @@ const LoginPage = () => {
     <Page>
       <div className="flex min-h-[70vh] items-center justify-center px-4 py-16">
         <div className="w-full max-w-md rounded-3xl border border-line bg-card p-8 shadow-xl sm:p-10">
-          <LogoMark className="h-12 w-12 text-ink" />
+          <LogoMark variant="complet" className="mx-auto w-44" alt={t("site.title")} />
           <h1 className="mt-6 font-display text-3xl text-ink">{t("login.title")}</h1>
           <p className="mt-2 text-ink-soft">{t("login.lead")}</p>
 
