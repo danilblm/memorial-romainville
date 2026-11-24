@@ -25,7 +25,7 @@ const LogoMark = ({ className, variant = "embleme", alt = "" }: LogoMarkProps) =
       alt={alt}
       aria-hidden={alt ? undefined : true}
       decoding="async"
-      className={cn("brand-logo h-auto select-none object-contain", className)}
+      className={cn("brand-logo select-none object-contain", className)}
       draggable={false}
     />
   );
