@@ -1,16 +1,13 @@
 import {
   Alert,
   Box,
-  Breadcrumbs,
   Button,
-  Container,
   Dialog,
   DialogActions,
   DialogContent,
   DialogContentText,
   DialogTitle,
   Grid,
-  Link,
   MenuItem,
   Paper,
   Stack,
@@ -23,8 +20,8 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
+import AdminPage from "../../components/admin/AdminPage";
 import { FormEvent, useState } from "react";
-import { Link as RouterLink } from "react-router-dom";
 import { apiSend } from "../../api/client";
 import PageState from "../../components/PageState";
 import { useAuth, UserRole } from "../../context/Auth/AuthContext";
@@ -115,17 +112,7 @@ const AdminUsersPage = () => {
   };
 
   return (
-    <Container sx={{ py: 4 }}>
-      <Breadcrumbs sx={{ mb: 2 }}>
-        <Link component={RouterLink} to="/admin">
-          Administration
-        </Link>
-        <Typography color="text.primary">Comptes de l'équipe</Typography>
-      </Breadcrumbs>
-
-      <Typography variant="h3" component="h1" gutterBottom>
-        Comptes de l'équipe
-      </Typography>
+    <AdminPage title="Comptes de l'équipe">
 
       {credentials && (
         <Alert severity="success" sx={{ mb: 3 }} onClose={() => setCredentials(null)}>
@@ -295,7 +282,7 @@ const AdminUsersPage = () => {
           </Button>
         </DialogActions>
       </Dialog>
-    </Container>
+    </AdminPage>
   );
 };
 

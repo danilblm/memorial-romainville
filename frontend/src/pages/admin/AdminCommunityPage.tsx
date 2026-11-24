@@ -6,7 +6,6 @@ import {
   CardActions,
   CardContent,
   Chip,
-  Container,
   Stack,
   Tab,
   Table,
@@ -16,13 +15,12 @@ import {
   TableRow,
   Tabs,
   TextField,
-  ToggleButton,
-  ToggleButtonGroup,
   Typography,
 } from "@mui/material";
 import { useState } from "react";
 import { Link as RouterLink } from "react-router-dom";
 import { apiSend } from "../../api/client";
+import AdminPage, { FilterPills } from "../../components/admin/AdminPage";
 import PageState from "../../components/PageState";
 import { useAuth } from "../../context/Auth/AuthContext";
 import { useApi } from "../../hooks/useApi";
@@ -244,15 +242,7 @@ const AdminCommunityPage = () => {
   const current = tab === "posts" ? posts : comments;
 
   return (
-    <Container sx={{ py: 4 }}>
-      <Typography variant="h3" component="h1" gutterBottom>
-        Communauté du fort
-      </Typography>
-      <Typography color="text.secondary" sx={{ mb: 3, maxWidth: 720 }}>
-        Les publications des membres sont en ligne immédiatement. Les membres peuvent signaler un contenu : l'équipe
-        décide alors de le masquer ou de le conserver. Un contenu masqué n'est plus visible sur le site mais reste ici.
-      </Typography>
-
+    <AdminPage title="Communauté du fort" lead="Les membres signalent un contenu, l'équipe décide de le masquer ou de le garder.">
       <Tabs value={tab} onChange={(_event, value) => setTab(value)} sx={{ mb: 3 }}>
         <Tab value="posts" label="Publications" />
         <Tab value="comments" label="Commentaires" />
@@ -263,11 +253,18 @@ const AdminCommunityPage = () => {
         <MembersTable token={token} />
       ) : (
         <>
-          <ToggleButtonGroup exclusive size="small" value={filter} onChange={(_event, value) => value && setFilter(value)} sx={{ mb: 3 }}>
-            <ToggleButton value="reported">Signalés</ToggleButton>
-            <ToggleButton value="hidden">Masqués</ToggleButton>
-            <ToggleButton value="all">Tous</ToggleButton>
-          </ToggleButtonGroup>
+          <div className="mb-6">
+            <FilterPills
+              label="Filtre"
+              value={filter}
+              onChange={setFilter}
+              options={[
+                { value: "reported", label: "Signalés" },
+                { value: "hidden", label: "Masqués" },
+                { value: "all", label: "Tous" },
+              ]}
+            />
+          </div>
 
           <PageState loading={current.loading} error={current.error} />
           {current.data && current.data.length === 0 && <Typography>Rien à traiter pour le moment.</Typography>}
@@ -280,7 +277,7 @@ const AdminCommunityPage = () => {
           </Box>
         </>
       )}
-    </Container>
+    </AdminPage>
   );
 };
 

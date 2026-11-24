@@ -1,6 +1,6 @@
-import { Alert, Box, Breadcrumbs, Button, Container, Link, Paper, Stack, TextField, Typography } from "@mui/material";
+import { Alert, Box, Button, Paper, Stack, TextField, Typography } from "@mui/material";
+import AdminPage from "../../components/admin/AdminPage";
 import { useEffect, useState } from "react";
-import { Link as RouterLink } from "react-router-dom";
 import { ApiError, apiSend } from "../../api/client";
 import MediaField from "../../components/admin/MediaField";
 import { useAuth } from "../../context/Auth/AuthContext";
@@ -55,17 +55,7 @@ const AdminSettingsPage = () => {
   const complete = Boolean(plan.url && plan.width && plan.height);
 
   return (
-    <Container sx={{ py: 4 }}>
-      <Breadcrumbs sx={{ mb: 2 }}>
-        <Link component={RouterLink} to="/admin">
-          Administration
-        </Link>
-        <Typography color="text.primary">Réglages du site</Typography>
-      </Breadcrumbs>
-
-      <Typography variant="h3" component="h1" gutterBottom>
-        Réglages du site
-      </Typography>
+    <AdminPage title="Réglages du site" narrow>
 
       <Paper variant="outlined" sx={{ p: 3 }}>
         <Typography variant="h5" component="h2" gutterBottom>
@@ -127,7 +117,7 @@ const AdminSettingsPage = () => {
           </Stack>
         </Stack>
       </Paper>
-    </Container>
+    </AdminPage>
   );
 };
 

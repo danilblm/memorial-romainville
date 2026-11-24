@@ -1,6 +1,6 @@
-import { Alert, Box, Breadcrumbs, Button, Container, Link, Stack, TextField, Typography } from "@mui/material";
+import { Alert, Box, Button, Stack, TextField, Typography } from "@mui/material";
+import AdminPage from "../../components/admin/AdminPage";
 import { FormEvent, useState } from "react";
-import { Link as RouterLink } from "react-router-dom";
 import { apiSend } from "../../api/client";
 import { useAuth } from "../../context/Auth/AuthContext";
 
@@ -30,17 +30,7 @@ const MyAccountPage = () => {
   };
 
   return (
-    <Container maxWidth="sm" sx={{ py: 4 }}>
-      <Breadcrumbs sx={{ mb: 2 }}>
-        <Link component={RouterLink} to="/admin">
-          Administration
-        </Link>
-        <Typography color="text.primary">Mon compte</Typography>
-      </Breadcrumbs>
-
-      <Typography variant="h3" component="h1" gutterBottom>
-        Mon compte
-      </Typography>
+    <AdminPage title="Mon compte" narrow>
       {username && <Typography sx={{ mb: 3 }}>{username}</Typography>}
 
       <Typography variant="h6" component="h2" gutterBottom>
@@ -84,7 +74,7 @@ const MyAccountPage = () => {
           </Button>
         </Stack>
       </Box>
-    </Container>
+    </AdminPage>
   );
 };
 

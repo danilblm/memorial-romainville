@@ -5,11 +5,6 @@ import {
   CardActions,
   CardContent,
   Chip,
-  Container,
-  FormControl,
-  InputLabel,
-  MenuItem,
-  Select,
   Stack,
   TextField,
   Typography,
@@ -17,6 +12,7 @@ import {
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { apiSend } from "../../api/client";
+import AdminPage, { FilterPills } from "../../components/admin/AdminPage";
 import PageState from "../../components/PageState";
 import { BASE_URL } from "../../constants/baseUrl";
 import { useAuth } from "../../context/Auth/AuthContext";
@@ -118,31 +114,21 @@ const AdminContributionsPage = () => {
   );
 
   return (
-    <Container sx={{ py: 4 }}>
-      <Typography variant="h3" component="h1" gutterBottom>
-        {t("admin.title")}
-      </Typography>
-
-      <FormControl size="small" sx={{ minWidth: 220, mb: 3 }}>
-        <InputLabel id="status-label" shrink>
-          {t("admin.filter")}
-        </InputLabel>
-        <Select
-          labelId="status-label"
+    <AdminPage title="Contributions du public" lead="Les propositions envoyées par les visiteurs depuis la page « Contribuer ».">
+      <div className="mb-6">
+        <FilterPills
           label={t("admin.filter")}
-          displayEmpty
-          notched
           value={status}
-          onChange={(event) => setStatus(event.target.value as ValidationStatus | "")}
-        >
-          <MenuItem value="">{t("admin.all")}</MenuItem>
-          {(["propose", "en_verification", "valide", "refuse"] as ValidationStatus[]).map((value) => (
-            <MenuItem key={value} value={value}>
-              {t(`status.${value}`)}
-            </MenuItem>
-          ))}
-        </Select>
-      </FormControl>
+          onChange={setStatus}
+          options={[
+            { value: "propose", label: "À traiter" },
+            { value: "en_verification", label: t("status.en_verification") },
+            { value: "valide", label: t("status.valide") },
+            { value: "refuse", label: t("status.refuse") },
+            { value: "", label: t("admin.all") },
+          ]}
+        />
+      </div>
 
       <PageState loading={loading} error={error} />
       {data && data.length === 0 && <Typography>{t("admin.empty")}</Typography>}
@@ -152,7 +138,7 @@ const AdminContributionsPage = () => {
           <ContributionCard key={item._id} item={item} token={token} onDone={reload} />
         ))}
       </Box>
-    </Container>
+    </AdminPage>
   );
 };
 

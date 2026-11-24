@@ -48,13 +48,33 @@ const AccessibilityProvider: FC<PropsWithChildren> = ({ children }) => {
           : {
               mode: "light",
               background: { default: "#ffffff", paper: "#ffffff" },
-              primary: { main: "#18181b" },
-              secondary: { main: "#9e2b1f" },
+              // Même rouge que le logo et les boutons du site
+              primary: { main: "#9e2b1f" },
+              secondary: { main: "#18181b" },
               text: { primary: "#18181b", secondary: "#52525b" },
               divider: "#e4e4e7",
             },
-        typography: { fontFamily: "var(--body-font)" },
-        shape: { borderRadius: 10 },
+        typography: {
+          fontFamily: "var(--body-font)",
+          h1: { fontFamily: "var(--display-font, serif)" },
+          h2: { fontFamily: "var(--display-font, serif)" },
+          h3: { fontFamily: "var(--display-font, serif)" },
+          h4: { fontFamily: "var(--display-font, serif)" },
+          h5: { fontFamily: "var(--display-font, serif)" },
+          button: { textTransform: "none", fontWeight: 600 },
+        },
+        shape: { borderRadius: 12 },
+        components: {
+          // Boutons arrondis et sans ombre, comme sur le reste du site
+          MuiButton: {
+            defaultProps: { disableElevation: true },
+            styleOverrides: { root: { borderRadius: 999, paddingInline: 18 } },
+          },
+          MuiCard: { defaultProps: { variant: "outlined" }, styleOverrides: { root: { borderRadius: 16 } } },
+          MuiPaper: { styleOverrides: { rounded: { borderRadius: 16 } } },
+          MuiChip: { styleOverrides: { root: { fontWeight: 600 } } },
+          MuiTab: { styleOverrides: { root: { textTransform: "none", fontWeight: 600 } } },
+        },
       }),
     [settings.highContrast]
   );

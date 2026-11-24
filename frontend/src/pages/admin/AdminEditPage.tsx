@@ -1,23 +1,20 @@
 import {
   Alert,
   Box,
-  Breadcrumbs,
   Button,
-  Container,
   Dialog,
   DialogActions,
   DialogContent,
   DialogContentText,
   DialogTitle,
-  Link,
   Paper,
   Snackbar,
   Stack,
-  Typography,
 } from "@mui/material";
 import { FormEvent, useEffect, useState } from "react";
 import { Link as RouterLink, useNavigate, useParams } from "react-router-dom";
 import { ApiError, apiSend } from "../../api/client";
+import AdminPage from "../../components/admin/AdminPage";
 import FieldRenderer from "../../components/admin/FieldRenderer";
 import PageState from "../../components/PageState";
 import { FormValues, getEntityConfig } from "../../constants/adminEntities";
@@ -90,26 +87,12 @@ const AdminEditPage = () => {
   const title = isNew ? `Nouvelle fiche : ${config.singular.toLowerCase()}` : `Modifier : ${config.singular.toLowerCase()}`;
 
   return (
-    <Container sx={{ py: 4 }}>
-      <Breadcrumbs sx={{ mb: 2 }}>
-        <Link component={RouterLink} to="/admin">
-          Administration
-        </Link>
-        <Link component={RouterLink} to={`/admin/${entity}`}>
-          {config.plural}
-        </Link>
-        <Typography color="text.primary">{isNew ? "Nouvelle fiche" : "Modifier"}</Typography>
-      </Breadcrumbs>
-
-      <Typography variant="h4" component="h1" gutterBottom>
-        {title}
-      </Typography>
-
+    <AdminPage title={title} back={{ to: `/admin/${entity}`, label: config.plural }}>
       {!isNew && <PageState loading={loading && !values} error={error} />}
 
       {values && (
         <Box component="form" onSubmit={save}>
-          <Stack spacing={3}>
+          <Stack spacing={3} sx={{ p: { xs: 2.5, sm: 4 }, border: 1, borderColor: "divider", borderRadius: 4, bgcolor: "background.paper" }}>
             {config.fields.map((field) => (
               <Box key={field.key}>
                 <FieldRenderer field={field} value={values[field.key]} onChange={(value) => setField(field.key, value)} />
@@ -134,14 +117,14 @@ const AdminEditPage = () => {
 
           {/* Barre d'actions toujours visible */}
           <Paper
-            elevation={3}
-            sx={{ position: "sticky", bottom: 0, mt: 3, p: 2, display: "flex", gap: 2, flexWrap: "wrap", zIndex: 10 }}
+            variant="outlined"
+            sx={{ position: "sticky", bottom: 12, mt: 3, p: 1.5, display: "flex", gap: 1.5, flexWrap: "wrap", zIndex: 10, borderRadius: 999, boxShadow: "0 8px 30px rgba(0,0,0,.08)" }}
           >
             <Button type="submit" variant="contained" disabled={saving}>
               {saving ? "Enregistrement…" : "Enregistrer"}
             </Button>
             <Button component={RouterLink} to={`/admin/${entity}`}>
-              Retour à la liste
+              Annuler
             </Button>
             {!isNew && role === "admin" && (
               <Button color="error" sx={{ ml: "auto" }} onClick={() => setConfirmDelete(true)}>
@@ -175,7 +158,7 @@ const AdminEditPage = () => {
         message="Fiche enregistrée"
         anchorOrigin={{ vertical: "top", horizontal: "center" }}
       />
-    </Container>
+    </AdminPage>
   );
 };
 
