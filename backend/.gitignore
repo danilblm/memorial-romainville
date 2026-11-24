@@ -3,3 +3,6 @@ dist
 .env
 uploads
 sauvegarde
+
+.env.*
+!.env.example
