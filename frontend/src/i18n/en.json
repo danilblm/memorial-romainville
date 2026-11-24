@@ -558,6 +558,8 @@
     "interestsHint": "Separated by commas (e.g. graffiti, genealogy, teaching).",
     "myPosts": "My posts",
     "postsBy": "Posts by {{name}}",
-    "noPostsYet": "No posts yet."
+    "noPostsYet": "No posts yet.",
+    "translate": "Translate",
+    "newTab": "(opens in a new tab)"
   }
 }

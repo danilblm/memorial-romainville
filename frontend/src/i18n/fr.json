@@ -558,6 +558,8 @@
     "interestsHint": "Séparés par des virgules (ex. graffitis, généalogie, pédagogie).",
     "myPosts": "Mes publications",
     "postsBy": "Publications de {{name}}",
-    "noPostsYet": "Aucune publication pour le moment."
+    "noPostsYet": "Aucune publication pour le moment.",
+    "translate": "Traduire",
+    "newTab": "(nouvel onglet)"
   }
 }

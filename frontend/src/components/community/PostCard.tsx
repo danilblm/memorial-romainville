@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Flag, Heart, Link2, MessageCircle, Trash2, TriangleAlert } from "lucide-react";
+import { Flag, Heart, Languages, Link2, MessageCircle, Trash2, TriangleAlert } from "lucide-react";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link, useNavigate } from "react-router-dom";
@@ -23,6 +23,11 @@ interface PostCardProps {
 }
 
 const LONG_TEXT = 420;
+
+// Les publications sont écrites par les membres (souvent en français) : on ne les réécrit pas,
+// mais en anglais on propose de les ouvrir dans Google Traduction (nouvel onglet).
+const translateUrl = (text: string, target: string) =>
+  `https://translate.google.com/?sl=auto&tl=${target}&op=translate&text=${encodeURIComponent(text.slice(0, 1800))}`;
 
 const PostCard = ({ post, onTagClick, onDeleted, defaultOpen = false }: PostCardProps) => {
   const { t, i18n } = useTranslation();
@@ -119,6 +124,18 @@ const PostCard = ({ post, onTagClick, onDeleted, defaultOpen = false }: PostCard
           <button type="button" onClick={() => setExpanded(true)} className="mt-1 text-sm font-semibold text-accent">
             {t("community.readMore")}
           </button>
+        )}
+        {!i18n.language.startsWith("fr") && (
+          <a
+            href={translateUrl([post.title, post.text].filter(Boolean).join("\n\n"), i18n.language.slice(0, 2))}
+            target="_blank"
+            rel="noreferrer"
+            className="mt-2 inline-flex items-center gap-1.5 text-sm font-semibold text-accent hover:underline"
+          >
+            <Languages className="h-4 w-4" aria-hidden="true" />
+            {t("community.translate")}
+            <span className="sr-only">{t("community.newTab")}</span>
+          </a>
         )}
 
         {post.image && (
