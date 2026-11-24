@@ -42,6 +42,8 @@ export interface EntityConfig {
   plural: string;
   description: string;
   fields: FieldConfig[];
+  // Champs affichés d'emblée ; les autres sont rangés dans « Plus de détails »
+  main: string[];
   defaults: () => FormValues;
 }
 
@@ -102,6 +104,7 @@ export const ADMIN_ENTITIES: Record<EntityName, EntityConfig> = {
       PUBLICATION,
       STATUS,
     ],
+    main: ["displayName", "photo", "roles", "biography", "arrivalAtFort", "status"],
     defaults: () => ({
       displayName: "",
       status: "propose",
@@ -151,6 +154,7 @@ export const ADMIN_ENTITIES: Record<EntityName, EntityConfig> = {
       MISSING,
       STATUS,
     ],
+    main: ["code", "kind", "name", "description", "photos", "status"],
     defaults: () => ({ code: "", kind: "casemate", name: { fr: "", en: "" }, status: "propose" }),
   },
 
@@ -171,6 +175,7 @@ export const ADMIN_ENTITIES: Record<EntityName, EntityConfig> = {
       CLAIMS,
       STATUS,
     ],
+    main: ["title", "start", "description", "status"],
     defaults: () => ({ title: { fr: "", en: "" }, start: { precision: "jour" }, status: "propose" }),
   },
 
@@ -206,6 +211,7 @@ export const ADMIN_ENTITIES: Record<EntityName, EntityConfig> = {
       { key: "rights", label: "Droits d'utilisation", type: "text", help: "Peut-on le montrer sur le site ?" },
       STATUS,
     ],
+    main: ["type", "title", "fileUrl", "status"],
     defaults: () => ({ type: "archive", title: { fr: "", en: "" }, status: "propose" }),
   },
 
@@ -254,6 +260,7 @@ export const ADMIN_ENTITIES: Record<EntityName, EntityConfig> = {
       PUBLICATION,
       STATUS,
     ],
+    main: ["witnessName", "witnessRelation", "medium", "transcript", "mediaUrl", "status"],
     defaults: () => ({
       witnessName: "",
       witnessRelation: "",

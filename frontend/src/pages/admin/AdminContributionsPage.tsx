@@ -1,12 +1,6 @@
 import {
   Box,
   Button,
-  Card,
-  CardActions,
-  CardContent,
-  Chip,
-  Stack,
-  TextField,
   Typography,
 } from "@mui/material";
 import { useState } from "react";
@@ -27,7 +21,8 @@ const ContributionCard = ({ item, token, onDone }: { item: Contribution; token: 
   const [reason, setReason] = useState("");
 
   const decide = async (status: Decision) => {
-    await apiSend(`/contributions/${item._id}/decision`, "PATCH", { status, reason }, token);
+    const motive = reason.trim().length >= 3 ? reason : status === "valide" ? "Validée par l'équipe" : "Refusée par l'équipe";
+    await apiSend(`/contributions/${item._id}/decision`, "PATCH", { status, reason: motive }, token);
     setReason("");
     onDone();
   };
@@ -42,65 +37,48 @@ const ContributionCard = ({ item, token, onDone }: { item: Contribution; token: 
   };
 
   return (
-    <Card variant="outlined">
-      <CardContent>
-        <Stack direction="row" justifyContent="space-between" alignItems="center" sx={{ mb: 1 }}>
-          <Typography variant="subtitle2">
-            {new Date(item.createdAt).toLocaleString(i18n.language)} · {t(`contribute.kinds.${item.target.kind}`)}
-            {item.target.label && ` – ${item.target.label}`}
-          </Typography>
-          <Chip label={t(`status.${item.status}`)} size="small" />
-        </Stack>
+    <article className="rounded-2xl border border-line/80 bg-card p-5 shadow-soft">
+      <p className="text-sm text-ink-soft">
+        {new Date(item.createdAt).toLocaleDateString(i18n.language)} · {item.contributor.name}
+        {item.target.label && ` · ${item.target.label}`}
+      </p>
+      <p className="mt-2 whitespace-pre-line text-ink">{item.content}</p>
 
-        <Typography sx={{ whiteSpace: "pre-line", mb: 2 }}>{item.content}</Typography>
-        <Typography variant="body2">
-          <strong>{t("admin.provenance")} :</strong> {item.declaredProvenance}
-        </Typography>
-        <Typography variant="body2">
-          <strong>{t("admin.from")} :</strong> {item.contributor.name} ({item.contributor.email})
-          {item.contributor.relation && ` – ${item.contributor.relation}`}
-        </Typography>
-        <Typography variant="body2">
-          <strong>{t("admin.consent")} :</strong> {item.consentToPublish ? t("common.yes") : t("common.no")}
-        </Typography>
+      {item.files.length > 0 && (
+        <div className="mt-3 flex flex-wrap gap-2" aria-label={t("admin.files")}>
+          {item.files.map((file, index) => (
+            <button
+              key={file._id}
+              type="button"
+              onClick={() => openFile(index)}
+              className="rounded-full border border-line px-3 py-1 text-sm text-ink hover:border-accent hover:text-accent"
+            >
+              {file.originalName}
+            </button>
+          ))}
+        </div>
+      )}
 
-        {item.files.length > 0 && (
-          <Stack direction="row" gap={1} flexWrap="wrap" sx={{ mt: 1 }} aria-label={t("admin.files")}>
-            {item.files.map((file, index) => (
-              <Chip key={file._id} label={file.originalName} onClick={() => openFile(index)} variant="outlined" />
-            ))}
-          </Stack>
-        )}
-
-        {item.decision?.reason && (
-          <Typography variant="body2" color="text.secondary" sx={{ mt: 1 }}>
-            {t("admin.decidedBy")} : {item.decision.reason}
-            {item.decision.by && ` (${item.decision.by.firstName} ${item.decision.by.lastName})`}
-          </Typography>
-        )}
-
-        <TextField
-          label={t("admin.reason")}
-          value={reason}
-          onChange={(event) => setReason(event.target.value)}
-          fullWidth
-          multiline
-          size="small"
-          sx={{ mt: 2 }}
-        />
-      </CardContent>
-      <CardActions>
-        <Button disabled={reason.trim().length < 3} onClick={() => decide("en_verification")}>
-          {t("admin.verify")}
-        </Button>
-        <Button disabled={reason.trim().length < 3} color="success" onClick={() => decide("valide")}>
-          {t("admin.approve")}
-        </Button>
-        <Button disabled={reason.trim().length < 3} color="error" onClick={() => decide("refuse")}>
-          {t("admin.refuse")}
-        </Button>
-      </CardActions>
-    </Card>
+      {item.status === "propose" || item.status === "en_verification" ? (
+        <div className="mt-4 flex flex-wrap items-center gap-2 border-t border-line pt-4">
+          <input
+            value={reason}
+            onChange={(event) => setReason(event.target.value)}
+            placeholder="Motif (facultatif)"
+            aria-label="Motif (facultatif)"
+            className="h-10 min-w-0 flex-1 rounded-full border border-line bg-card px-4 text-sm focus:border-accent focus:outline-none"
+          />
+          <Button variant="contained" onClick={() => decide("valide")}>
+            {t("admin.approve")}
+          </Button>
+          <Button color="inherit" variant="outlined" onClick={() => decide("refuse")}>
+            {t("admin.refuse")}
+          </Button>
+        </div>
+      ) : (
+        <p className="mt-3 text-sm font-semibold text-ink-soft">{t(`status.${item.status}`)}</p>
+      )}
+    </article>
   );
 };
 
@@ -122,7 +100,6 @@ const AdminContributionsPage = () => {
           onChange={setStatus}
           options={[
             { value: "propose", label: "À traiter" },
-            { value: "en_verification", label: t("status.en_verification") },
             { value: "valide", label: t("status.valide") },
             { value: "refuse", label: t("status.refuse") },
             { value: "", label: t("admin.all") },

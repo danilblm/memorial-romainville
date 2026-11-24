@@ -84,6 +84,9 @@ const AdminEditPage = () => {
     }
   };
 
+  const mainFields = config.main.map((key) => config.fields.find((field) => field.key === key)!).filter(Boolean);
+  const otherFields = config.fields.filter((field) => !config.main.includes(field.key));
+
   const title = isNew ? `Nouvelle fiche : ${config.singular.toLowerCase()}` : `Modifier : ${config.singular.toLowerCase()}`;
 
   return (
@@ -93,12 +96,29 @@ const AdminEditPage = () => {
       {values && (
         <Box component="form" onSubmit={save}>
           <Stack spacing={3} sx={{ p: { xs: 2.5, sm: 4 }, border: 1, borderColor: "divider", borderRadius: 4, bgcolor: "background.paper" }}>
-            {config.fields.map((field) => (
+            {mainFields.map((field) => (
               <Box key={field.key}>
-                <FieldRenderer field={field} value={values[field.key]} onChange={(value) => setField(field.key, value)} />
+                <FieldRenderer field={{ ...field, help: undefined }} value={values[field.key]} onChange={(value) => setField(field.key, value)} />
               </Box>
             ))}
           </Stack>
+
+          {/* Le reste, rarement utile : fermé par défaut */}
+          {otherFields.length > 0 && (
+            <details className="group mt-4 rounded-2xl border border-line bg-card">
+              <summary className="flex cursor-pointer list-none items-center justify-between px-5 py-4 font-semibold text-ink">
+                Plus de détails
+                <span className="text-sm font-normal text-ink-soft group-open:hidden">{otherFields.length} champs facultatifs</span>
+              </summary>
+              <Stack spacing={3} sx={{ px: { xs: 2.5, sm: 4 }, pb: 4 }}>
+                {otherFields.map((field) => (
+                  <Box key={field.key}>
+                    <FieldRenderer field={field} value={values[field.key]} onChange={(value) => setField(field.key, value)} />
+                  </Box>
+                ))}
+              </Stack>
+            </details>
+          )}
 
           {saveError && (
             <Alert severity="error" sx={{ mt: 3 }}>
