@@ -6,6 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { apiSend } from "../../api/client";
 import { useMember } from "../../context/Member/MemberContext";
 import { Post } from "../../types/Community";
+import { useAutoTranslate } from "../../hooks/useAutoTranslate";
 import { cn } from "../../utils/cn";
 import { mediaUrl } from "../../utils/mediaUrl";
 import { timeAgo } from "../../utils/timeAgo";
@@ -24,11 +25,6 @@ interface PostCardProps {
 
 const LONG_TEXT = 420;
 
-// Les publications sont écrites par les membres (souvent en français) : on ne les réécrit pas,
-// mais en anglais on propose de les ouvrir dans Google Traduction (nouvel onglet).
-const translateUrl = (text: string, target: string) =>
-  `https://translate.google.com/?sl=auto&tl=${target}&op=translate&text=${encodeURIComponent(text.slice(0, 1800))}`;
-
 const PostCard = ({ post, onTagClick, onDeleted, defaultOpen = false }: PostCardProps) => {
   const { t, i18n } = useTranslation();
   const { token, isMember } = useMember();
@@ -40,6 +36,10 @@ const PostCard = ({ post, onTagClick, onDeleted, defaultOpen = false }: PostCard
   const [expanded, setExpanded] = useState(post.text.length <= LONG_TEXT);
   const [reporting, setReporting] = useState(false);
   const [copied, setCopied] = useState(false);
+  // Texte des membres traduit automatiquement quand le site n'est pas en français
+  const [showOriginal, setShowOriginal] = useState(false);
+  const auto = useAutoTranslate([post.title ?? "", post.text]);
+  const [title, text] = showOriginal ? [post.title ?? "", post.text] : auto.texts;
 
   const KindIcon = KIND_ICONS[post.kind];
 
@@ -116,26 +116,24 @@ const PostCard = ({ post, onTagClick, onDeleted, defaultOpen = false }: PostCard
         </header>
 
         {/* Contenu */}
-        {post.title && <h2 className="mt-5 font-display text-2xl leading-snug tracking-tight text-ink">{post.title}</h2>}
-        <p className={cn("whitespace-pre-line leading-relaxed text-ink", post.title ? "mt-2" : "mt-5")}>
-          {expanded ? post.text : `${post.text.slice(0, LONG_TEXT).trimEnd()}…`}
+        {title && <h2 className="mt-5 font-display text-2xl leading-snug tracking-tight text-ink">{title}</h2>}
+        <p className={cn("whitespace-pre-line leading-relaxed text-ink", title ? "mt-2" : "mt-5")}>
+          {expanded ? text : `${text.slice(0, LONG_TEXT).trimEnd()}…`}
         </p>
         {!expanded && (
           <button type="button" onClick={() => setExpanded(true)} className="mt-1 text-sm font-semibold text-accent">
             {t("community.readMore")}
           </button>
         )}
-        {!i18n.language.startsWith("fr") && (
-          <a
-            href={translateUrl([post.title, post.text].filter(Boolean).join("\n\n"), i18n.language.slice(0, 2))}
-            target="_blank"
-            rel="noreferrer"
-            className="mt-2 inline-flex items-center gap-1.5 text-sm font-semibold text-accent hover:underline"
-          >
-            <Languages className="h-4 w-4" aria-hidden="true" />
-            {t("community.translate")}
-            <span className="sr-only">{t("community.newTab")}</span>
-          </a>
+        {(auto.isTranslated || showOriginal) && (
+          <p className="mt-2 flex flex-wrap items-center gap-x-2 text-xs text-ink-soft">
+            <Languages className="h-3.5 w-3.5" aria-hidden="true" />
+            {showOriginal ? t("community.original") : t("community.autoTranslated")}
+            <span aria-hidden="true">·</span>
+            <button type="button" onClick={() => setShowOriginal(!showOriginal)} className="font-semibold text-accent hover:underline">
+              {showOriginal ? t("community.showTranslation") : t("community.showOriginal")}
+            </button>
+          </p>
         )}
 
         {post.image && (

@@ -559,7 +559,9 @@
     "myPosts": "My posts",
     "postsBy": "Posts by {{name}}",
     "noPostsYet": "No posts yet.",
-    "translate": "Translate",
-    "newTab": "(opens in a new tab)"
+    "autoTranslated": "Translated automatically",
+    "original": "Original text",
+    "showOriginal": "Show original",
+    "showTranslation": "Show translation"
   }
 }

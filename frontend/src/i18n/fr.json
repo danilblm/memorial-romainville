@@ -559,7 +559,9 @@
     "myPosts": "Mes publications",
     "postsBy": "Publications de {{name}}",
     "noPostsYet": "Aucune publication pour le moment.",
-    "translate": "Traduire",
-    "newTab": "(nouvel onglet)"
+    "autoTranslated": "Traduit automatiquement",
+    "original": "Texte original",
+    "showOriginal": "Voir l'original",
+    "showTranslation": "Voir la traduction"
   }
 }

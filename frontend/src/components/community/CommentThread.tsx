@@ -6,9 +6,24 @@ import { apiSend } from "../../api/client";
 import { useMember } from "../../context/Member/MemberContext";
 import { useApi } from "../../hooks/useApi";
 import { PostComment } from "../../types/Community";
+import { useAutoTranslate } from "../../hooks/useAutoTranslate";
 import { timeAgo } from "../../utils/timeAgo";
 import Avatar from "./Avatar";
 import ReportDialog from "./ReportDialog";
+
+// Texte d'un commentaire, traduit automatiquement quand le site n'est pas en français
+const CommentText = ({ text }: { text: string }) => {
+  const { t } = useTranslation();
+  const auto = useAutoTranslate([text]);
+  return (
+    <>
+      <p className="mt-1 whitespace-pre-line text-ink" title={auto.isTranslated ? text : undefined}>
+        {auto.texts[0]}
+      </p>
+      {auto.isTranslated && <p className="mt-1 text-xs text-ink-soft">{t("community.autoTranslated")}</p>}
+    </>
+  );
+};
 
 interface CommentThreadProps {
   postId: string;
@@ -69,7 +84,7 @@ const CommentThread = ({ postId, onCountChange }: CommentThreadProps) => {
                   )}
                   <span className="ml-2 text-ink-soft">{timeAgo(comment.createdAt, i18n.language)}</span>
                 </p>
-                <p className="mt-1 whitespace-pre-line text-ink">{comment.text}</p>
+                <CommentText text={comment.text} />
               </div>
               {isMember && (
                 <div className="mt-1 flex gap-3 pl-2 text-xs text-ink-soft">
