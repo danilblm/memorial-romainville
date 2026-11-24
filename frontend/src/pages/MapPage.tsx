@@ -12,7 +12,6 @@ import {
   ChevronRight,
   DoorClosed,
   Footprints,
-  Image as ImageIcon,
   LandPlot,
   Layers,
   MapPin,
@@ -116,8 +115,9 @@ const PlacePreview = ({ code, onClose }: { code: string; onClose: () => void }) 
 
   return (
     <div className="max-h-[40rem] overflow-y-auto">
-      <div className="relative h-52 overflow-hidden bg-paper-2">
-        {photo ? (
+      {/* Photo seulement quand le lieu en a une : sinon la fiche commence directement par le titre */}
+      <div className={photo ? "relative h-52 overflow-hidden bg-paper-2" : "relative h-14"}>
+        {photo && (
           <button type="button" onClick={() => setViewerIndex(0)} className="group block h-full w-full" aria-label={t("viewer.open")}>
             <img
               src={mediaUrl(photo.url)}
@@ -129,11 +129,6 @@ const PlacePreview = ({ code, onClose }: { code: string; onClose: () => void }) 
               {t("map.photos", { count: photos.length })}
             </span>
           </button>
-        ) : (
-          <div className="flex h-full flex-col items-center justify-center gap-2 bg-paper-2 px-8 text-center text-ink-soft">
-            <ImageIcon className="h-8 w-8 opacity-60" aria-hidden="true" />
-            <p className="text-sm">{t("map.noPhoto")}</p>
-          </div>
         )}
         <button
           type="button"
@@ -144,7 +139,7 @@ const PlacePreview = ({ code, onClose }: { code: string; onClose: () => void }) 
           <X className="h-4 w-4" aria-hidden="true" />
         </button>
       </div>
-      <div className="p-6">
+      <div className={photo ? "p-6" : "px-6 pb-6"}>
         <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">{t(`place.kinds.${kindOf(place)}`)}</p>
         <h2 className="mt-2 font-display text-3xl text-ink">{localize(place.name, lang)}</h2>
         {description && <p className="mt-3 line-clamp-4 leading-relaxed text-ink-soft">{description}</p>}
