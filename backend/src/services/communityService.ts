@@ -1,12 +1,10 @@
 import bcrypt from "bcrypt";
-import fs from "fs";
 import { isValidObjectId, Types } from "mongoose";
-import path from "path";
 import { generateMemberJWT } from "../middlewares/memberAuth";
-import { COMMUNITY_DIR } from "../middlewares/upload";
 import commentModel from "../models/commentModel";
 import memberModel, { MemberDocument } from "../models/memberModel";
 import postModel from "../models/postModel";
+import { deleteStoredFile } from "../storage/fileStore";
 import { CommunityStatus, MemberProfile, PostKind } from "../types/common";
 
 // ------------------------------------------------------------------
@@ -212,7 +210,7 @@ export const createPost = async (member: MemberDocument, input: NewPost, image?:
 
 const removeImageFile = (url?: string | null) => {
   if (!url?.startsWith("/community-media/")) return;
-  fs.unlink(path.join(COMMUNITY_DIR, path.basename(url)), () => undefined);
+  deleteStoredFile("community", url.split("/").pop() ?? "").catch(() => undefined);
 };
 
 export const deleteOwnPost = async (member: MemberDocument, id: string) => {

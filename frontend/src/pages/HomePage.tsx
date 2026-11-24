@@ -1,7 +1,6 @@
 import { motion } from "framer-motion";
 import { ArrowRight, ChevronDown } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
 import AnimatedNumber from "../components/AnimatedNumber";
 import ExploreIndex from "../components/ExploreIndex";
 import GraffitiTorch from "../components/GraffitiTorch";
@@ -190,10 +189,6 @@ const HomePage = () => {
             </h2>
             <p className="mt-6 max-w-xl text-lg leading-relaxed text-ink-soft">{t("home.method.p1")}</p>
             <p className="mt-4 max-w-xl text-lg leading-relaxed text-ink-soft">{t("home.method.p2")}</p>
-            <Link to="/nos-sources" className="mt-8 inline-flex items-center gap-2 font-semibold text-accent hover:underline">
-              {t("home.method.link")}
-              <ArrowRight className="h-4 w-4" aria-hidden="true" />
-            </Link>
           </Reveal>
 
           <Reveal delay={0.15}>

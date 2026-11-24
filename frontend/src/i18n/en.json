@@ -8,7 +8,6 @@
     "home": "Home",
     "map": "Map of the fort",
     "contribute": "Contribute",
-    "sources": "Our sources",
     "admin": "Administration",
     "login": "Team login",
     "logout": "Log out",
@@ -100,11 +99,6 @@
         "desc": "A photo, a letter, a memory? Share it, the team will check it.",
         "image": "Old postcard of the fort entrance – collection shared by the Mémorial national"
       },
-      "sources": {
-        "title": "Our sources",
-        "desc": "How we check facts, and what the reliability levels mean.",
-        "image": "Inside a casemate used as a dormitory – collection shared by the Mémorial national"
-      },
       "community": {
         "title": "The fort community",
         "desc": "Join the network of families, researchers and history lovers: share, ask, exchange."
@@ -119,7 +113,6 @@
       "title": "What we know, and what we don't",
       "p1": "The fort's archives are incomplete. One date may come from a German register, another from a memory told within a family. We don't treat them the same way: next to each piece of information, we show where it comes from and whether it could be checked.",
       "p2": "When a family does not want a person to be exposed, we keep only her name. In the tree, her apple stays empty.",
-      "link": "See how we check",
       "sample": "Example: how to read a record",
       "rows": {
         "arrival": {
@@ -295,23 +288,6 @@
       "autre": "Other"
     }
   },
-  "sources": {
-    "eyebrow": "Transparency",
-    "title": "Our sources and rules",
-    "intro": "Every piece of information shows where it comes from and how certain it is. Memory is incomplete: we also show what we do not know.",
-    "reliabilityTitle": "Reliability levels",
-    "reliabilityLead": "Each statement carries one of these levels. They are shown with an icon and a word, never by colour alone.",
-    "validationTitle": "How submissions are checked",
-    "validationText": "Public submissions are checked by the team (authenticity, provenance, historical interest) before anything is published. Every decision is explained.",
-    "steps": {
-      "1": "You submit a document or information",
-      "2": "The team checks its provenance and authenticity",
-      "3": "The decision is explained, whether positive or not",
-      "4": "Approved content is published with its source"
-    },
-    "aiTitle": "The role of artificial intelligence",
-    "aiText": "AI can help us search, transcribe or link documents. It is neither a source nor an authority: anything produced with its help is checked by a person and labelled as such."
-  },
   "footer": {
     "slogan": "Dusting off the history of these places.",
     "project": "Master's project, THYP – Université Paris 8",
@@ -357,7 +333,6 @@
     "title": "Four years at the fort",
     "lead": "Scroll down to travel through the history of the camp, from its opening to the Liberation.",
     "credit": "Photographs: collection shared by the National memorial to women in the Resistance and Deportation",
-    "sources": "Where does this information come from?",
     "steps": {
       "1": {
         "date": "1940",

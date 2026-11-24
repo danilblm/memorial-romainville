@@ -1,8 +1,6 @@
 import { AnimatePresence, motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
 import { cn } from "../utils/cn";
 import { Container, SectionHeading } from "./ui";
 
@@ -112,12 +110,6 @@ const StoryScroll = () => {
           </ol>
         </div>
 
-        <div className="mt-6 flex flex-wrap items-center gap-x-8 gap-y-3 border-t border-line pt-8 text-sm">
-          <Link to="/nos-sources" className="group inline-flex items-center gap-2 font-semibold text-accent">
-            <span className="link-underline">{t("story.sources")}</span>
-            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden="true" />
-          </Link>
-        </div>
       </Container>
     </section>
   );

@@ -8,7 +8,6 @@
     "home": "Accueil",
     "map": "Carte du fort",
     "contribute": "Contribuer",
-    "sources": "Nos sources",
     "admin": "Administration",
     "login": "Connexion équipe",
     "logout": "Déconnexion",
@@ -100,11 +99,6 @@
         "desc": "Une photo, une lettre, un souvenir ? Proposez-le, l'équipe le vérifiera.",
         "image": "Carte postale ancienne de l'entrée du fort – fonds partagé par le Mémorial national"
       },
-      "sources": {
-        "title": "Nos sources",
-        "desc": "Comment nous vérifions, et ce que signifient les niveaux de fiabilité.",
-        "image": "Intérieur d'une casemate aménagée en dortoir – fonds partagé par le Mémorial national"
-      },
       "community": {
         "title": "La communauté du fort",
         "desc": "Rejoindre le réseau des familles, chercheurs et passionnés : partager, questionner, échanger."
@@ -119,7 +113,6 @@
       "title": "Ce que l'on sait, et ce que l'on ne sait pas",
       "p1": "Les archives du fort sont incomplètes. Une date peut venir d'un registre allemand, une autre d'un souvenir raconté en famille. Nous ne les mettons pas sur le même plan : à côté de chaque information, nous indiquons d'où elle vient et si elle a pu être vérifiée.",
       "p2": "Quand une famille ne souhaite pas qu'une personne soit exposée, nous gardons seulement son nom. Dans l'arbre, sa pomme reste vide.",
-      "link": "Voir comment nous vérifions",
       "sample": "Exemple : comment se lit une fiche",
       "rows": {
         "arrival": {
@@ -295,23 +288,6 @@
       "autre": "Autre"
     }
   },
-  "sources": {
-    "eyebrow": "Transparence",
-    "title": "Nos sources et nos règles",
-    "intro": "Chaque information du mémorial indique d'où elle vient et à quel point elle est sûre. La mémoire est incomplète : nous montrons aussi ce que nous ne savons pas.",
-    "reliabilityTitle": "Niveaux de fiabilité",
-    "reliabilityLead": "Chaque affirmation porte l'un de ces niveaux. Ils sont signalés par une icône et un mot, jamais par la seule couleur.",
-    "validationTitle": "Validation des contributions",
-    "validationText": "Les propositions du public sont vérifiées par l'équipe (authenticité, provenance, intérêt historique) avant toute publication. Chaque décision est motivée.",
-    "steps": {
-      "1": "Vous proposez un document ou une information",
-      "2": "L'équipe vérifie sa provenance et son authenticité",
-      "3": "La décision est motivée, qu'elle soit positive ou non",
-      "4": "Le contenu validé est publié avec sa source"
-    },
-    "aiTitle": "Le rôle de l'intelligence artificielle",
-    "aiText": "L'IA peut nous aider à chercher, transcrire ou relier des documents. Elle n'est ni une source ni une autorité : tout contenu produit avec son aide est vérifié par une personne et signalé comme tel."
-  },
   "footer": {
     "slogan": "Dépoussiérer l'histoire de ces lieux.",
     "project": "Projet du Master 2 THYP – Université Paris 8",
@@ -357,7 +333,6 @@
     "title": "Quatre années au fort",
     "lead": "Faites défiler la page pour traverser l'histoire du camp, de son ouverture à la Libération.",
     "credit": "Photographies : fonds partagé par le Mémorial national des femmes en Résistance et en Déportation",
-    "sources": "D'où viennent ces informations ?",
     "steps": {
       "1": {
         "date": "1940",

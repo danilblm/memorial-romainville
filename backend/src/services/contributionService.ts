@@ -1,6 +1,4 @@
 import { isValidObjectId } from "mongoose";
-import path from "path";
-import { UPLOAD_DIR } from "../middlewares/upload";
 import contributionModel from "../models/contributionModel";
 import { ValidationStatus } from "../types/common";
 import { ContributionInput, DecisionInput } from "../validators/contributionSchemas";
@@ -63,7 +61,7 @@ export const getContributionFile = async (id: string, index: number) => {
   if (!file) return null;
 
   return {
-    absolutePath: path.join(UPLOAD_DIR, path.basename(file.storedName)),
+    storedName: file.storedName,
     originalName: file.originalName,
     mimeType: file.mimeType,
   };
@@ -125,7 +123,7 @@ export const getPublishedContributionFile = async (id: string, index: number) =>
   const file = item?.files?.[index];
   if (!file) return null;
   return {
-    absolutePath: path.join(UPLOAD_DIR, path.basename(file.storedName)),
+    storedName: file.storedName,
     originalName: file.originalName,
     mimeType: file.mimeType,
   };

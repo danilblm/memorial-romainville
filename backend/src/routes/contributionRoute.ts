@@ -1,5 +1,6 @@
 import express from "express";
 import { upload } from "../middlewares/upload";
+import { sendStoredFile } from "../storage/fileStore";
 import requireRole from "../middlewares/requireRole";
 import validateJWT from "../middlewares/validateJWT";
 import {
@@ -65,11 +66,7 @@ router.get("/published/:id/files/:index", async (req, res) => {
       res.status(404).send("Not found");
       return;
     }
-    res.type(file.mimeType);
-    res.setHeader("X-Content-Type-Options", "nosniff");
-    res.sendFile(file.absolutePath, (err) => {
-      if (err && !res.headersSent) res.status(404).send("Not found");
-    });
+    await sendStoredFile(res, "contributions", file.storedName, { mimeType: file.mimeType });
   } catch {
     res.status(500).send("Something went wrong!");
   }
@@ -123,8 +120,10 @@ router.get(
         res.status(404).send("Not found");
         return;
       }
-      res.type(file.mimeType);
-      res.download(file.absolutePath, file.originalName);
+      await sendStoredFile(res, "contributions", file.storedName, {
+        mimeType: file.mimeType,
+        downloadName: file.originalName,
+      });
     } catch {
       res.status(500).send("Something went wrong!");
     }

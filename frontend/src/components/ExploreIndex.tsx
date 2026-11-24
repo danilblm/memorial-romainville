@@ -3,6 +3,7 @@ import { ArrowUpRight } from "lucide-react";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
+import { SHOW_COMMUNITY } from "../constants/features";
 import { cn } from "../utils/cn";
 import Reveal from "./Reveal";
 import { Container, SectionHeading } from "./ui";
@@ -11,10 +12,13 @@ import { Container, SectionHeading } from "./ui";
 // et à droite une photo d'archive qui change selon la ligne survolée.
 const PATHS = [
   { to: "/carte", key: "map", image: "/images/histoire/rangee-casemates.jpg" },
-  { to: "/communaute", key: "community", image: "/images/histoire/dortoir.jpg" },
-  { to: "/archives", key: "archives", image: "/images/histoire/plaques.jpg" },
+  ...(SHOW_COMMUNITY
+    ? [
+        { to: "/communaute", key: "community", image: "/images/histoire/dortoir.jpg" },
+        { to: "/archives", key: "archives", image: "/images/histoire/plaques.jpg" },
+      ]
+    : []),
   { to: "/contribuer", key: "contribute", image: "/images/histoire/carte-postale-entree.jpg" },
-  { to: "/nos-sources", key: "sources", image: "/images/histoire/interieur-casemate.jpg" },
 ];
 
 const ExploreIndex = () => {

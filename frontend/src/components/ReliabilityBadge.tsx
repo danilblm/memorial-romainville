@@ -1,6 +1,5 @@
 import { BadgeCheck, CircleHelp, CircleOff, FileText, LucideIcon, MessagesSquare, Mic } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
 import { Reliability } from "../types/common";
 import { cn } from "../utils/cn";
 
@@ -19,17 +18,16 @@ const ReliabilityBadge = ({ level }: { level: Reliability }) => {
   const { icon: Icon, tone } = LEVELS[level];
 
   return (
-    <Link
-      to="/nos-sources#fiabilite"
+    <span
       title={t(`reliability.${level}.desc`)}
       className={cn(
-        "inline-flex shrink-0 items-center gap-1.5 rounded-full border bg-card px-2.5 py-1 text-xs font-semibold transition hover:shadow-sm",
+        "inline-flex shrink-0 cursor-help items-center gap-1.5 rounded-full border bg-card px-2.5 py-1 text-xs font-semibold",
         tone
       )}
     >
       <Icon className="h-3.5 w-3.5" aria-hidden="true" />
       {t(`reliability.${level}.label`)}
-    </Link>
+    </span>
   );
 };
 

@@ -9,6 +9,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import ScrollProgress from "./components/ScrollProgress";
 import AccessibilityProvider from "./context/Accessibility/AccessibilityProvider";
 import AuthProvider from "./context/Auth/AuthProvider";
+import { SHOW_COMMUNITY } from "./constants/features";
 import MemberProvider from "./context/Member/MemberProvider";
 import ArchivesPage from "./pages/ArchivesPage";
 import ContributePage from "./pages/ContributePage";
@@ -17,7 +18,6 @@ import LoginPage from "./pages/LoginPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import PersonPage from "./pages/PersonPage";
 import PlacePage from "./pages/PlacePage";
-import SourcesPage from "./pages/SourcesPage";
 import TestimonyPage from "./pages/TestimonyPage";
 
 // Chargées à la demande : la carte (Leaflet) et l'administration (MUI)
@@ -69,18 +69,21 @@ function App() {
                     <Route path="/lieux/:code" element={<PlacePage />} />
                     <Route path="/personnes/:id" element={<PersonPage />} />
                     <Route path="/temoignages/:id" element={<TestimonyPage />} />
-                    <Route path="/archives" element={<ArchivesPage />} />
-                    <Route path="/communaute" element={<CommunityPage />} />
-                    <Route path="/communaute/rejoindre" element={<JoinPage />} />
-                    <Route path="/communaute/membres/:id" element={<MemberPage />} />
-                    <Route path="/communaute/publication/:id" element={<PostPage />} />
+                    {SHOW_COMMUNITY && (
+                      <>
+                        <Route path="/archives" element={<ArchivesPage />} />
+                        <Route path="/communaute" element={<CommunityPage />} />
+                        <Route path="/communaute/rejoindre" element={<JoinPage />} />
+                        <Route path="/communaute/membres/:id" element={<MemberPage />} />
+                        <Route path="/communaute/publication/:id" element={<PostPage />} />
+                      </>
+                    )}
                     <Route path="/contribuer" element={<ContributePage />} />
-                    <Route path="/nos-sources" element={<SourcesPage />} />
                     <Route path="/connexion" element={<LoginPage />} />
                     <Route element={<ProtectedRoute />}>
                       <Route path="/admin" element={<AdminHomePage />} />
                       <Route path="/admin/contributions" element={<AdminContributionsPage />} />
-                      <Route path="/admin/communaute" element={<AdminCommunityPage />} />
+                      {SHOW_COMMUNITY && <Route path="/admin/communaute" element={<AdminCommunityPage />} />}
                       <Route path="/admin/comptes" element={<AdminUsersPage />} />
                       <Route path="/admin/mon-compte" element={<MyAccountPage />} />
                       <Route path="/admin/reglages" element={<AdminSettingsPage />} />

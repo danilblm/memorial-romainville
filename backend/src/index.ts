@@ -4,7 +4,6 @@ import cors from "cors";
 import express from "express";
 import mongoose from "mongoose";
 import multer from "multer";
-import { COMMUNITY_DIR, MEDIA_DIR } from "./middlewares/upload";
 import adminRoute from "./routes/adminRoute";
 import communityRoute from "./routes/communityRoute";
 import contributionRoute from "./routes/contributionRoute";
@@ -18,6 +17,7 @@ import userRoute from "./routes/userRoute";
 import { seedCommunityExamples } from "./seed/communityExamples";
 import { seedExampleData } from "./seed/exampleData";
 import { ensureAdminUser } from "./services/userService";
+import { sendStoredFile } from "./storage/fileStore";
 
 dotenv.config();
 
@@ -29,7 +29,17 @@ const app = express();
 const port = Number(process.env.PORT) || 3001;
 
 app.use(express.json());
-app.use(cors({ origin: process.env.CLIENT_URL || "http://localhost:5173" }));
+// Adresses du site autorisées à appeler l'API (plusieurs possibles, séparées par des virgules)
+const allowedOrigins = (process.env.CLIENT_URL || "http://localhost:5173")
+  .split(",")
+  .map((origin) => origin.trim().replace(/\/$/, ""))
+  .filter(Boolean);
+app.use(cors({ origin: allowedOrigins }));
+
+// Petite route de contrôle pour l'hébergeur
+app.get("/health", (_req, res) => {
+  res.send({ ok: true, database: mongoose.connection.readyState === 1 });
+});
 
 mongoose
   .connect(process.env.DATABASE_URL || "")
@@ -52,11 +62,15 @@ app.use("/user", userRoute);
 app.use("/admin", adminRoute);
 app.use("/community", communityRoute);
 
-// Photos, audio et vidéos publiés par l'équipe
-app.use("/media", express.static(MEDIA_DIR));
+// Photos, audio, vidéos et plan publiés par l'équipe (rangés dans la base)
+app.get("/media/:name", (req, res) => {
+  sendStoredFile(res, "media", req.params.name).catch(() => !res.headersSent && res.status(500).end());
+});
 
 // Images publiées par les membres de la communauté
-app.use("/community-media", express.static(COMMUNITY_DIR, { setHeaders: (res) => res.setHeader("X-Content-Type-Options", "nosniff") }));
+app.get("/community-media/:name", (req, res) => {
+  sendStoredFile(res, "community", req.params.name).catch(() => !res.headersSent && res.status(500).end());
+});
 
 // Fichier trop lourd ou refusé : message clair plutôt qu'une page d'erreur
 app.use((err: unknown, _req: express.Request, res: express.Response, next: express.NextFunction) => {

@@ -1,5 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
+import { SHOW_COMMUNITY } from "../constants/features";
 import LogoMark from "./LogoMark";
 import { Container } from "./ui";
 
@@ -8,10 +9,13 @@ const Footer = () => {
 
   const links = [
     { to: "/carte", key: "nav.map" },
-    { to: "/archives", key: "nav.archives" },
-    { to: "/communaute", key: "nav.community" },
+    ...(SHOW_COMMUNITY
+      ? [
+          { to: "/archives", key: "nav.archives" },
+          { to: "/communaute", key: "nav.community" },
+        ]
+      : []),
     { to: "/contribuer", key: "nav.contribute" },
-    { to: "/nos-sources", key: "nav.sources" },
   ];
 
   return (

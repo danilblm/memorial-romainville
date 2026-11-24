@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/Auth/AuthContext";
 import { useMember } from "../context/Member/MemberContext";
+import { SHOW_COMMUNITY } from "../constants/features";
 import { cn } from "../utils/cn";
 import AccessibilityPanel from "./AccessibilityPanel";
 import Avatar from "./community/Avatar";
@@ -14,10 +15,13 @@ import LogoMark from "./LogoMark";
 const LINKS = [
   { to: "/", key: "nav.home", end: true },
   { to: "/carte", key: "nav.map" },
-  { to: "/archives", key: "nav.archives" },
-  { to: "/communaute", key: "nav.community" },
+  ...(SHOW_COMMUNITY
+    ? [
+        { to: "/archives", key: "nav.archives" },
+        { to: "/communaute", key: "nav.community" },
+      ]
+    : []),
   { to: "/contribuer", key: "nav.contribute" },
-  { to: "/nos-sources", key: "nav.sources" },
 ];
 
 const desktopLink = ({ isActive }: { isActive: boolean }) =>
@@ -67,7 +71,7 @@ const Navbar = () => {
           </span>
           <AccessibilityPanel />
 
-          {isMember && member && (
+          {SHOW_COMMUNITY && isMember && member && (
             <Link
               to={`/communaute/membres/${member._id}`}
               title={t("community.myProfile")}
@@ -142,7 +146,7 @@ const Navbar = () => {
                 {t(link.key)}
               </NavLink>
             ))}
-            {isMember ? (
+            {!SHOW_COMMUNITY ? null : isMember ? (
               <button
                 type="button"
                 onClick={() => {
