@@ -50,7 +50,7 @@ const Navbar = () => {
         <Link to="/" className="flex shrink-0 items-center gap-2.5 text-ink">
           <LogoMark className="h-9 w-auto sm:h-10" />
           <span className="leading-none">
-            <span className="hidden text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-accent sm:block">
+            <span className="hidden whitespace-nowrap font-display text-[0.8rem] italic text-accent sm:block">
               {t("site.kicker")}
             </span>
             <span className="block whitespace-nowrap font-display text-base sm:text-lg">{t("site.short")}</span>
